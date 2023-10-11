@@ -47,8 +47,8 @@
     <h2>達成履歴</h2>
     <ul>
         <c:forEach items="${achievementHistory}" var="history">
-    		<li><c:out value="${history.date}" />: <c:out value="${history.content}" /></li>
-		</c:forEach>
+    		    <li><c:out value="${history.date}" />: <c:out value="${history.content}" /></li>
+		    </c:forEach>
 
 
 </body>
