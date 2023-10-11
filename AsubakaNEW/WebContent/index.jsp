@@ -24,4 +24,5 @@
 <a href="/AsubakaNEW/Register.jsp">新規登録</a>
 
 </body>
-</html>
+</html> 
+ 
