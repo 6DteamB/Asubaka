@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>アスバカ - 新規登録完了</title>
+<title>明日やろうは馬鹿野郎- 新規登録完了</title>
 </head>
 <body>
 <h1>新規登録が完了しました</h1>

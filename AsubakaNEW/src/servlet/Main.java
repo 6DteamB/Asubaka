@@ -38,8 +38,6 @@ public class Main extends HttpServlet {
       int achievedDays = 0;  // Placeholder value
       int remainingDays = 66 - achievedDays;
       String animalImagePath = ""; 
-      
-      
 //      List<History> achievementHistory = null;  // Placeholder value
 
       

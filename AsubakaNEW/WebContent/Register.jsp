@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>どこつぶ - 新規登録</title>
+<title>明日やろうは馬鹿野郎 - 新規登録</title>
 <script>
   function validatePassword() {
     var password = document.getElementById("newPass").value;
