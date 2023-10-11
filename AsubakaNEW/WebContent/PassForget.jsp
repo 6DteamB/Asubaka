@@ -9,7 +9,7 @@
 <h1>パスワードを忘れた場合</h1>
 
 <!-- パスワードリセットフォーム -->
-<form action="/AsubakaNEW/PasswordResetServlet" method="post">
+<form action="/AsubakaNEW/PassReset" method="post">
 メールアドレス：<input type="email" name="email"><br>
 <input type="submit" value="パスワードリセット">
 </form>

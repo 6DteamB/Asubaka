@@ -8,22 +8,35 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/PasswordResetServlet")
+
+@WebServlet("/resetPassword")
 public class PassReset extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // フォームからメールアドレスを取得
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
-        
-        // ここにパスワードリセットのロジックを実装
-        // ユーザーのメールアドレスに関連付けられたアカウントのパスワードをリセットし、新しいパスワードをユーザーに送信
-        
-        // パスワードリセットが成功した場合の処理（例: リセット完了メッセージを表示）
-        response.setContentType("text/html; charset=UTF-8");
-        response.getWriter().println("<html><head><title>パスワードリセット完了</title></head><body>");
-        response.getWriter().println("<h1>パスワードリセットが完了しました</h1>");
-        response.getWriter().println("<p>新しいパスワードがメールで送信されました。</p>");
-        response.getWriter().println("<p>メールをご確認ください。</p>");
-        response.getWriter().println("</body></html>");
+        // ここにデータベースからユーザを検索し、リセットコードを生成し、メールを送信するコードを実装
+
+        // 例: ダミーコード（実際の実装は異なります）
+        String resetCode = generateResetCode(); // リセットコード生成
+        boolean emailSent = sendResetEmail(email, resetCode); // メール送信
+
+        if (emailSent) {
+            // メール送信成功時の処理
+            response.sendRedirect("resetPasswordConfirm.jsp"); // リセット確認ページにリダイレクト
+        } else {
+            // メール送信失敗時の処理
+            response.sendRedirect("resetPassword.jsp"); // リセット要求ページにリダイレクト
+        }
+    }
+
+    private String generateResetCode() {
+        // ランダムなリセットコードを生成するロジックを実装
+        return "random_reset_code";
+    }
+
+    private boolean sendResetEmail(String email, String resetCode) {
+        // メール送信のロジックを実装
+        // ここでは実際のメール送信を行うコードを書く必要があります
+        return true; // 仮の成功フラグ
     }
 }
+
