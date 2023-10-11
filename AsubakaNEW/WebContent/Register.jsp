@@ -38,5 +38,5 @@
 <!-- ログインへのリンク -->
 <a href="/AsubakaNEW/index.jsp">ログイン</a>
 
-</body>
+</body> 
 </html>

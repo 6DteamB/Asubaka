@@ -22,4 +22,4 @@ User loginUser = (User) session.getAttribute("loginUser");
 <a href="/AsubakaNEW/">TOPへ</a>
 <% } %>
 </body>
-</html>
+</html> 
