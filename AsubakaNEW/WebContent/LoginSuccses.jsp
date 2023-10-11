@@ -14,7 +14,7 @@
 <hr> <!-- 水平線を追加 -->
 
 <!-- ログインへのリンク -->
-<a href="/docoTsubu/index.jsp">ログイン</a>
+<a href="/Asubaka/index.jsp">ログイン</a>
 
 </body>
 </html>
