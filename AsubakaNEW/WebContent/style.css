@@ -6,20 +6,23 @@
 }
 
 body {
+	color: #0B1013;
     font-family: Arial, sans-serif;
-    background-color: #cc944c;
+    background-color: #FCFAF2;
 }
 
 h1 {
-    color:#3c241c;
     text-align: center;
 }
 
-h4 {color: #3c241c;
+h4 {
     text-align: center;	
-    
+    padding: 20px 0 0 0;
 }
 
+p{
+	text-align: center;
+}
 
 form {
     background-color: #fff;
@@ -34,34 +37,36 @@ form input[type="text"], form input[type="password"] {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 2px solid #cc944c;
-    color:#cc944c;
+    border: 2px solid #0B1013;
     border-radius: 4px;
 }
 
 .form-label {
-    color:#cc944c;
+    color:#0B1013;
 }
 
 
 form input[type="submit"] {
-    background-color: #cc944c;
-    color: #fff;
+	justify-content: center;
+    background-color: #D7C4BB;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: .3s cubic-bezier(0.5, 1, 0.89, 1);
 }
 
 form input[type="submit"]:hover {
-    background-color: #0056b3;
+    background: rgb(0, 0, 0);
+  	color: #D7C4BB;
+  	transform: scale(1.1);
 }
 
 /* Link styles */
 a {
-    color: #007BFF;
+    color: #0B1013;
     text-decoration: none;
+    text-align: left;
 }
 
 a:hover {
