@@ -11,9 +11,9 @@ import model.Login;
 
 public class AccountDAO {
   // データベース接続に使用する情報
-	private final String JDBC_URL = "jdbc:mysql://172.16.0.178:3306/asubaka";
-  private final String DB_USER = "root";
-  private final String DB_PASS = "adminadmin";
+	private final String JDBC_URL =  "jdbc:mysql://172.16.0.178:3306/Asubaka";
+  private final String DB_USER = "sa";
+  private final String DB_PASS = "";
   
   public Account findByLogin(Login login) {
     Account account = null;
@@ -23,9 +23,9 @@ public class AccountDAO {
         JDBC_URL, DB_USER, DB_PASS)) {
 
       // SELECT文を準備
-      String sql = "SELECT NAME, PASS, MAIL, OBIECTIVE, REWARD  FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
+      String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD  FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
       PreparedStatement pStmt = conn.prepareStatement(sql);
-      pStmt.setString(1, login.getUserId());
+      pStmt.setString(1, login.getName());
       pStmt.setString(2, login.getPass());
 
       // SELECTを実行し、結果表を取得
@@ -38,7 +38,7 @@ public class AccountDAO {
         String name = rs.getString("NAME");
         String pass = rs.getString("PASS");
         String mail = rs.getString("MAIL");
-        String objective = rs.getString("OBIECTIVE");
+        String objective = rs.getString("OBJECTIVE");
         String reward = rs.getString("REWARD");
         account = new Account(name, pass, mail, objective, reward);
         return account;
