@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;  // Added import
-import model.User;
+import model.Account;
 
 
 @WebServlet("/Main")
@@ -23,7 +23,7 @@ public class Main extends HttpServlet {
 	  
 	  
 	  HttpSession session = request.getSession();
-      User loginUser = (User) session.getAttribute("loginUser");
+	  Account loginUser = (Account) session.getAttribute("loginUser");
       
      
       
