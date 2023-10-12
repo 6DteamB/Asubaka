@@ -8,11 +8,12 @@
 body {
 	color: #0B1013;
     font-family: Arial, sans-serif;
-    background-color: #FCFAF2;
+    background-color: #91B493;
 }
 
 h1 {
     text-align: center;
+    font-size: 35px;
 }
 
 h4 {
@@ -44,7 +45,6 @@ form input[type="text"], form input[type="password"] {
 .form-label {
     color:#0B1013;
 }
-
 
 form input[type="submit"] {
 	justify-content: center;
