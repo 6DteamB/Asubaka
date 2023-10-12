@@ -29,7 +29,7 @@ public class Account {
   }
 
   public String getObjective() {
-    return name;
+    return objective;
   }
 
   public String getReward() {

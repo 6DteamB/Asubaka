@@ -26,14 +26,14 @@ public class AccountDAOTest {
 	    }
 	  }
 
-//  public static void testFindByLogin2() {
-//    Login login = new Login("kenta", "12345");
-//    AccountDAO dao = new AccountDAO();
-//    Account result = dao.findByLogin(login);
-//    if (result == null) {
-//      System.out.println("findByLogin2:成功しました");
-//    } else {
-//      System.out.println("findByLogin2:失敗しました");
-//    }
-//  }
+  public static void testFindByLogin2() {
+    Login login = new Login("kenta", "12345");
+    AccountDAO dao = new AccountDAO();
+    Account result = dao.findByLogin(login);
+    if (result == null) {
+      System.out.println("findByLogin2:成功しました");
+    } else {
+      System.out.println("findByLogin2:失敗しました");
+    }
+  }
 }
