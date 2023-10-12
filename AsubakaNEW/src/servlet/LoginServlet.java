@@ -2,30 +2,58 @@ package servlet;
 
 import java.io.IOException;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Login;
+import model.LoginLogic;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // フォームからユーザー名とパスワードを取得
-        String username = request.getParameter("name");
-        String password = request.getParameter("pass");
+	private static final long serialVersionUID = 1L;
 
-        // ここでユーザー認証のロジックを実装
-        // 仮の認証ロジック: ユーザー名とパスワードが"admin"の場合に認証成功とする
-        if ("admin".equals(username) && "adminpassword".equals(password)) {
-            // 認証成功時の処理
-            response.sendRedirect(request.getContextPath() + "/main.jsp");
-        } else {
-            // 認証失敗時の処理
-            // 例: エラーメッセージを設定してログインページに戻る
-            request.setAttribute("errorMessage", "認証に失敗しました");
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
-        }
-    }
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response)
+
+			throws ServletException, IOException {
+
+		// フォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher(
+				"index.jsp");
+		dispatcher.forward(request, response);
+	}
+
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response)
+			throws ServletException, IOException {
+
+		// リクエストパラメータの取得
+		request.setCharacterEncoding("UTF-8");
+		String name = request.getParameter("name");
+		String pass = request.getParameter("pass");
+
+		// ログイン処理の実行
+		Login login = new Login(name, pass);
+		LoginLogic bo = new LoginLogic();
+		boolean result = bo.execute(login);
+
+		// ログイン処理の成否によって処理を分岐
+		if (result) { // ログイン成功時
+
+			// セッションスコープにユーザーIDを保存
+			HttpSession session = request.getSession();
+			session.setAttribute("name", name);
+
+			// フォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("main.jsp");
+			dispatcher.forward(request, response);
+		} else { // ログイン失敗時
+			// リダイレクト
+			response.sendRedirect("/AsubakaNEW/LoginServlet");
+		}
+	}
 }
-

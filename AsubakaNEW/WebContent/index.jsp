@@ -18,7 +18,7 @@
 	<!-- ログインフォーム -->
 	
 	
-	<form action="/docoTsubu/LoginServlet" method="post">
+	<form action="/AsubakaNEW/LoginServlet" method="post">
 	<span class="form-label">ユーザー名：</span><input type="text" name="name"><br>
 	<span class="form-label">パスワード：</span><input type="password" name="pass"><br>
 	<input type="submit" value="ログイン">
