@@ -1,13 +1,17 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
+
+<link rel="stylesheet" type="text/css" href="style.css">
+
 <html>
 <head>
 <meta charset="UTF-8">
-<title>asubaka - ログイン</title>
+<title>あすばかログイン</title>
 </head>
 <body>
-<h1>asubakaへようこそ!</h1>
+<h4>習慣づけ管理アプリ</h4><br>
+<h1>明日やろうは馬鹿野郎</h1>
 
 <!-- ログインフォーム -->
 <form action="/docoTsubu/LoginServlet" method="post">
