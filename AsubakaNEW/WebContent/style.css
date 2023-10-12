@@ -1,27 +1,29 @@
 @charset "UTF-8";
 
-/* General styles */
+* {
+	margin:0;
+	padding:0;
+}
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    margin: 0;
+    background-color: #cc944c;
 }
 
 h1 {
-    color:#333;
+    color:#3c241c;
     text-align: center;
-    margin-bottom: 30px;
 }
 
-h4 {color: #333;
+h4 {color: #3c241c;
     text-align: center;	
     
 }
 
-/* Form styles */
+
 form {
     background-color: #fff;
-    padding: 20px;
+    padding: 60px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin: 0 auto;
@@ -32,12 +34,18 @@ form input[type="text"], form input[type="password"] {
     width: 100%;
     padding: 10px;
     margin: 10px 0;
-    border: 1px solid #ddd;
+    border: 2px solid #cc944c;
+    color:#cc944c;
     border-radius: 4px;
 }
 
+.form-label {
+    color:#cc944c;
+}
+
+
 form input[type="submit"] {
-    background-color: #007BFF;
+    background-color: #cc944c;
     color: #fff;
     padding: 10px 15px;
     border: none;
