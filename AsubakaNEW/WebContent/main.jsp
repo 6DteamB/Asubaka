@@ -53,9 +53,11 @@
 		    <button id="notAchievedButton">やってない</button>
 		</div>
 		
-	
-		
-	
+	 	<h1 id="calendar-title"></h1>
+		<div id="calendar" class="calendar-wrap"></div>
+		<button id="prevMonth">前の月</button>
+    	<button id="nextMonth">次の月</button>
+	    <script src='script.js'></script>
 
 	</body>
 </html>
