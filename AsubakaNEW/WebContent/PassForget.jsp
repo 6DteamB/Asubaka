@@ -8,7 +8,7 @@
     <h1>パスワードを忘れた場合</h1>
 
 
-    <form action="PassReset.java" method="post">
+    <form action="PassResetServlet.java" method="post">
         <label for="mail">メールアドレス:</label>
         <input type="text" name="mail" required><br>
 
