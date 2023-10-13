@@ -23,12 +23,19 @@
 <h1>新規登録</h1>
 
 <!-- 新規登録フォーム -->
-<form action="/AsubakaNEW/RegisterServlet" method="post" onsubmit="return validatePassword();">
+<form action="RegisterServlet.java" method="post" onsubmit="return validatePassword();">
 ユーザー名：<input type="text" name="name"><br>
 パスワード：<input type="password" name="pass" id="pass"><br>
 メールアドレス：<input type="email" name="mail"><br>
 達成したい目標：<input type="text" name="objective"><br>
 達成報酬：<input type="text" name="reward"><br>
+継続日数:
+<select name="day">
+	<option value="66">66日</option>
+	<option value="100">100日</option>
+</select>
+<br>
+
 <input type="submit" value="新規登録">
 </form>
 
