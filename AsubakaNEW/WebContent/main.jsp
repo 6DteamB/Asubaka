@@ -49,15 +49,6 @@
 		<!-- 残り日数-->
 		<p>残り日数: <c:out value="${remainingDays}" />日</p>
 		
-		
-		
-		<!-- その日の目標達成を確認するボタン -->
-		<div>
-		    <h2>今日の目標</h2>
-		    <button id="achievedButton">やった！</button>
-		    <button id="notAchievedButton">やってない</button>
-		</div>
-		
 	 	<h1 id="calendar-title"></h1>
 		<div id="calendar" class="calendar-wrap"></div>
 		<button id="prevMonth">前の月</button>
