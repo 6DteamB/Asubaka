@@ -14,4 +14,14 @@
         <url-pattern>/RegisterServlet.java</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>PassReset</servlet-name>
+        <servlet-class>servlet.PassReset</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PassReset</servlet-name>
+        <url-pattern>/PassReset.java</url-pattern>
+    </servlet-mapping>
+
 </web-app>
