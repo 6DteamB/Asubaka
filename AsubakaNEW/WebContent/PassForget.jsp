@@ -29,9 +29,9 @@
     <% } %>
         
     </form>
-    
+<br><br><br>
+<hr>
 
-    
     <a href="/AsubakaNEW/index.jsp">ログインページへ戻る</a>
     
     
