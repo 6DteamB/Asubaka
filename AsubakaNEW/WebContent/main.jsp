@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
 
+
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="style.css">
 
@@ -13,6 +14,11 @@
 
 	<body>
 		<h1>明日やろうは馬鹿野郎</h1>
+		
+		
+		<!-- ランダムな犬・猫の画像 -->
+		<c:out value="${animalImagePath}" />
+		<img src="${animalImagePath}" alt="動物の画像" />
 		
 	
 		<!-- 目標の詳細-->
@@ -31,7 +37,8 @@
 		    <button id="notAchievedButton">やってない</button>
 		</div>
 		
-		APIkey:live_gKgh0LGV6aOpmpxzxayKlTgpyAK0CcdouTfvqzFZXSFqpHQhG1Gfm4gVW0HpMzkn
+		
+
 		
 		<!-- 66日間の継続達成度の表示 プログレスバー-->
 		<div>
@@ -43,8 +50,6 @@
 		<p>残り日数: <c:out value="${remainingDays}" />日</p>
 		
 		
-		<!-- ランダムな犬・猫の画像 -->
-		<img src="${animalImagePath}" alt="動物の画像" />
 		
 		<!-- その日の目標達成を確認するボタン -->
 		<div>
