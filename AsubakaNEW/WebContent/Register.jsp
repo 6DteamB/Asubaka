@@ -7,7 +7,7 @@
 <title>明日やろうは馬鹿野郎 - 新規登録</title>
 <script>
   function validatePassword() {
-    var password = document.getElementById("newPass").value;
+    var password = document.getElementById("pass").value;
     
     // パスワードが6文字以上で、大文字と数字を含むかを検証
     if (password.length < 6 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
@@ -24,11 +24,10 @@
 
 <!-- 新規登録フォーム -->
 <form action="/AsubakaNEW/RegisterServlet" method="post" onsubmit="return validatePassword();">
-<!-- ニックネーム：<input type="text" name="nickname"><br> -->
-ユーザー名：<input type="text" name="newName"><br>
-パスワード：<input type="password" name="newPass" id="newPass"><br>
-メールアドレス：<input type="email" name="email"><br>
-達成したい目標：<input type="text" name="goal"><br>
+ユーザー名：<input type="text" name="name"><br>
+パスワード：<input type="password" name="pass" id="pass"><br>
+メールアドレス：<input type="email" name="mail"><br>
+達成したい目標：<input type="text" name="objective"><br>
 達成報酬：<input type="text" name="reward"><br>
 <input type="submit" value="新規登録">
 </form>
