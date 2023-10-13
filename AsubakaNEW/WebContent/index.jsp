@@ -18,7 +18,7 @@
 		<!-- ログインフォーム -->
 		
 		
-		<form action="/docoTsubu/LoginServlet" method="post">
+		<form action="/AsubakaNEW/main.jsp" method="post">
 		<span class="form-label">ユーザー名：</span><input type="text" name="name"><br>
 		<span class="form-label">パスワード：</span><input type="password" name="pass"><br>
 		<a href="/AsubakaNEW/PassForget.jsp">パスワードを忘れた場合</a><br>
