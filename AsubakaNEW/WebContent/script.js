@@ -2,6 +2,7 @@ const calendarElement = document.getElementById("calendar");
 const prevMonthButton = document.getElementById("prevMonth");
 const nextMonthButton = document.getElementById("nextMonth");
 const titleElement = document.getElementById("calendar-title");
+const achievedButton = document.getElementById("achievedButton"); // achievedButtonを追加
 
 let currentYear, currentMonth, selectedDates = new Set();
 
@@ -12,7 +13,9 @@ function initCalendar() {
     renderCalendar(currentYear, currentMonth);
     prevMonthButton.addEventListener("click", showPreviousMonth);
     nextMonthButton.addEventListener("click", showNextMonth);
+    achievedButton.addEventListener("click", checkToday); // achievedButtonのクリックイベントを追加
 }
+
 
 function renderCalendar(year, month) {
     const daysInMonth = new Date(year, month + 1, 0).getDate();
@@ -77,6 +80,25 @@ function toggleDate(event) {
     if (selectedDates.has(date)) {
         selectedDates.delete(date);
     } else {
+        selectedDates.add(date);
+    }
+}
+
+function checkToday() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = currentDate.getMonth();
+    const day = currentDate.getDate();
+    const date = `${year}-${month + 1}-${day}`;
+
+    // その日のチェックボックスを取得
+    const checkbox = calendarElement.querySelector(`input[data-date="${date}"]`);
+
+    if (checkbox) {
+        // チェックボックスをチェックする
+        checkbox.checked = true;
+
+        // 選択日を記録
         selectedDates.add(date);
     }
 }
