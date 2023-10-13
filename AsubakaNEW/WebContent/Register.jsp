@@ -32,7 +32,6 @@
 継続日数:
 <select name="day">
 	<option value="66">66日</option>
-	<option value="100">100日</option>
 </select>
 <br>
 
@@ -42,7 +41,7 @@
 <hr> <!-- 水平線を追加 -->
 
 <!-- ログインへのリンク -->
-<a href="/AsubakaNEW/index.jsp">ログイン</a>
+<a href="/AsubakaNEW/index.jsp">ログインページへ戻る</a>
 
 </body> 
 </html>

@@ -1,42 +1,63 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
-@WebServlet("/resetPassword")
 public class PassReset extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String email = request.getParameter("email");
-        // ここにデータベースからユーザを検索し、リセットコードを生成し、メールを送信するコードを実装
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String mail = request.getParameter("mail");
+        String name = request.getParameter("name");
 
-        // 例: ダミーコード（実際の実装は異なります）
-        String resetCode = generateResetCode(); // リセットコード生成
-        boolean emailSent = sendResetEmail(email, resetCode); // メール送信
+        String pass = retrievePassword(mail, name); // データベースからパスワードを取得
 
-        if (emailSent) {
-            // メール送信成功時の処理
-            response.sendRedirect("resetPasswordConfirm.jsp"); // リセット確認ページにリダイレクト
+        if (pass != null) {
+            request.setAttribute("pass", pass);
         } else {
-            // メール送信失敗時の処理
-            response.sendRedirect("resetPassword.jsp"); // リセット要求ページにリダイレクト
+            request.setAttribute("message", "一致するユーザーが見つかりませんでした。");
         }
+
+        request.getRequestDispatcher("PassForget.jsp").forward(request, response);
     }
 
-    private String generateResetCode() {
-        // ランダムなリセットコードを生成するロジックを実装
-        return "random_reset_code";
-    }
+    private String retrievePassword(String mail, String name) {
+        String pass = null;
+        Connection connection = null;
 
-    private boolean sendResetEmail(String email, String resetCode) {
-        // メール送信のロジックを実装
-        // ここでは実際のメール送信を行うコードを書く必要があります
-        return true; // 仮の成功フラグ
+        try {
+            Class.forName("com.mysql.jdbc.Driver");
+            connection = DriverManager.getConnection("jdbc:mysql://172.16.0.178:3306/Asubaka", "sa", "");
+
+            String sql = "SELECT pass FROM account WHERE mail = ? AND name = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, mail);
+            statement.setString(2, name);
+
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                pass = resultSet.getString("pass");
+            }
+        } catch (ClassNotFoundException | SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+
+        return pass;
     }
 }
-
