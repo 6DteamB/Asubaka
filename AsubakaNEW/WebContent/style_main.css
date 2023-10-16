@@ -1,0 +1,39 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family: 'Zen Kaku Gothic Antique', sans-serif;
+}
+
+body {
+	color: #0B1013;
+	font-family: Arial, sans-serif;
+	background-color: #91B493;
+}
+
+h1 {
+	text-align: center;
+	font-size: 35px;
+}
+
+/* カスタムチェックボックスのスタイル */
+input[type="checkbox"] {
+	display: none;
+}
+
+/* カスタムチェックボックスのスタイル */
+input[type="checkbox"]+label {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background-image: url('mark.png');
+	/* これを 'mark.png' に変更 */
+	background-size: cover;
+	cursor: pointer;
+}
+
+/* チェックされたときのスタイル */
+input[type="checkbox"]:checked+label {
+	background-image: url('mark.png');
+	/* これを 'mark.png' に変更 */
+	background-size: cover;
+}
