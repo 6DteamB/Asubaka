@@ -10,7 +10,7 @@
 body {
 	color: #0B1013;
     font-family: Arial, sans-serif;
-    background-color: #91B493;
+    background-color: #E0E0E0;
 }
 
 h1 {
@@ -20,7 +20,7 @@ h1 {
 
 
 p{
-	margin-top: 20px;
+	margin-top: 30px;
 	margin-bottom: -20px;
 	text-align: center;
 	font-weight: bold;
@@ -29,7 +29,7 @@ p{
 }
 
 form {
-    background-color: #fff;
+    background-color: #ffff7a;
     padding: 60px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

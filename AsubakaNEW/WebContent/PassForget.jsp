@@ -18,6 +18,7 @@
         <label for="name">名前:</label>
         <input type="text" name="name" required><br>
 
+		<br>
         <input type="submit" value="パスワードを表示">
         
         
@@ -29,7 +30,7 @@
     <% } %>
         
     </form>
-<br><br><br>
+<br>
 <hr>
 
     <a href="/AsubakaNEW/index.jsp">ログインページへ戻る</a>
