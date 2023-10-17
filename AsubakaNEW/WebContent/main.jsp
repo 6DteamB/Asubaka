@@ -15,7 +15,6 @@
 	<h1>明日やろうは馬鹿野郎</h1>
 
 	<!-- ランダムな犬・猫の画像 -->
-	<c:out value="${animalImagePath}" />
 	<img src="${animalImagePath}" alt="動物の画像" />
 
 	<!-- ランダムな名言 -->
