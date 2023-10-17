@@ -23,7 +23,7 @@ public class AccountDAO {
         JDBC_URL, DB_USER, DB_PASS)) {
 
       // SELECT文を準備
-      String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD  FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
+      String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
       PreparedStatement pStmt = conn.prepareStatement(sql);
       pStmt.setString(1, login.getName());
       pStmt.setString(2, login.getPass());
@@ -40,7 +40,8 @@ public class AccountDAO {
         String mail = rs.getString("MAIL");
         String objective = rs.getString("OBJECTIVE");
         String reward = rs.getString("REWARD");
-        account = new Account(name, pass, mail, objective, reward);
+        int day =rs.getInt("DAY");
+        account = new Account(name, pass, mail, objective, reward, day);
         return account;
       }
     } catch (SQLException e) {
