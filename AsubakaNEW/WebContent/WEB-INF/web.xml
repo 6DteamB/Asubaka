@@ -11,7 +11,7 @@
   <servlet>
     <servlet-name>PassResetServlet</servlet-name>
     <servlet-class>servlet.PassResetServlet</servlet-class>
-  </servlet>
+  </servlet> 
   <servlet-mapping>
     <servlet-name>PassResetServlet</servlet-name>
     <url-pattern>/PassResetServlet.java</url-pattern>

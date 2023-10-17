@@ -21,7 +21,7 @@ public class AccountDAO {
     // データベースへ接続
     try (Connection conn = DriverManager.getConnection(
         JDBC_URL, DB_USER, DB_PASS)) {
-
+ 
       // SELECT文を準備
       String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
       PreparedStatement pStmt = conn.prepareStatement(sql);

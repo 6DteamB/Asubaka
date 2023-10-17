@@ -16,7 +16,7 @@ public class Account {
     this.objective = objective;
     this.reward = reward;
     this.day=day;
-  }
+  } 
 
   public String getName() {
     return name;

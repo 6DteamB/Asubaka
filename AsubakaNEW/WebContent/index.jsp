@@ -9,7 +9,7 @@
 <body>
     <h4>ねこちゃんとがんばる習慣づけ管理アプリ</h4>
     <h1>明日やろうは馬鹿野郎</h1>
-
+ 
     <!-- ログインフォーsム -->
     <form action="MainServlet.java" method="post">
         <span class="form-label">ユーザー名</span><input type="text" name="name"><br>
