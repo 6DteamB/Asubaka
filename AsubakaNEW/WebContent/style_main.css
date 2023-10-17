@@ -16,24 +16,24 @@ h1 {
 }
 
 /* カスタムチェックボックスのスタイル */
-input[type="checkbox"] {
-	display: none;
-}
+/*input[type="checkbox"] {*/
+/*	display: none;*/
+/*}*/
 
 /* カスタムチェックボックスのスタイル */
-input[type="checkbox"]+label {
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	background-image: url('mark.png');
-	/* これを 'mark.png' に変更 */
-	background-size: cover;
-	cursor: pointer;
-}
+/*input[type="checkbox"]+label {*/
+/*	display: inline-block;*/
+/*	width: 20px;*/
+/*	height: 20px;*/
+/*	background-image: url('mark.png');*/
+/*	 これを 'mark.png' に変更 */
+/*	background-size: cover;*/
+/*	cursor: pointer;*/
+/*}*/
 
 /* チェックされたときのスタイル */
-input[type="checkbox"]:checked+label {
-	background-image: url('mark.png');
-	/* これを 'mark.png' に変更 */
-	background-size: cover;
-}
+/*input[type="checkbox"]:checked+label {*/
+/*	background-image: url('mark.png');*/
+/*	 これを 'mark.png' に変更 */
+/*	background-size: cover;*/
+/*}*/
