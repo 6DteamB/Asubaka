@@ -11,17 +11,27 @@
   <servlet>
     <servlet-name>PassResetServlet</servlet-name>
     <servlet-class>servlet.PassResetServlet</servlet-class>
-  </servlet> 
+  </servlet>
   <servlet-mapping>
     <servlet-name>PassResetServlet</servlet-name>
     <url-pattern>/PassResetServlet.java</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>MainServlet</servlet-name>
     <servlet-class>servlet.MainServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MainServlet</servlet-name>
     <url-pattern>/MainServlet.java</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RandomQuoteServlet</display-name>
+    <servlet-name>RandomQuoteServlet</servlet-name>
+    <servlet-class>servlet.RandomQuoteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RandomQuoteServlet</servlet-name>
+    <url-pattern>/RandomQuoteServlet</url-pattern>
   </servlet-mapping>
 </web-app>
