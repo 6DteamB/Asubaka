@@ -18,14 +18,9 @@
 	<c:out value="${animalImagePath}" />
 	<img src="${animalImagePath}" alt="動物の画像" />
 
-	<!-- ランダムな名言と偉人 -->
-	<c:if test="${not empty randomQuote}">
-		<div>
-			<h2>名言</h2>
-			<p>${randomQuote}</p>
-			<p>- ${randomAuthor}</p>
-		</div>
-	</c:if>
+	<!-- ランダムな名言 -->
+	<p>今日の名言</p>
+   	<c:out value="${randomQuoteAndAuthor}" />
 
 	<!-- 目標の詳細-->
 	<div>
