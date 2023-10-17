@@ -1,29 +1,67 @@
 package model;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+
+
 public class ConfigLoader {
-    private static final String CONFIG_FILE = "/config.properties";
+    private static final String PROPERTIES_FILE = "config.properties";
+    private static final Properties PROPERTIES = new Properties();
+    InputStream inputStream = ConfigLoader.class.getResourceAsStream("config.properties");
+
+
+    static {
+        try {
+            InputStream in = ConfigLoader.class.getResourceAsStream(PROPERTIES_FILE);
+            if (in == null) {
+                throw new FileNotFoundException("Property file " + PROPERTIES_FILE + " not found");
+            }
+            PROPERTIES.load(in);
+        } catch (IOException e) {
+            throw new RuntimeException("Failed to load properties", e);
+        }
+    }
 
     public static String getApiKey() {
-        String apiKey = null;
-
-        try (InputStream input = ConfigLoader.class.getResourceAsStream(CONFIG_FILE)) {
-            if (input == null) {
-                System.out.println("Sorry, unable to find " + CONFIG_FILE);
-                return null;
-            }
-
-            Properties prop = new Properties();
-            prop.load(input);
-
-            apiKey = prop.getProperty("catapi.apikey");
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-
-        return apiKey;
+        return PROPERTIES.getProperty("catapi.apikey");
     }
 }
+
+
+
+
+
+
+
+//package model;
+//
+//import java.io.FileNotFoundException;
+//import java.io.IOException;
+//import java.io.InputStream;
+//import java.util.Properties;
+//
+//import jakarta.servlet.ServletContext;
+//
+//public class ConfigLoader {
+//    private static final String PROPERTIES_FILE = "/WEB-INF/config.properties";
+//    private static final Properties PROPERTIES = new Properties();
+//
+//    public static void init(ServletContext context) {
+//        try {
+//            InputStream in = context.getResourceAsStream(PROPERTIES_FILE);
+//            if (in == null) {
+//                throw new FileNotFoundException("Property file " + PROPERTIES_FILE + " not found");
+//            }
+//            PROPERTIES.load(in);
+//        } catch (IOException e) {
+//            throw new RuntimeException("Failed to load properties", e);
+//        }
+//    }
+//
+//    public static String getApiKey() {
+//        return PROPERTIES.getProperty("catapi.apikey");
+//    }
+//}
