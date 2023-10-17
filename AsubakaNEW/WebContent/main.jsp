@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
+<%@ page import="dao.AccountDAO" %>
+<%@ page import="model.Login" %>
 
 <!DOCTYPE html>
 <html>
@@ -15,18 +17,14 @@
 	<!-- ランダムな犬・猫の画像 -->
 	<img src="${animalImagePath}" alt="動物の画像" />
 
-	<!-- ランダムな名言と偉人 -->
-	<c:if test="${not empty randomQuote}">
-		<div>
-			<h2>名言</h2>
-			<p>${randomQuote}</p>
-			<p>- ${randomAuthor}</p>
-		</div>
-	</c:if>
+	<!-- ランダムな名言 -->
+	<p>今日の名言</p>
+   	<c:out value="${randomQuoteAndAuthor}" />
 
 	<!-- 目標の詳細-->
 	<div>
 		<h2>目標</h2>
+		<c:out value="${account.objective}" />
 	</div>
 
 	<!-- その日の目標達成を確認するボタン -->
@@ -39,15 +37,14 @@
 	<!-- 66日間の継続達成度の表示 プログレスバー-->
 	<div>
 		<h2>達成度</h2>
-		<progress value="${achievedDays}" max="66"></progress>
-		<c:out value="${achievedDays}" />
-		日 / 66日
+		<progress value="<c:out value="${account.day}" />" max="66"></progress>
+		<c:out value="${account.day}" /> /日 / 66日
 	</div>
 
 	<!-- 残り日数-->
 	<p>
 		残り日数:
-		<c:out value="${remainingDays}" />
+		<c:out value="${account.day}" />
 		日
 	</p>
 
