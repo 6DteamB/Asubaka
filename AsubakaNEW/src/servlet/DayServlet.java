@@ -3,7 +3,6 @@ package servlet;
 import java.io.IOException;
 
 import dao.AccountDAO;
-import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -15,9 +14,8 @@ public class DayServlet extends HttpServlet {
         // 初期のJSPページのGETリクエストを処理
         // ここにロジックやデータ取得を配置できます
         
-        // JSPページにフォワード
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");
-        dispatcher.forward(request, response);
+        // MainServlet にリダイレクト
+        response.sendRedirect(request.getContextPath() + "/MainServlet.java");
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -36,7 +34,7 @@ public class DayServlet extends HttpServlet {
             }
         }
 
-        // DayServlet.java にリダイレクト
-        response.sendRedirect(request.getContextPath() + "/DayServlet");
+        // MainServlet にリダイレクト
+        response.sendRedirect(request.getContextPath() + "/MainServlet.java");
     }
 }
