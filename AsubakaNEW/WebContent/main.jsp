@@ -21,7 +21,6 @@
 	</div>
 
 	<!-- ランダムな名言 -->
-	<p>今日の名言</p>
    	<c:out value="${randomQuoteAndAuthor}" />
 
 
