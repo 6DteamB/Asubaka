@@ -36,8 +36,9 @@
 	<!-- その日の目標達成を確認するボタン -->
 	<div>
 		<h2>今日の習慣</h2>
+		<form method="post" action="DayServlet.java">
 		<button id="achievedButton">やった！</button>
-		<button id="notAchievedButton">やってない</button>
+		</form>
 	</div>
 
 	<!-- 66日間の継続達成度の表示 プログレスバー-->
