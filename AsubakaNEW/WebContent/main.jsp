@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
-<%@ page import="dao.AccountDAO" %>
-<%@ page import="model.Login" %>
+<%@ page import="dao.AccountDAO"%>
+<%@ page import="model.Login"%>
 
 <!DOCTYPE html>
 <html>
@@ -44,7 +44,8 @@
 	<div>
 		<h2>達成度</h2>
 		<progress value="<c:out value="${account.day}" />" max="66"></progress>
-		<c:out value="${account.day}" /> /日 / 66日
+		<c:out value="${account.day}" />
+		/日 / 66日
 	</div>
 
 	<!-- 残り日数-->
@@ -54,11 +55,27 @@
 		日
 	</p>
 
+	<h2>CSSから画像の表示</h2>
+	<div class="disp-img"></div>
+
 	<h1 id="calendar-title"></h1>
 	<div id="calendar" class="calendar-wrap"></div>
 	<button id="prevMonth">前の月</button>
 	<button id="nextMonth">次の月</button>
 
 	<script src="script.js"></script>
+
+	<button id="redirectToRewardPage">報酬ページへ移動</button>
+	<script>
+		// ボタンのクリックを検知し、指定のページに移動するイベントリスナーを追加
+		document.getElementById("redirectToRewardPage").addEventListener(
+				"click", function() {
+					// 移動先ページのURLを定義
+					var targetUrl = "reward.jsp";
+
+					// JavaScriptを使用して指定のページに移動
+					window.location.href = targetUrl;
+				});
+	</script>
 </body>
 </html>
