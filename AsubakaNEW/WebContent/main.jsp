@@ -61,21 +61,11 @@
 	<div id="calendar" class="calendar-wrap"></div>
 	<button id="prevMonth">前の月</button>
 	<button id="nextMonth">次の月</button>
-</div>
+	</div>
 
-	<script src="script.js"></script>
 
 	<button id="redirectToRewardPage">報酬ページへ移動</button>
-	<script>
-		// ボタンのクリックを検知し、指定のページに移動するイベントリスナーを追加
-		document.getElementById("redirectToRewardPage").addEventListener(
-				"click", function() {
-					// 移動先ページのURLを定義
-					var targetUrl = "reward.jsp";
-
-					// JavaScriptを使用して指定のページに移動
-					window.location.href = targetUrl;
-				});
-	</script>
+	
+	<script src="script.js"></script>
 </body>
 </html>
