@@ -2,10 +2,12 @@ const calendarElement = document.getElementById("calendar");
 const prevMonthButton = document.getElementById("prevMonth");
 const nextMonthButton = document.getElementById("nextMonth");
 const titleElement = document.getElementById("calendar-title");
-const achievedButton = document.getElementById("achievedButton"); // achievedButtonを追加
-//const notAchievedButton = document.getElementById("notAchievedButton");  やってないボタンのアクション
+const achievedButton = document.getElementById("achievedButton"); 
 
 let currentYear, currentMonth, selectedDates = new Set();
+
+document.addEventListener("DOMContentLoaded", function() {
+    initCalendar();
 
 function initCalendar() {
     const currentDate = new Date();
@@ -104,6 +106,14 @@ function checkToday() {
         selectedDates.add(date);
     }
 }
+
+// ボタンのクリックを検知し、指定のページに移動するイベントリスナーを追加
+		document.getElementById("redirectToRewardPage").addEventListener("click", function() {
+        var targetUrl = "reward.jsp";
+        window.location.href = targetUrl;
+    });
+
+});
 
 //function uncheckToday() {
 //    const currentDate = new Date();

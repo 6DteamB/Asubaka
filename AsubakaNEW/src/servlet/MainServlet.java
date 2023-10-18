@@ -99,10 +99,6 @@ public class MainServlet extends HttpServlet {
         if (isLogin) {
             session.setAttribute("login", login);
         }
-    	
-    	// フォームからユーザー名とパスワードの値を取得
-        String username = request.getParameter("name");
-        String password = request.getParameter("pass");
 
 
         // accountDAOを使用してAccountインスタンスを取得
