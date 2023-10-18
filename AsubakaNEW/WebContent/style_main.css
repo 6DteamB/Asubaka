@@ -15,25 +15,75 @@ h1 {
 	font-size: 35px;
 }
 
-/* カスタムチェックボックスのスタイル */
-input[type="checkbox"] {
-	display: none;
+h2 {
+	text-align: center;
 }
 
-/* カスタムチェックボックスのスタイル */
-input[type="checkbox"]+label {
-	display: inline-block;
-	width: 20px;
-	height: 20px;
-	background-image: url('mark.png');
-	/* これを 'mark.png' に変更 */
-	background-size: cover;
-	cursor: pointer;
+p {
+	text-align: center;
 }
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+
+/* 猫API画像 */
+
+
+.image-container {
+    display: flex;
+    justify-content: center;  
+    align-items: center;     
+}
+
+
+.image-container img{
+    width: 300px;
+    height: 300px;
+    object-fit: cover;
+}
+        
+        
+/*やったボタン*/
+.do-button{
+	display: flex;
+	justify-content: center;
+}
+
+
+/* レスポンシブ*/
+@media (max-width: 600px) {
+    .animal-image {
+        width: 200px;
+        height: 200px;
+    }
+}
+
+
+/* カスタムチェックボックスのスタイル */
+/*input[type="checkbox"] {*/
+/*	display: none;*/
+/*}*/
+
+/* カスタムチェックボックスのスタイル */
+/*input[type="checkbox"]+label {*/
+/*	display: inline-block;*/
+/*	width: 20px;*/
+/*	height: 20px;*/
+/*	background-image: url('mark.png');*/
+/*	 これを 'mark.png' に変更 */
+/*	background-size: cover;*/
+/*	cursor: pointer;*/
+/*}*/
 
 /* チェックされたときのスタイル */
-input[type="checkbox"]:checked+label {
-	background-image: url('mark.png');
-	/* これを 'mark.png' に変更 */
-	background-size: cover;
-}
+/*input[type="checkbox"]:checked+label {*/
+/*	background-image: url('mark.png');*/
+/*	 これを 'mark.png' に変更 */
+/*	background-size: cover;*/
+/*}*/

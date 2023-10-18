@@ -25,6 +25,16 @@
     <url-pattern>/MainServlet.java</url-pattern>
   </servlet-mapping>
   <servlet>
+    <description></description>
+    <display-name>RandomQuoteServlet</display-name>
+    <servlet-name>RandomQuoteServlet</servlet-name>
+    <servlet-class>servlet.RandomQuoteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RandomQuoteServlet</servlet-name>
+    <url-pattern>/RandomQuoteServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
     <servlet-name>DayServlet</servlet-name>
     <servlet-class>servlet.DayServlet</servlet-class>
   </servlet>
@@ -32,4 +42,3 @@
     <servlet-name>DayServlet</servlet-name>
     <url-pattern>/DayServlet.java</url-pattern>
   </servlet-mapping>
-</web-app>
