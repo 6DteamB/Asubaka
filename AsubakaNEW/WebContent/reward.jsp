@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="com.example.dao.AccountDAO" %>
+<%@ page import="com.example.model.main.Account" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,7 @@
 <title>達成おめでとう！</title>
 </head>
 <body>
-<p><c:out value="${name }"/>さん</p>
-<p><c:out value="${reward }"/>のご褒美</p>
+<c:out value="${account.name}さん"/>
+<c:out value="${account.reward}のご褒美"/>
 </body>
 </html>
