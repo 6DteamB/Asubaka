@@ -35,6 +35,8 @@
 	<div>
 		<h2>今日の習慣</h2>
 		<form method="post" action="DayServlet.java">
+		    <input type="hidden" name="name" value="${account.name}">
+    		<input type="hidden" name="pass" value="${account.pass}">
 		<button id="achievedButton">やった！</button>
 		</form>
 	</div>
