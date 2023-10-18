@@ -15,7 +15,8 @@ public class AccountDAO {
     private final String DB_USER = "sa";
     private final String DB_PASS = "";
 
-    public Account findByLogin(Login login) {
+
+	public Account findByLogin(Login login) {
         Account account = null;
 
         // MySQLのJDBCドライバをロード
