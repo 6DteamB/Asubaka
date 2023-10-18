@@ -3,7 +3,7 @@ const prevMonthButton = document.getElementById("prevMonth");
 const nextMonthButton = document.getElementById("nextMonth");
 const titleElement = document.getElementById("calendar-title");
 const achievedButton = document.getElementById("achievedButton"); // achievedButtonを追加
-const notAchievedButton = document.getElementById("notAchievedButton");
+//const notAchievedButton = document.getElementById("notAchievedButton");  やってないボタンのアクション
 
 let currentYear, currentMonth, selectedDates = new Set();
 
@@ -105,24 +105,24 @@ function checkToday() {
     }
 }
 
-function uncheckToday() {
-    const currentDate = new Date();
-    const year = currentDate.getFullYear();
-    const month = currentDate.getMonth();
-    const day = currentDate.getDate();
-    const date = `${year}-${month + 1}-${day}`;
-
-    // その日のチェックボックスを取得
-    const checkbox = calendarElement.querySelector(`input[data-date="${date}"]`);
-
-    if (checkbox) {
-        // チェックボックスのチェックを外す
-        checkbox.checked = false;
-
-        // 選択日を削除
-        selectedDates.delete(date);
-    }
-}
-
-initCalendar();
+//function uncheckToday() {
+//    const currentDate = new Date();
+//    const year = currentDate.getFullYear();
+//    const month = currentDate.getMonth();
+//    const day = currentDate.getDate();
+//    const date = `${year}-${month + 1}-${day}`;
+//
+//    // その日のチェックボックスを取得
+//    const checkbox = calendarElement.querySelector(`input[data-date="${date}"]`);
+//
+//    if (checkbox) {
+//        // チェックボックスのチェックを外す
+//        checkbox.checked = false;
+//
+//        // 選択日を削除
+//        selectedDates.delete(date);
+//    }
+//}
+//
+//initCalendar();
 

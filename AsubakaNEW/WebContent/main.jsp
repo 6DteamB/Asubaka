@@ -15,18 +15,16 @@
 	<h1>明日やろうは馬鹿野郎</h1>
 
 	<!-- ランダムな犬・猫の画像 -->
-	<c:out value="${animalImagePath}" />
-	<img src="${animalImagePath}" alt="動物の画像" />
+	
+	<div class="image-container">
+    	<img src="${animalImagePath}" alt="動物の画像" />
+	</div>
 
-	<!-- ランダムな名言と偉人 -->
-	<c:if test="${not empty randomQuote}">
-		<div>
-			<h2>名言</h2>
-			<p>${randomQuote}</p>
-			<p>- ${randomAuthor}</p>
-		</div>
-	</c:if>
+	<!-- ランダムな名言 -->
+   	<c:out value="${randomQuoteAndAuthor}" />
 
+
+<div class="center-container">
 	<!-- 目標の詳細-->
 	<div>
 		<h2>目標</h2>
@@ -62,6 +60,7 @@
 	<div id="calendar" class="calendar-wrap"></div>
 	<button id="prevMonth">前の月</button>
 	<button id="nextMonth">次の月</button>
+</div>
 
 	<script src="script.js"></script>
 

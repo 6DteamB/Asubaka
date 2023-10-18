@@ -41,5 +41,9 @@ public class Account {
   public int getDay() {
 	  return day;
   }
+
+public void setDay(int i) {
+	
+}
   
 }

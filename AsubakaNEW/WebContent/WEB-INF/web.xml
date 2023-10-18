@@ -11,12 +11,12 @@
   <servlet>
     <servlet-name>PassResetServlet</servlet-name>
     <servlet-class>servlet.PassResetServlet</servlet-class>
-  </servlet> 
+  </servlet>
   <servlet-mapping>
     <servlet-name>PassResetServlet</servlet-name>
     <url-pattern>/PassResetServlet.java</url-pattern>
   </servlet-mapping>
-   <servlet>
+  <servlet>
     <servlet-name>MainServlet</servlet-name>
     <servlet-class>servlet.MainServlet</servlet-class>
   </servlet>
@@ -25,12 +25,22 @@
     <url-pattern>/MainServlet.java</url-pattern>
   </servlet-mapping>
   <servlet>
-        <servlet-name>ImageServlet</servlet-name>
-        <servlet-class>servlet.ImageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ImageServlet</servlet-name>
-        <url-pattern>/ImageServlet</url-pattern>
-    </servlet-mapping>
-  
-</web-app>
+    <description></description>
+    <display-name>RandomQuoteServlet</display-name>
+    <servlet-name>RandomQuoteServlet</servlet-name>
+    <servlet-class>servlet.RandomQuoteServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RandomQuoteServlet</servlet-name>
+    <url-pattern>/RandomQuoteServlet</url-pattern>
+  </servlet-mapping>
+    <servlet>
+    <servlet-name>DayServlet</servlet-name>
+    <servlet-class>servlet.DayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DayServlet</servlet-name>
+    <url-pattern>/DayServlet.java</url-pattern>
+  </servlet-mapping>
+  </web-app>
+

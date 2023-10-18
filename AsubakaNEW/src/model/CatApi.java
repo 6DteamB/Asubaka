@@ -15,9 +15,7 @@ import okhttp3.Response;
 public class CatApi {
 
 	private static final String BASE_URL = "https://api.thecatapi.com/v1/images/search";
-	private static final String API_KEY = "live_UChd9a9fnvDCswhqemI5vQEy9uicz4J0zGuKhoQHdVlFWSxqabPoif4wPqJzB5HJ";
-
-//	private static final String API_KEY = ConfigLoader.getApiKey();
+	private static final String API_KEY = ConfigLoader.getApiKey();
 
 	/**
      * ランダムな猫の画像のURLを取得します。
