@@ -28,7 +28,7 @@ public class MainServlet extends HttpServlet {
         request.setAttribute("account", account);
 
         // リクエストをJSPにフォワード
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("//main.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -34,4 +34,11 @@
     <servlet-name>RandomQuoteServlet</servlet-name>
     <url-pattern>/RandomQuoteServlet</url-pattern>
   </servlet-mapping>
-</web-app>
+    <servlet>
+    <servlet-name>DayServlet</servlet-name>
+    <servlet-class>servlet.DayServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DayServlet</servlet-name>
+    <url-pattern>/DayServlet.java</url-pattern>
+  </servlet-mapping>
