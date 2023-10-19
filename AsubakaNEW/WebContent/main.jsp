@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>あすばか</title>
-<!-- <link rel="stylesheet" type="text/css" href="style_main.css"> -->
+
 </head>
 <body>
 	<h1>明日やろうは馬鹿野郎</h1>
@@ -37,7 +37,7 @@
 			<form method="post" action="DayServlet.java">
 			    <input type="hidden" name="name" value="${account.name}">
 	    		<input type="hidden" name="pass" value="${account.pass}">
-				<button id="achievedButton">やった！</button>
+				<button id="achievedButton" class="button">やった！</button>
 			</form>
 		</div>
 	
@@ -58,12 +58,12 @@
 		<!-- カレンダーの表示 -->
 		<h1 id="calendar-title"></h1>
 		<div id="calendar" class="calendar-wrap"></div>
-		<button id="prevMonth">前の月</button>
-		<button id="nextMonth">次の月</button>
+		<button id="prevMonth" class="month">前の月</button>
+		<button id="nextMonth" class="month">次の月</button>
 	</div>
 		
 </div>
-	<button id="redirectToRewardPage">報酬ページへ移動</button>
+
 	<script src="script.js"></script>
 
 	<style>
@@ -87,11 +87,31 @@
 			background-color: #E0E0E0;
 		}
 		
+		h1 {
+			text-align: center;
+			font-size: 35px;
+			padding: 25px 0 0 0;
+		}
+		
+		h2,p {
+			text-align: center;
+			font-size: 25px;
+		}
+		
 		/*２段組み*/
 		.main{
 		 	display:flex;
 		 }
-		 
+		 .containerA{
+		 	margin: 20px;
+			width: 800px;
+            float: right;
+		}
+		
+		.containerB{
+			margin: 20px 0px 0px 0px;
+		}
+		
 		 /*猫画像*/
 		.image-container {
 		    display: flex;
@@ -105,36 +125,73 @@
     		object-fit: cover;/* 縦横比を保持 */
     		border-radius:15px;
     		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    		margin:0px 0px 20px 0px;
 		}
 		
 		/*名言*/
 		.quote{
-			inline-size: 480px;
+			inline-size: 550px;
   			overflow-wrap: break-word;
-  			text-align:center;
+  			padding: 0px 0px 0px 120px;
+  			text-align: center;
+		}
+
+		/*やったボタン*/
+		.button {
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    width: 250px;
+		    margin: 0 auto;
+		    padding: .9em 2em;
+		    border: none;
+		    border-radius: 25px;
+		    background-color: #5b6b76;
+		    color: #fff;
+		    font-weight: 600;
+		    font-size: 1em;
 		}
 		
-		.containerA{
-			padding:15px 150px;
+		.button:hover {
+		    animation: anime-button .3s linear infinite;
 		}
 		
-		.containerB{
-			width: 500px;
-			height: ;
+		@keyframes anime-button {
+		    20% {
+		        transform: translate(-2px, 2px);
+		    }
+		    40% {
+		        transform: translate(-2px, -2px);
+		    }
+		    60% {
+		        transform: translate(2px, 2px);
+		    }
+		    80% {
+		        transform: translate(2px, -2px);
+		    }
 		}
 		
-		h1 {
-			text-align: center;
-			font-size: 35px;
-			padding: 25px 0 0 0;
+		.month {
+			justify-content: center;
+			align-items: center;
+			padding: .5em 1em;
+			margin:0 auto;
+		    border: 1px solid #49535b;
+		    border-radius: 25px;
+		    background-color: #fff;
+		    color: #49535b;
 		}
-		
-		h2,p {
-			text-align: center;
-			font-size: 25px;
-		}
-		#achievedButton{
-			
+
+
+		/* レスポンシブ*/
+		@media (max-width: 600px) {
+		    .image-container img {
+		        width: 450px;
+		        height: 450px;
+		    }
+		    .main{
+			 	display:block;
+		 	}
 		}
 		
 	</style>
