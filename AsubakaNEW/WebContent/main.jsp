@@ -71,6 +71,7 @@
 	<script src="script.js"></script>
 	
 	<style>
+	
 		* {
 			margin: 0;
 			padding: 0;
