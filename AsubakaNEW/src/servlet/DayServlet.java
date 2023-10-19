@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -49,10 +50,19 @@ public class DayServlet extends HttpServlet {
                 PreparedStatement countPreparedStatement = conn.prepareStatement(updateCountQuery);
                 countPreparedStatement.setString(1, nameFromMainJSP);
                 int countRowsUpdated = countPreparedStatement.executeUpdate();
- 
+
+                // Check the remaining days
+                int remainingDays = getRemainingDays(nameFromMainJSP, conn);
+                
                 if (dayRowsUpdated > 0 && countRowsUpdated > 0) {
                     lastProcessedDate = currentDateString; // 処理が成功した場合、日付を更新
-                    request.getRequestDispatcher("MainServlet.java").forward(request, response);
+                    
+                    // Redirect to reward.jsp if remaining days are 0
+                    if (remainingDays == 0) {
+                        response.sendRedirect("reward.jsp");
+                    } else {
+                        request.getRequestDispatcher("MainServlet.java").forward(request, response);
+                    }
                 } else {
                     // If no rows were updated, set an error message and forward to an error page
                     request.setAttribute("errorMessage", "更新に失敗しました。");
@@ -76,6 +86,21 @@ public class DayServlet extends HttpServlet {
             // 同じ日に2回目以降の実行を制限し、エラーメッセージを表示
             request.setAttribute("errorMessage", "本日は既に処理済みです。");
             request.getRequestDispatcher("Error.jsp").forward(request, response);
+        }
+    }
+
+    // Helper method to get the remaining days from the database
+    private int getRemainingDays(String name, Connection connection) throws SQLException {
+        String selectRemainingDaysQuery = "SELECT day FROM account WHERE name = ?";
+        PreparedStatement selectDaysStatement = connection.prepareStatement(selectRemainingDaysQuery);
+        selectDaysStatement.setString(1, name);
+        ResultSet resultSet = selectDaysStatement.executeQuery();
+
+        if (resultSet.next()) {
+            return resultSet.getInt("day");
+        } else {
+            // Handle the case where the user is not found
+            return -1;
         }
     }
 }
