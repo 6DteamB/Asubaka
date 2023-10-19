@@ -59,7 +59,7 @@ public class AccountDAO {
         }
         // 見つかったユーザーまたはnullを返す
         return null;
-    }
+    } 
 
     public void update(Account account) {
         // MySQLのJDBCドライバをロード

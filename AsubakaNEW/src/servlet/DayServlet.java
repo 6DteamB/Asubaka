@@ -49,7 +49,7 @@ public class DayServlet extends HttpServlet {
                 PreparedStatement countPreparedStatement = conn.prepareStatement(updateCountQuery);
                 countPreparedStatement.setString(1, nameFromMainJSP);
                 int countRowsUpdated = countPreparedStatement.executeUpdate();
-
+ 
                 if (dayRowsUpdated > 0 && countRowsUpdated > 0) {
                     lastProcessedDate = currentDateString; // 処理が成功した場合、日付を更新
                     request.getRequestDispatcher("MainServlet.java").forward(request, response);

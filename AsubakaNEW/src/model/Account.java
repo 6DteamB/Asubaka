@@ -30,7 +30,7 @@ public class Account {
 
   public String getMail() {
     return mail;
-  }
+  } 
 
   public String getObjective() {
     return objective;

@@ -41,7 +41,7 @@ public class RegisterServlet extends HttpServlet {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        try {
+        try { 
             // データベースに接続
             connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
 
