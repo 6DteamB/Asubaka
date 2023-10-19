@@ -31,7 +31,7 @@ public class AccountDAO {
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 
             // SELECT文を準備
-            String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
+            String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, login.getName());
             pStmt.setString(2, login.getPass());
@@ -49,7 +49,8 @@ public class AccountDAO {
                 String objective = rs.getString("OBJECTIVE");
                 String reward = rs.getString("REWARD");
                 int day = rs.getInt("DAY");
-                account = new Account(name, pass, mail, objective, reward, day);
+                int count =rs.getInt("COUNT");
+                account = new Account(name, pass, mail, objective, reward, day, count);
                 return account;
             }
         } catch (SQLException e) {

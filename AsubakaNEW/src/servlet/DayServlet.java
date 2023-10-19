@@ -39,12 +39,18 @@ public class DayServlet extends HttpServlet {
                 String nameFromMainJSP = request.getParameter("name");
 
                 // データベース内の 'day' の値を -1 にする条件を設定（name 属性と一致する条件）
-                String updateQuery = "UPDATE account SET day = day - 1 WHERE name = ?";
-                PreparedStatement preparedStatement = conn.prepareStatement(updateQuery);
-                preparedStatement.setString(1, nameFromMainJSP);
-                int rowsUpdated = preparedStatement.executeUpdate();
+                String updateDayQuery = "UPDATE account SET day = day - 1 WHERE name = ?";
+                PreparedStatement dayPreparedStatement = conn.prepareStatement(updateDayQuery);
+                dayPreparedStatement.setString(1, nameFromMainJSP);
+                int dayRowsUpdated = dayPreparedStatement.executeUpdate();
 
-                if (rowsUpdated > 0) {
+                // データベース内の 'count' の値を +1 にする条件を設定（name 属性と一致する条件）
+                String updateCountQuery = "UPDATE account SET count = count + 1 WHERE name = ?";
+                PreparedStatement countPreparedStatement = conn.prepareStatement(updateCountQuery);
+                countPreparedStatement.setString(1, nameFromMainJSP);
+                int countRowsUpdated = countPreparedStatement.executeUpdate();
+
+                if (dayRowsUpdated > 0 && countRowsUpdated > 0) {
                     lastProcessedDate = currentDateString; // 処理が成功した場合、日付を更新
                     request.getRequestDispatcher("MainServlet.java").forward(request, response);
                 } else {

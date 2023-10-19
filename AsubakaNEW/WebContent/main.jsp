@@ -44,8 +44,8 @@
 	<!-- 66日間の継続達成度の表示 プログレスバー-->
 	<div>
 		<h2>達成度</h2>
-		<progress value="<c:out value="${account.day}" />" max="66"></progress>
-		<c:out value="${account.day}" />
+		<progress value="<c:out value="${account.count}" />" max="66"></progress>
+		<c:out value="${account.count}" />
 		/日 / 66日
 		
 	</div>

@@ -35,6 +35,7 @@ public class RegisterServlet extends HttpServlet {
         String objective = request.getParameter("objective");
         String reward = request.getParameter("reward");
         String day = request.getParameter("day"); 
+        String count = request.getParameter("count"); 
 
         // データベースに新規登録情報を保存
         Connection connection = null;
@@ -45,7 +46,7 @@ public class RegisterServlet extends HttpServlet {
             connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
 
             // SQLクエリを作成（適切なテーブル名とカラム名に置き換えてください）
-            String sql = "INSERT INTO account (NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY) VALUES (?, ?, ?, ?, ?,?)";
+            String sql = "INSERT INTO account (NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT) VALUES (?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, pass);
@@ -53,6 +54,7 @@ public class RegisterServlet extends HttpServlet {
             preparedStatement.setString(4, objective);
             preparedStatement.setString(5, reward);
             preparedStatement.setString(6, day);
+            preparedStatement.setString(7, count);
 
             // クエリを実行し、新規登録情報をデータベースに保存
             int rowsAffected = preparedStatement.executeUpdate();
