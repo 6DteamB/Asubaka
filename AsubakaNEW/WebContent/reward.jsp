@@ -10,7 +10,12 @@
 <title>達成おめでとう！</title>
 </head>
 <body>
-<c:out value="${account.name}さん"/>
-<c:out value="${account.reward}のご褒美"/>
+   <form method="post" action="RewardServlet"> <!-- フォームをPOSTでRewardServletに送信 -->
+        <input type="hidden" name="name" value="${account.name}">
+        <input type="hidden" name="pass" value="${account.pass}">
+        <input type="submit" value="報酬を受け取る"> <!-- ボタンを追加 -->
+    </form>
+    <c:out value="${account.name}さん"/>
+    <c:out value="${account.reward}のご褒美"/>
 </body>
 </html>
