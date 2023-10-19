@@ -14,16 +14,16 @@
 	<h1>明日やろうは馬鹿野郎</h1>
 <div class="main">
 	<div class="containerA">
-		<!-- ランダムな犬・猫の画像 -->
-		<div class="image-container">
-	    	<img src="${animalImagePath}" alt="動物の画像" />
-		</div>
-	
 		<!-- ランダムな名言 -->
 		<div class="quote">
 	   		<c:out value="${randomQuoteAndAuthor}" />
 	   	</div>
+		<!-- ランダムな犬・猫の画像 -->
+		<div class="image-container">
+	    	<img src="${animalImagePath}" alt="動物の画像" />
+		</div>
 	</div>
+	
 	<div class="center-container">
 		<!-- 目標の詳細-->
 		<div>
@@ -90,7 +90,7 @@
 		h1 {
 			text-align: center;
 			font-size: 35px;
-			padding: 25px 0 0 0;
+			padding: 15px 0 0 0;
 		}
 		
 		h2,p {
@@ -103,7 +103,7 @@
 		 	display:flex;
 		 }
 		 .containerA{
-		 	margin: 20px;
+		 	margin: 10px;
 			width: 800px;
             float: right;
 		}
@@ -120,8 +120,8 @@
 		}
 		
 		.image-container img{
-    		width: 500px;
-    		height: 500px;
+    		width: 450px;
+    		height: 450px;
     		object-fit: cover;/* 縦横比を保持 */
     		border-radius:15px;
     		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -130,12 +130,39 @@
 		
 		/*名言*/
 		.quote{
-			inline-size: 550px;
+			inline-size: 560px;
   			overflow-wrap: break-word;
-  			padding: 0px 0px 0px 120px;
-  			text-align: center;
+  			text-align: center; 
+			position: relative;
+			margin: 2em 0 2em 75px;
+			padding: 10px;
+			background: #43676b;
+			border-radius: 30px;
+			color: #fff;
 		}
-
+		
+		.quote:before {  
+		    content: "";
+		    position: absolute;
+		    left: -38px;
+		    width: 13px;
+		    height: 12px;
+		    bottom: 0;
+		    background: #43676b;
+		    border-radius: 50%;
+		}
+		
+		.quote:after {
+		    content: "";
+		    position: absolute;
+		    left: -24px;
+		    width: 20px;
+		    height: 18px;
+		    bottom: 3px;
+		    background: #43676b;
+		    border-radius: 50%;
+		}
+		
 		/*やったボタン*/
 		.button {
 		    display: flex;
