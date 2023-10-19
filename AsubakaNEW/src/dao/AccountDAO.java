@@ -85,4 +85,9 @@ public class AccountDAO {
             // 例外処理を行うか、エラーハンドリングを適切に行ってください
         }
     }
+
+	public Account getAccountByName(String name) {
+		// TODO 自動生成されたメソッド・スタブ
+		return null;
+	}
 }
