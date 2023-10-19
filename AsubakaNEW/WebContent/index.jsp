@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,10 +19,11 @@
         <input type="submit" value="ログイン"><br>
         <!-- 新規登録へのリンク -->
     <a href="Register.jsp">アカウントを新規作成</a>
+    <!-- エラーメッセージを表示 -->
+	<% String errorMessage = (String) request.getAttribute("errorMessage"); %>
+	<% if (errorMessage != null) { %>
+    	<div class="error-message"><%= errorMessage %></div>
+	<% } %>
     </form>
 
     <hr> <!-- 水平線 -->
-    <p>習慣化に必要な期間は平均66日間と言われています。<br>
-    まずは66日間、あなたが身に付けたい習慣に取り組んでみてください。</p>
-</body>
-</html>
