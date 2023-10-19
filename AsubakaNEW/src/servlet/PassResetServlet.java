@@ -54,7 +54,7 @@ public class PassResetServlet extends HttpServlet {
                     connection.close();
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                e.printStackTrace(); 
             }
         }
 

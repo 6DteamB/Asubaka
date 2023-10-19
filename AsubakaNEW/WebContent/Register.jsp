@@ -36,7 +36,8 @@
 <select name="day">
 	<option value="66">66日</option>
 </select>
-<br>
+ </select><br>
+    <input type="hidden" name="count" value="0" style="display: none;"> <!-- 非表示の count フィールド -->
 <br>
 <input type="submit" value="新規登録">
 </form>
