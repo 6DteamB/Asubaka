@@ -135,9 +135,9 @@
 			position: relative;
 			margin: 2em 0 2em 75px;
 			padding: 10px;
-			background: #43676b;
+			background: #ffff7a;
 			border-radius: 30px;
-			color: #fff;
+			color: #0B1013;
 		}
 		
 		.quote:before {  
@@ -147,7 +147,7 @@
 		    width: 13px;
 		    height: 12px;
 		    bottom: 0;
-		    background: #43676b;
+		    background: #ffff7a;
 		    border-radius: 50%;
 		}
 		
@@ -158,7 +158,7 @@
 		    width: 20px;
 		    height: 18px;
 		    bottom: 3px;
-		    background: #43676b;
+		    background: #ffff7a;
 		    border-radius: 50%;
 		}
 		
