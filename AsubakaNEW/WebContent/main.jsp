@@ -47,6 +47,7 @@
 		<progress value="<c:out value="${account.day}" />" max="66"></progress>
 		<c:out value="${account.day}" />
 		/日 / 66日
+		
 	</div>
 
 	<!-- 残り日数-->
@@ -63,11 +64,13 @@
 	<div id="calendar" class="calendar-wrap"></div>
 	<button id="prevMonth">前の月</button>
 	<button id="nextMonth">次の月</button>
+	
+		<script src="script.js"></script>
 	</div>
 
 
 	<button id="redirectToRewardPage">報酬ページへ移動</button>
 	
-	<script src="script.js"></script>
+
 </body>
 </html>
