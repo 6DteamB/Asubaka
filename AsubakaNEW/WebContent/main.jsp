@@ -10,9 +10,14 @@
 
 </head>
 <body>
-	<h1>明日やろうは馬鹿野郎</h1>
+	<!--<h1>明日やろうは馬鹿野郎</h1>-->
 <div class="main">
 	<div class="containerA">
+		<!-- 目標の詳細-->
+		<div class="card goal">
+			<!--<h2>目標</h2>-->
+			<p><c:out value="${account.objective}" /></p>
+		</div>
 		<!-- ランダムな名言 -->
 		<div class="quote">
 	   		<c:out value="${randomQuoteAndAuthor}" />
@@ -20,16 +25,16 @@
 		<!-- ランダムな犬・猫の画像 -->
 		<div class="image-container">
 	    	<img src="${animalImagePath}" alt="動物の画像" />
-		</div>
+		</div>		
 	</div>
 	
-	<div class="center-container">
-		<!-- 目標の詳細-->
-		<div>
-			<h2>目標</h2>
-			<c:out value="${account.objective}" />
-		</div>
-	
+	<div class="containerB">
+		<!-- カレンダーの表示 -->
+		<h1 id="calendar-title"></h1>
+		<div id="calendar" class="calendar-wrap"></div>
+		<button id="prevMonth" class="month">前の月</button>
+		<button id="nextMonth" class="month">次の月</button>
+		
 		<!-- その日の目標達成を確認するボタン -->
 		<div>
 			<h2>今日の習慣</h2>
@@ -39,7 +44,14 @@
 				<button id="achievedButton" class="button">やった！</button>
 			</form>
 		</div>
-	
+		
+		<!-- 残り日数-->
+		<p>
+			残り日数:
+			<c:out value="${account.day}" />
+			日
+		</p>
+		
 		<!-- 66日間の継続達成度の表示 プログレスバー-->
 		<div>
 			<h2>達成度</h2>
@@ -47,18 +59,7 @@
 			<c:out value="${account.count}" />
 			/日 / 66日
 		</div>
-	
-		<!-- 残り日数-->
-		<p>
-			残り日数:
-			<c:out value="${account.day}" />
-			日
-		</p>
-		<!-- カレンダーの表示 -->
-		<h1 id="calendar-title"></h1>
-		<div id="calendar" class="calendar-wrap"></div>
-		<button id="prevMonth" class="month">前の月</button>
-		<button id="nextMonth" class="month">次の月</button>
+
 	</div>
 		
 </div>
@@ -94,7 +95,8 @@
 		
 		h2,p {
 			text-align: center;
-			font-size: 25px;
+			font-size: 20px;
+			margin-top: 10px;
 		}
 		
 		/*２段組み*/
@@ -108,7 +110,7 @@
 		}
 		
 		.containerB{
-			margin: 20px 0px 0px 0px;
+			margin: 50px 0px 0px 30px;
 		}
 		
 		 /*猫画像*/
@@ -119,8 +121,8 @@
 		}
 		
 		.image-container img{
-    		width: 450px;
-    		height: 450px;
+    		width: 400px;
+    		height: 400px;
     		object-fit: cover;/* 縦横比を保持 */
     		border-radius:15px;
     		box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
@@ -128,38 +130,78 @@
 		}
 		
 		/*名言*/
-		.quote{
-			inline-size: 560px;
-  			overflow-wrap: break-word;
-  			text-align: center; 
-			position: relative;
-			margin: 2em 0 2em 75px;
-			padding: 10px;
-			background: #ffff7a;
-			border-radius: 30px;
-			color: #0B1013;
-		}
+		.quote {
+		    position: relative;
+		    padding: 1rem;
+		    border-radius: 10px;
+		    border: 1px solid #ffff7a;
+		    background-color: #ffff7a;
+		    color: #0B1013;
+		    font-weight: bold;
+		    font-size: 18px;
+		    margin-bottom: 20px;
+		} 
 		
-		.quote:before {  
-		    content: "";
+		.quote:before {
 		    position: absolute;
-		    left: -38px;
-		    width: 13px;
-		    height: 12px;
-		    bottom: 0;
-		    background: #ffff7a;
-		    border-radius: 50%;
+		    top: 3px;
+		    left: 3px;
+		    width: 100%;
+		    height: 100%;
+		    border-radius: 10px;
+		    border: 3px solid #0C4842;
+		    content: "";
 		}
 		
 		.quote:after {
-		    content: "";
 		    position: absolute;
-		    left: -24px;
-		    width: 20px;
-		    height: 18px;
-		    bottom: 3px;
-		    background: #ffff7a;
-		    border-radius: 50%;
+		    bottom: -31px;
+		    left: 50px;
+		    transform: skew(-25deg);
+		    height: 25px;
+		    width: 15px;
+		    border-right: 3px solid #333;
+		    background-color: #E0E0E0;
+		    content: "";
+		}
+		
+		/*目標*/
+		.card {
+		    position: relative;
+		    padding: .5rem .5rem 1rem .5rem ;
+		    margin: 30px 20px 10px 170px;
+		    width: 450px;
+		    height: 40px;
+		    border: 2px solid #2E5C6E;
+		    border-radius: 5px;
+		    background-color: #efefef;
+		    justify-content: center;  
+		    align-items: center;
+		}
+		
+		.card.goal::before {
+		    position: absolute;
+		    top: -2.05rem;
+		    left: 50%;
+		    width: 30px;
+		    height: 15px;
+		    line-height: 5px;
+		    transform: translateX(-50%);
+		    border-radius: 30px 30px 0 0;
+		    border: 2px solid #333;
+		    border-bottom: transparent;
+		    padding: 1rem 1rem 0 1rem;
+		    background: #2E5C6E;
+		    color: #FBE251;
+		    font-size: 0.8rem;
+		    text-align: center;
+		    text-transform: uppercase;
+		    content: '目標';
+		}
+		
+		.card p {
+		    color: #0B1013;
+		    line-height: 1.5;
 		}
 		
 		/*やったボタン*/
@@ -172,8 +214,8 @@
 		    padding: .9em 2em;
 		    border: none;
 		    border-radius: 25px;
-		    background-color: #5b6b76;
-		    color: #fff;
+		    background-color: #2E5C6E;
+		    color: #FBE251;
 		    font-weight: 600;
 		    font-size: 1em;
 		}
@@ -197,6 +239,7 @@
 		    }
 		}
 		
+		/* カレンダーの月移動ボタン*/
 		.month {
 			justify-content: center;
 			align-items: center;
@@ -206,6 +249,16 @@
 		    border-radius: 25px;
 		    background-color: #fff;
 		    color: #49535b;
+		}
+		
+		/* カレンダー*/
+		
+		#calendar-title{
+			font-size: 20px;
+			margin-top: 20px;
+		}
+		.calendar-wrap{
+			
 		}
 
 
