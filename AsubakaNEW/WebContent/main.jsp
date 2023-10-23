@@ -35,6 +35,15 @@
 		<button id="prevMonth" class="month">前の月</button>
 		<button id="nextMonth" class="month">次の月</button>
 		
+		<!-- 代わりに使用するイラストを表示する要素 -->
+		<td>
+		    <span class="date">${day}</span>
+		    <div class="custom-checkbox" data-date="${date}">
+		        <img class="mark-icon" src="images/mark.png" alt="Mark">
+		    </div>
+		</td>
+		
+		
 		<!-- その日の目標達成を確認するボタン -->
 		<div>
 			<h2>今日の習慣</h2>
@@ -223,6 +232,38 @@
 		.button:hover {
 		    animation: anime-button .3s linear infinite;
 		}
+		/* チェックボックスを非表示にするスタイル */
+		/* input[type="checkbox"] {
+    		display: none;
+		} */
+
+		/* 代わりに使用するイラストのスタイル */
+		.custom-checkbox {
+		    display: inline-block;
+		    width: 20px; /* 適切な幅と高さを設定してください */
+		    height: 20px;
+		    background: url('images/mark.png') no-repeat;;
+		    background-size: contain;
+		    cursor: pointer;
+		} 
+		
+		/* チェックされた日付にイラストを表示するスタイル */
+		.custom-checkbox.checked {
+		    background: url('images/mark.png') no-repeat;;
+		    background-size: contain;
+		}
+		
+		/* 初めはマークアイコンを非表示にする */
+	 	.custom-checkbox .mark-icon {
+		    display: none;
+		} 
+		
+		/* .checked クラスが追加されたときにマークアイコンを表示する */
+	 	.custom-checkbox.checked .mark-icon {
+		    display: inline-block;
+		}
+ 
+		
 		
 		@keyframes anime-button {
 		    20% {
