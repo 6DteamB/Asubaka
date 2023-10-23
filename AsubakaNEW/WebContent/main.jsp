@@ -257,20 +257,41 @@
 			font-size: 20px;
 			margin-top: 20px;
 		}
-		.calendar-wrap{
-			
+		#calendar td {
+		    padding: 8px;   
 		}
 
 
-		/* レスポンシブ*/
-		@media (max-width: 600px) {
-		    .image-container img {
-		        width: 450px;
-		        height: 450px;
+		/* レスポンシブ */
+		@media (max-width: 900px) {
+		    .main {
+		        flex-direction: column;
 		    }
-		    .main{
-			 	display:block;
-		 	}
+		
+		    .containerA,
+		    .containerB {
+		        width: 80%;
+		        margin: 0 auto; /* 左右の余白を自動調整 */
+		    }
+		    
+		    #calendar{
+				padding: 4% 20%;
+			}
+			
+			#calendar td {
+		    	padding: 8px;   
+			}
+		
+		    .image-container img {
+		        width: 80%; /* 画像の幅を80%に設定 */
+		    }
+		    
+		    .card{
+		    	margin: 0px auto;
+		    	margin-top: 35px;
+		    	margin-bottom: 20px;
+		    	width: 80%;
+		    }
 		}
 		
 	</style>
