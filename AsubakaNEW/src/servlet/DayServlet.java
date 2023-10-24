@@ -66,13 +66,13 @@ public class DayServlet extends HttpServlet {
                 } else {
                     // If no rows were updated, set an error message and forward to an error page
                     request.setAttribute("errorMessage", "更新に失敗しました。");
-                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    request.getRequestDispatcher("Error.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
                 // Set an error message for database connection error
                 request.setAttribute("errorMessage", "データベースエラーが発生しました。");
-                request.getRequestDispatcher("error.jsp").forward(request, response);
+                request.getRequestDispatcher("Error.jsp").forward(request, response);
             } finally {
                 if (conn != null) {
                     try {
