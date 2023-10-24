@@ -62,7 +62,7 @@
 		</p>
 		
 		<!-- 66日間の継続達成度の表示 プログレスバー-->
-		<div>
+		<div class="achieve">
 			<h2>達成度</h2>
 			<progress value="<c:out value="${account.count}" />" max="66"></progress>
 			<c:out value="${account.count}" />
@@ -317,10 +317,8 @@
 		    
 		    #calendar{
 				padding: 4% 20%;
-			}
-			
-			#calendar td {
-		    	padding: 8px;   
+				margin: 0 auto;
+				margin-right: 20px;
 			}
 		
 		    .image-container img {
@@ -333,6 +331,16 @@
 		    	margin-bottom: 20px;
 		    	width: 80%;
 		    }
+		    
+		    .achieve{
+		    	margin-bottom: 4%;
+		    }
+		}
+		
+		@media (max-width: 600px) {
+			#calendar{
+				padding: 4% 15%;
+			}
 		}
 		
 	</style>
