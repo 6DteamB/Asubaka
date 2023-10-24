@@ -26,7 +26,7 @@ public class DayServlet extends HttpServlet {
 
         // クライアントが同じ日に複数回実行できないように日付をチェック
         if (lastProcessedDate == null || !lastProcessedDate.equals(currentDateString)) {
-            // データベース接続情報（安全に保管するべき）
+            // データベース接続情報
             String jdbcUrl = "jdbc:mysql://172.16.0.178:3306/Asubaka";
             String dbUser = "sa";
             String dbPassword = "";
@@ -59,7 +59,8 @@ public class DayServlet extends HttpServlet {
                     
                     // Redirect to reward.jsp if remaining days are 0
                     if (remainingDays == 0) {
-                        response.sendRedirect("reward.jsp");
+                        request.getRequestDispatcher("/AsubakaNEW/servlet/servlet.RewardServlet").forward(request, response);
+                    
                     } else {
                         request.getRequestDispatcher("MainServlet.java").forward(request, response);
                     }

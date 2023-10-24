@@ -1,30 +1,53 @@
 package servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
+
+
+
+@WebServlet("/AsubakaNEW/servlet/RewardServlet")
 
 public class RewardServlet extends HttpServlet {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/reward.jsp").forward(request, response);
+    }
+    
+    	
+
+    
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // クライアントから送信された名前を取得
-        String name = "せり"; // 固定の名前
+        String name = ""; 
 
         // Initialize variables to store the reward information
         String reward = "";
 
         // Database connection parameters
-        String jdbcUrl = "jdbc:mysql://localhost:3306/your_database";
-        String dbUser = "your_username";
-        String dbPassword = "your_password";
+        String jdbcUrl = "jdbc:mysql://172.16.0.178:3306/Asubaka";
+        String dbUser = "sa";
+        String dbPassword = "";
+        
+        
+        HttpSession session = request.getSession();
+        Account account = (Account) session.getAttribute("loggedInAccount");
+        name = account.getName(); 
+  
+        request.setAttribute("account", account);
+        request.setAttribute("reward", reward);
 
+
+       
         try {
             // Load the database driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -53,15 +76,12 @@ public class RewardServlet extends HttpServlet {
             e.printStackTrace();
             // Handle any exceptions here
         }
+        request.getRequestDispatcher("/reward.jsp").forward(request, response);
 
-        // Set the response content type
-        response.setContentType("text/html; charset=UTF-8");
 
-        // Generate the response in HTML format
-        PrintWriter out = response.getWriter();
-        out.println("<html><head><title>報酬ページ</title></head><body>");
-        out.println("<h1>" + name + "さんの報酬</h1>");
-        out.println("<p>報酬: " + reward + "</p>");
-        out.println("</body></html>");
+//        // Set the response content type
+//        response.setContentType("text/html; charset=UTF-8");
+
+      
     }
 }
