@@ -43,17 +43,16 @@
 		<td>
 		    <span class="date">${day}</span>
 		    <div class="custom-checkbox" data-date="${date}">
-		        <img class="mark-icon" src="images/mark.png" alt="Mark">
 		    </div>
 		</td>
 		
 		
 		<!-- その日の目標達成を確認するボタン -->
 		<div>
-			<h2>今日の習慣</h2>
-			<form method="post" action="DayServlet.java">
+			<h2>今日の習慣</h2>	
+<%-- 			<form method="post" action="DayServlet.java">
 			    <input type="hidden" name="name" value="${account.name}">
-	    		<input type="hidden" name="pass" value="${account.pass}">
+	    		<input type="hidden" name="pass" value="${account.pass}"> --%>
 				<button id="achievedButton" class="button">やった！</button>
 			</form>
 		</div>
@@ -237,9 +236,9 @@
 		    animation: anime-button .3s linear infinite;
 		}
 		/* チェックボックスを非表示にするスタイル */
-		/* input[type="checkbox"] {
+		input[type="checkbox"] {
     		display: none;
-		} */
+		}
 
 		/* 代わりに使用するイラストのスタイル */
 		.custom-checkbox {
@@ -251,22 +250,14 @@
 		    cursor: pointer;
 		} 
 		
-		/* チェックされた日付にイラストを表示するスタイル */
-		.custom-checkbox.checked {
-		    background: url('images/mark.png') no-repeat;;
-		    background-size: contain;
+		/* Checkboxがチェックされたときのカスタムスタイル */
+		input[type="checkbox"]:checked + .custom-checkbox-label {
+		    background-image: url('mark_checked.png'); /* チェックされたときの画像 */
 		}
 		
-		/* 初めはマークアイコンを非表示にする */
-	 	.custom-checkbox .mark-icon {
-		    display: none;
-		} 
-		
-		/* .checked クラスが追加されたときにマークアイコンを表示する */
-	 	.custom-checkbox.checked .mark-icon {
-		    display: inline-block;
+ 		element.style {
+    	display: none;
 		}
- 
 		
 		
 		@keyframes anime-button {
