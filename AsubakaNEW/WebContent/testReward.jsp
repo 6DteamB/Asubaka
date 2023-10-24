@@ -13,7 +13,7 @@
 <body>
     <h2>Test Reward Transition</h2>
     <p>
-        <a href="/AsubakaNEW/servlet/TestRewardServlet">Go to Reward Page</a>
+        <a href="/AsubakaNEW/src/servle/RewardServlet.java">Go to Reward Page</a>
     </p>
 </body>
 </html>

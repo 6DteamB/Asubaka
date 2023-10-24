@@ -16,7 +16,7 @@ import model.Account;
 
 
 
-@WebServlet("/AsubakaNEW/servlet/RewardServlet")
+@WebServlet("/RewardServlet")
 
 public class RewardServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
