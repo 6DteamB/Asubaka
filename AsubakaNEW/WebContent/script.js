@@ -95,17 +95,15 @@ function checkToday() {
     const day = currentDate.getDate();
     const date = `${year}-${month + 1}-${day}`;
 
-    // その日のチェックボックスを取得
-    const checkbox = calendarElement.querySelector(`input[data-date="${date}"]`);
+    // 日付のカスタムチェックボックス要素を取得
+    const dateCustomCheckbox = calendarElement.querySelector(`.custom-checkbox[data-date="${date}"]`);
 
-    if (checkbox) {
-        // チェックボックスをチェックする
-        checkbox.checked = true;
-
-        // 選択日を記録
-        selectedDates.add(date);
+    if (dateCustomCheckbox) {
+        // クラスを追加してマークアイコンを表示する
+        dateCustomCheckbox.classList.add('checked');
     }
 }
+
 
 // ボタンのクリックを検知し、指定のページに移動するイベントリスナーを追加
 		document.getElementById("redirectToRewardPage").addEventListener("click", function() {
