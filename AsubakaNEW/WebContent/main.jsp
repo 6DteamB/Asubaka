@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8"><title>あすばか</title>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 	<!--<h1>明日やろうは馬鹿野郎</h1>-->
@@ -16,7 +16,11 @@
 		<!-- 目標の詳細-->
 		<div class="card goal">
 			<!--<h2>目標</h2>-->
-			<p><c:out value="${account.objective}" /></p>
+			<p>
+				<span class="material-icons">pets</span>
+				<c:out value="${account.objective}"/>
+				<span class="material-icons">pets</span>
+			</p>
 		</div>
 		<!-- ランダムな名言 -->
 		<div class="quote">
