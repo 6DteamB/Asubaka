@@ -85,7 +85,7 @@ public class DayServlet extends HttpServlet {
         } else {
             // 同じ日に2回目以降の実行を制限し、エラーメッセージを表示
             request.setAttribute("errorMessage", "本日は既に処理済みです。");
-            request.getRequestDispatcher("Error.jsp").forward(request, response);
+            request.getRequestDispatcher("MainServlet.java").forward(request, response);
         }
     }
 
