@@ -10,7 +10,8 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
-	<!--<h1>明日やろうは馬鹿野郎</h1>-->
+	<!-- 背景 -->
+	<div class="bg_pattern Moon"></div>
 <div class="main">
 	<div class="containerA">
 		<!-- 目標の詳細-->
@@ -33,14 +34,7 @@
 	</div>
 	
 	<div class="containerB">
-		<!-- カレンダーの表示 -->
-		<h1 id="calendar-title"></h1>
-		<div id="calendar" class="calendar-wrap"></div>
-		<button id="prevMonth" class="month">前の月</button>
-		<button id="nextMonth" class="month">次の月</button>
-		
-		
-		
+	
 		<!-- その日の目標達成を確認するボタン -->
 		<div>
 			<h2>今日の習慣</h2>	
@@ -51,6 +45,12 @@
 			</form>
 		</div>
 		
+		<!-- カレンダーの表示 -->
+		<h1 id="calendar-title"></h1>
+		<div id="calendar" class="calendar-wrap"></div>
+		<button id="prevMonth" class="month">前の月</button>
+		<button id="nextMonth" class="month">次の月</button>
+
 		<!-- 残り日数-->
 		<p>
 			残り日数:
@@ -96,7 +96,7 @@
 		h1 {
 			text-align: center;
 			font-size: 35px;
-			padding: 15px 0 0 0;
+			padding: 10px 0 0 0;
 		}
 		
 		h2,p {
@@ -104,19 +104,34 @@
 			font-size: 20px;
 			margin-top: 10px;
 		}
+		/*背景*/
+		.bg_pattern {
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  width: 100vw;
+		  height: 100vh;
+		  background-color: #B5CAA0;
+		  opacity: 0.4;
+		  z-index: -1;
+		}
+		.Moon {
+		  background-image: radial-gradient( ellipse farthest-corner at 20px 20px , #91AD70, #91AD70 50%, #B5CAA0  50%);
+		  background-size: 20px 20px;
+		}
 		
 		/*２段組み*/
 		.main{
 		 	display:flex;
 		 }
 		 .containerA{
-		 	margin: 10px;
+		 	margin: 20px;
 			width: 800px;
             float: right;
 		}
 		
 		.containerB{
-			margin: 50px 0px 0px 30px;
+			margin: 30px 0px 0px 30px;
 		}
 		
 		 /*猫画像*/
@@ -140,11 +155,12 @@
 		    position: relative;
 		    padding: 1rem;
 		    border-radius: 10px;
-		    border: 1px solid #ffff7a;
-		    background-color: #ffff7a;
+		    border: 1px solid #B5CAA0;
+		    background-color: #B5CAA0;
+		    opacity: 0.8;
 		    color: #0B1013;
 		    font-weight: bold;
-		    font-size: 18px;
+		    font-size: 17px;
 		    margin-bottom: 20px;
 		} 
 		
@@ -155,7 +171,7 @@
 		    width: 100%;
 		    height: 100%;
 		    border-radius: 10px;
-		    border: 3px solid #0C4842;
+		    border: 3px solid #2E5C6E;
 		    content: "";
 		}
 		
@@ -167,7 +183,7 @@
 		    height: 25px;
 		    width: 15px;
 		    border-right: 3px solid #333;
-		    background-color: #E0E0E0;
+		    background-color: #B5CAA0;
 		    content: "";
 		}
 		
@@ -180,7 +196,7 @@
 		    height: 40px;
 		    border: 2px solid #2E5C6E;
 		    border-radius: 5px;
-		    background-color: #efefef;
+		    background-color: #FBE251;
 		    justify-content: center;  
 		    align-items: center;
 		}
@@ -194,7 +210,7 @@
 		    line-height: 5px;
 		    transform: translateX(-50%);
 		    border-radius: 30px 30px 0 0;
-		    border: 2px solid #333;
+		    border: 2px solid #2E5C6E;
 		    border-bottom: transparent;
 		    padding: 1rem 1rem 0 1rem;
 		    background: #2E5C6E;
@@ -229,6 +245,21 @@
 		.button:hover {
 		    animation: anime-button .3s linear infinite;
 		}
+		@keyframes anime-button {
+		    20% {
+		        transform: translate(-2px, 2px);
+		    }
+		    40% {
+		        transform: translate(-2px, -2px);
+		    }
+		    60% {
+		        transform: translate(2px, 2px);
+		    }
+		    80% {
+		        transform: translate(2px, -2px);
+		    }
+		}
+		
 		/* チェックボックスを非表示にするスタイル */
 		input[type="checkbox"] {
     		display: none;
@@ -253,41 +284,34 @@
 		input[type="checkbox"] {
 		    display: none;
 		}
-
-		
-		
-		@keyframes anime-button {
-		    20% {
-		        transform: translate(-2px, 2px);
-		    }
-		    40% {
-		        transform: translate(-2px, -2px);
-		    }
-		    60% {
-		        transform: translate(2px, 2px);
-		    }
-		    80% {
-		        transform: translate(2px, -2px);
-		    }
-		}
 		
 		/* カレンダーの月移動ボタン*/
 		.month {
 			justify-content: center;
 			align-items: center;
-			padding: .5em 1em;
-			margin:0 auto;
-		    border: 1px solid #49535b;
-		    border-radius: 25px;
-		    background-color: #fff;
-		    color: #49535b;
+			vertical-align: middle;
+			text-decoration: none;
+			width: 120px;
+			margin: 0 auto;
+			padding: .5rem 1rem;
+			border-radius: 25px;
+			font-weight: bold;
+			border: 1px solid #FBE251;
+			color: #2E5C6E;
+			background: #FBE251;
+			transition: 0.5s;
+		}
+		.month:hover {
+			border: #2E5C6E;
+			color: #FBE251;
+			background: #2E5C6E;
 		}
 		
 		/* カレンダー*/
 		
 		#calendar-title{
 			font-size: 20px;
-			margin-top: 20px;
+			margin-top: 15px;
 		}
 		#calendar td {
 		    padding: 8px;   
