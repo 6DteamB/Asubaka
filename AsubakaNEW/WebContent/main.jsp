@@ -7,16 +7,22 @@
 <html>
 <head>
 <meta charset="UTF-8"><title>あすばか</title>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
-	<!--<h1>明日やろうは馬鹿野郎</h1>-->
+	<!-- 背景 -->
+	<div class="bg_pattern Moon"></div>
 <div class="main">
 	<div class="containerA">
 		<!-- 目標の詳細-->
 		<div class="card goal">
 			<!--<h2>目標</h2>-->
-			<p><c:out value="${account.objective}" /></p>
+			<p>
+				<span class="material-icons">pets</span>
+				<c:out value="${account.objective}"/>
+				<span class="material-icons">pets</span>
+			</p>
 		</div>
 		<!-- ランダムな名言 -->
 		<div class="quote">
@@ -29,22 +35,27 @@
 	</div>
 	
 	<div class="containerB">
-		<!-- カレンダーの表示 -->
-		<h1 id="calendar-title"></h1>
-		<div id="calendar" class="calendar-wrap"></div>
-		<button id="prevMonth" class="month">前の月</button>
-		<button id="nextMonth" class="month">次の月</button>
-		
+	
 		<!-- その日の目標達成を確認するボタン -->
 		<div>
-			<h2>今日の習慣</h2>
-			<form method="post" action="DayServlet.java">
+			<h2>今日の習慣</h2>	
+	 			<form method="post" action="DayServlet.java">
 			    <input type="hidden" name="name" value="${account.name}">
-	    		<input type="hidden" name="pass" value="${account.pass}">
+	    		<input type="hidden" name="pass" value="${account.pass}"> 
 				<button id="achievedButton" class="button">やった！</button>
 			</form>
 		</div>
 		
+		<!-- カレンダーの表示 -->
+		<div class="flex">
+			<span class="material-symbols-outlined" id="prevMonth" class="month">chevron_left</span>
+			<h1 id="calendar-title"></h1>
+			<span class="material-symbols-outlined"id="nextMonth" class="month">navigate_next</span>
+		</div>
+		<div id="calendar" class="calendar-wrap"></div>
+		
+		
+
 		<!-- 残り日数-->
 		<p>
 			残り日数:
@@ -53,10 +64,22 @@
 		</p>
 		
 		<!-- 66日間の継続達成度の表示 プログレスバー-->
+<<<<<<< HEAD
 		<div>
 			<h2>達成度</h2>
 			<progress value="<c:out value="${account.count}" />" max="66"></progress>
 			<c:out value="${account.count}" />日 / 66日
+=======
+		<div class="achieve">
+			<div class="side1">
+				<h2>達成度</h2>
+			</div>
+			<div class="side1">
+				<progress value="<c:out value="${account.count}" />" max="66"></progress>
+				<c:out value="${account.count}" />
+				/日 / 66日
+			</div>
+>>>>>>> 58254eafaa1bb531017c98dacd03f5ac2cb28556
 		</div>
 				
 
@@ -84,7 +107,9 @@
 	<script src="script.js"></script>
 
 	<style>
-	
+		@charset "UTF-8";
+		@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;600&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
+		
 		* {
 			margin: 0;
 			padding: 0;
@@ -107,7 +132,6 @@
 		h1 {
 			text-align: center;
 			font-size: 35px;
-			padding: 15px 0 0 0;
 		}
 		
 		h2,p {
@@ -115,19 +139,34 @@
 			font-size: 20px;
 			margin-top: 10px;
 		}
+		/*背景*/
+		.bg_pattern {
+		  position: fixed;
+		  top: 0;
+		  left: 0;
+		  width: 100vw;
+		  height: 100vh;
+		  background-color: #B5CAA0;
+		  opacity: 0.4;
+		  z-index: -1;
+		}
+		.Moon {
+		  background-image: radial-gradient( ellipse farthest-corner at 20px 20px , #91AD70, #91AD70 50%, #B5CAA0  50%);
+		  background-size: 20px 20px;
+		}
 		
 		/*２段組み*/
 		.main{
 		 	display:flex;
 		 }
 		 .containerA{
-		 	margin: 10px;
+		 	margin: 20px 20px 0 20px;
 			width: 800px;
             float: right;
 		}
 		
 		.containerB{
-			margin: 50px 0px 0px 30px;
+			margin: 30px 30px 0px 30px;
 		}
 		
 		 /*猫画像*/
@@ -151,11 +190,12 @@
 		    position: relative;
 		    padding: 1rem;
 		    border-radius: 10px;
-		    border: 1px solid #ffff7a;
-		    background-color: #ffff7a;
+		    border: 1px solid #B5CAA0;
+		    background-color: #B5CAA0;
+		    opacity: 0.8;
 		    color: #0B1013;
 		    font-weight: bold;
-		    font-size: 18px;
+		    font-size: 17px;
 		    margin-bottom: 20px;
 		} 
 		
@@ -166,7 +206,7 @@
 		    width: 100%;
 		    height: 100%;
 		    border-radius: 10px;
-		    border: 3px solid #0C4842;
+		    border: 3px solid #2E5C6E;
 		    content: "";
 		}
 		
@@ -178,7 +218,7 @@
 		    height: 25px;
 		    width: 15px;
 		    border-right: 3px solid #333;
-		    background-color: #E0E0E0;
+		    background-color: #B5CAA0;
 		    content: "";
 		}
 		
@@ -191,7 +231,7 @@
 		    height: 40px;
 		    border: 2px solid #2E5C6E;
 		    border-radius: 5px;
-		    background-color: #efefef;
+		    background-color: #FBE251;
 		    justify-content: center;  
 		    align-items: center;
 		}
@@ -205,7 +245,7 @@
 		    line-height: 5px;
 		    transform: translateX(-50%);
 		    border-radius: 30px 30px 0 0;
-		    border: 2px solid #333;
+		    border: 2px solid #2E5C6E;
 		    border-bottom: transparent;
 		    padding: 1rem 1rem 0 1rem;
 		    background: #2E5C6E;
@@ -240,7 +280,6 @@
 		.button:hover {
 		    animation: anime-button .3s linear infinite;
 		}
-		
 		@keyframes anime-button {
 		    20% {
 		        transform: translate(-2px, 2px);
@@ -256,38 +295,102 @@
 		    }
 		}
 		
-		/* カレンダーの月移動ボタン*/
-		.month {
-			justify-content: center;
-			align-items: center;
-			padding: .5em 1em;
-			margin:0 auto;
-		    border: 1px solid #49535b;
-		    border-radius: 25px;
-		    background-color: #fff;
-		    color: #49535b;
+		/* チェックボックスを非表示にするスタイル */
+		input[type="checkbox"] {
+    		display: none;
+		}
+
+		/* 代わりに使用するイラストのスタイル */
+		.custom-checkbox {
+		    display: inline-block;
+		    width: 20px; /* 適切な幅と高さを設定してください */
+		    height: 20px;
+		    background: url('images/mark.png') ;
+		    background-size: contain;
+		    cursor: pointer;
+		} 
+		
+		/* Checkboxがチェックされたときのカスタムスタイル */
+		input[type="checkbox"]:checked + .custom-checkbox-label {
+		    background-image: url('mark_checked.png'); /* チェックされたときの画像 */
+		}
+		
+		/* Checkboxを非表示にするスタイル */
+		input[type="checkbox"] {
+		    display: none;
 		}
 		
 		/* カレンダー*/
-		
+		.month{
+			cursor: pointer;
+		}
 		#calendar-title{
 			font-size: 20px;
-			margin-top: 20px;
+			margin-top: 0px;
+		}
+		#calendar td {
+		    padding: 15px;   
 		}
 		.calendar-wrap{
-			
+			font-size: 18px;
+		}
+		/* カレンダーの月とボタンの横並び */
+		.flex {
+		    display: flex;
+		    justify-content: space-around;
+		    align-items: center;
+		    margin-top: 15px;
+		    cursor: pointer;
 		}
 
+		.side{
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+		
+		 .side1 {
+	        display: inline-block;
+	    }
 
-		/* レスポンシブ*/
-		@media (max-width: 600px) {
-		    .image-container img {
-		        width: 450px;
-		        height: 450px;
+		/* レスポンシブ */
+		@media (max-width: 900px) {
+		    .main {
+		        flex-direction: column;
 		    }
-		    .main{
-			 	display:block;
-		 	}
+		
+		    .containerA,
+		    .containerB {
+		        width: 80%;
+		        margin: 0 auto; /* 左右の余白を自動調整 */
+		    }
+		    
+		    #calendar{
+				padding: 4% 26%;
+				margin: 0 auto;
+				margin-right: 20px;
+			}
+		
+		    .image-container img {
+		        width: 80%; /* 画像の幅を80%に設定 */
+		    }
+		    
+		    .card{
+		    	margin: 0px auto;
+		    	margin-top: 35px;
+		    	margin-bottom: 20px;
+		    	width: 80%;
+		    }
+		    
+		    .achieve{
+		    	margin-bottom: 4%;
+		    }
+		}
+		
+		@media (max-width: 600px) {
+			#calendar{
+				padding: 4% 15%;
+			}
 		}
 		
 	</style>

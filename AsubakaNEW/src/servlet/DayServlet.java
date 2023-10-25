@@ -79,13 +79,13 @@ public class DayServlet extends HttpServlet {
                 } else {
                     // If no rows were updated, set an error message and forward to an error page
                     request.setAttribute("errorMessage", "更新に失敗しました。");
-                    request.getRequestDispatcher("error.jsp").forward(request, response);
+                    request.getRequestDispatcher("Error.jsp").forward(request, response);
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
                 // Set an error message for database connection error
                 request.setAttribute("errorMessage", "データベースエラーが発生しました。");
-                request.getRequestDispatcher("error.jsp").forward(request, response);
+                request.getRequestDispatcher("Error.jsp").forward(request, response);
             } finally {
                 if (conn != null) {
                     try {
@@ -98,7 +98,7 @@ public class DayServlet extends HttpServlet {
         } else {
             // 同じ日に2回目以降の実行を制限し、エラーメッセージを表示
             request.setAttribute("errorMessage", "本日は既に処理済みです。");
-            request.getRequestDispatcher("Error.jsp").forward(request, response);
+            request.getRequestDispatcher("MainServlet.java").forward(request, response);
         }
     }
 
