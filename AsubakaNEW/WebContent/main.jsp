@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8"><title>あすばか</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 </head>
 <body>
 	<!-- 背景 -->
@@ -46,10 +47,14 @@
 		</div>
 		
 		<!-- カレンダーの表示 -->
-		<h1 id="calendar-title"></h1>
+		<div class="flex">
+			<span class="material-symbols-outlined" id="prevMonth" class="month">chevron_left</span>
+			<h1 id="calendar-title"></h1>
+			<span class="material-symbols-outlined"id="nextMonth" class="month">navigate_next</span>
+		</div>
 		<div id="calendar" class="calendar-wrap"></div>
-		<button id="prevMonth" class="month">前の月</button>
-		<button id="nextMonth" class="month">次の月</button>
+		
+		
 
 		<!-- 残り日数-->
 		<p>
@@ -60,10 +65,14 @@
 		
 		<!-- 66日間の継続達成度の表示 プログレスバー-->
 		<div class="achieve">
-			<h2>達成度</h2>
-			<progress value="<c:out value="${account.count}" />" max="66"></progress>
-			<c:out value="${account.count}" />
-			/日 / 66日
+			<div class="side1">
+				<h2>達成度</h2>
+			</div>
+			<div class="side1">
+				<progress value="<c:out value="${account.count}" />" max="66"></progress>
+				<c:out value="${account.count}" />
+				/日 / 66日
+			</div>
 		</div>
 
 	</div>
@@ -73,7 +82,9 @@
 	<script src="script.js"></script>
 
 	<style>
-	
+		@charset "UTF-8";
+		@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;600&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
+		
 		* {
 			margin: 0;
 			padding: 0;
@@ -96,7 +107,6 @@
 		h1 {
 			text-align: center;
 			font-size: 35px;
-			padding: 10px 0 0 0;
 		}
 		
 		h2,p {
@@ -125,13 +135,13 @@
 		 	display:flex;
 		 }
 		 .containerA{
-		 	margin: 20px;
+		 	margin: 20px 20px 0 20px;
 			width: 800px;
             float: right;
 		}
 		
 		.containerB{
-			margin: 30px 0px 0px 30px;
+			margin: 30px 30px 0px 30px;
 		}
 		
 		 /*猫画像*/
@@ -285,38 +295,38 @@
 		    display: none;
 		}
 		
-		/* カレンダーの月移動ボタン*/
-		.month {
-			justify-content: center;
-			align-items: center;
-			vertical-align: middle;
-			text-decoration: none;
-			width: 120px;
-			margin: 0 auto;
-			padding: .5rem 1rem;
-			border-radius: 25px;
-			font-weight: bold;
-			border: 1px solid #FBE251;
-			color: #2E5C6E;
-			background: #FBE251;
-			transition: 0.5s;
-		}
-		.month:hover {
-			border: #2E5C6E;
-			color: #FBE251;
-			background: #2E5C6E;
-		}
-		
 		/* カレンダー*/
-		
+		.month{
+			cursor: pointer;
+		}
 		#calendar-title{
 			font-size: 20px;
-			margin-top: 15px;
+			margin-top: 0px;
 		}
 		#calendar td {
-		    padding: 8px;   
+		    padding: 15px;   
+		}
+		.calendar-wrap{
+			font-size: 18px;
+		}
+		/* カレンダーの月とボタンの横並び */
+		.flex {
+		    display: flex;
+		    justify-content: space-around;
+		    align-items: center;
+		    margin-top: 15px;
+		    cursor: pointer;
 		}
 
+		.side{
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+		
+		 .side1 {
+	        display: inline-block;
+	    }
 
 		/* レスポンシブ */
 		@media (max-width: 900px) {
@@ -331,7 +341,7 @@
 		    }
 		    
 		    #calendar{
-				padding: 4% 20%;
+				padding: 4% 26%;
 				margin: 0 auto;
 				margin-right: 20px;
 			}
