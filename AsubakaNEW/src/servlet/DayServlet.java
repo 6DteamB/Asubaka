@@ -10,10 +10,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
+import utils.DBUtility;
 
+@WebServlet("/DayServlet")
 public class DayServlet extends HttpServlet {
     // クライアントが同じ日に複数回実行できないように、日付をトラッキングするための変数を追加
     private static String lastProcessedDate = null;
@@ -26,15 +31,21 @@ public class DayServlet extends HttpServlet {
 
         // クライアントが同じ日に複数回実行できないように日付をチェック
         if (lastProcessedDate == null || !lastProcessedDate.equals(currentDateString)) {
-            // データベース接続情報（安全に保管するべき）
-            String jdbcUrl = "jdbc:mysql://172.16.0.178:3306/Asubaka";
-            String dbUser = "sa";
-            String dbPassword = "";
+            // データベース接続情報
+        	String url = DBUtility.JDBC_URL;
+        	String user = DBUtility.DB_USER;
+        	String password = DBUtility.DB_PASSWORD;
+
+
+//            String jdbcUrl = "jdbc:mysql://172.16.0.178:3306/Asubaka";
+//            String dbUser = "sa";
+//            String dbPassword = "";
 
             Connection conn = null;
             try {
                 // データベースに接続
-                conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+            	conn = DriverManager.getConnection(url, user, password);
+//                conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
 
                 // main.jsp から送信された name 属性の値を取得
                 String nameFromMainJSP = request.getParameter("name");
@@ -59,7 +70,9 @@ public class DayServlet extends HttpServlet {
                     
                     // Redirect to reward.jsp if remaining days are 0
                     if (remainingDays == 0) {
-                        response.sendRedirect("reward.jsp");
+                    	request.getRequestDispatcher("/reward.jsp").forward(request, response);
+
+                    
                     } else {
                         request.getRequestDispatcher("MainServlet.java").forward(request, response);
                     }
@@ -103,4 +116,35 @@ public class DayServlet extends HttpServlet {
             return -1;
         }
     }
-}
+    
+    
+    //「やった」ボタンを押して達成画面に
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    HttpSession session = request.getSession();
+	    Account account = (Account) session.getAttribute("loggedInAccount");
+	    String name = account.getName(); 
+	    request.setAttribute("account", account);
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD);
+        String sql = "SELECT reward FROM Account WHERE name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        
+        if (resultSet.next()) {
+            String reward = resultSet.getString("reward");
+            account.setReward(reward);  // ここでAccountオブジェクトにrewardをセット
+            session.setAttribute("loggedInAccount", account);  // セッションに更新されたAccountオブジェクトを保存
+            request.setAttribute("reward", reward);
+        }
+        
+        resultSet.close();
+        preparedStatement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+    }
