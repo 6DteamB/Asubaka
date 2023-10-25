@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +18,7 @@ import jakarta.servlet.http.HttpSession;
 import model.Account;
 import utils.DBUtility;
 
-
+@WebServlet("/DayServlet")
 public class DayServlet extends HttpServlet {
     // クライアントが同じ日に複数回実行できないように、日付をトラッキングするための変数を追加
     private static String lastProcessedDate = null;
@@ -69,7 +70,8 @@ public class DayServlet extends HttpServlet {
                     
                     // Redirect to reward.jsp if remaining days are 0
                     if (remainingDays == 0) {
-                        request.getRequestDispatcher("/AsubakaNEW/servlet/servlet.RewardServlet").forward(request, response);
+                    	request.getRequestDispatcher("/reward.jsp").forward(request, response);
+
                     
                     } else {
                         request.getRequestDispatcher("MainServlet.java").forward(request, response);
@@ -115,6 +117,8 @@ public class DayServlet extends HttpServlet {
         }
     }
     
+    
+    //「やった」ボタンを押して達成画面に
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    HttpSession session = request.getSession();
 	    Account account = (Account) session.getAttribute("loggedInAccount");
@@ -128,10 +132,14 @@ public class DayServlet extends HttpServlet {
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
         preparedStatement.setString(1, name);
         ResultSet resultSet = preparedStatement.executeQuery();
+        
         if (resultSet.next()) {
             String reward = resultSet.getString("reward");
+            account.setReward(reward);  // ここでAccountオブジェクトにrewardをセット
+            session.setAttribute("loggedInAccount", account);  // セッションに更新されたAccountオブジェクトを保存
             request.setAttribute("reward", reward);
         }
+        
         resultSet.close();
         preparedStatement.close();
         connection.close();

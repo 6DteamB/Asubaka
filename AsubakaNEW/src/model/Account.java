@@ -39,6 +39,10 @@ public class Account {
   public String getReward() {
     return reward;
   }
+  
+  public void setReward(String reward) {
+      this.reward = reward;
+  }
 
   public int getDay() {
 	  return day;

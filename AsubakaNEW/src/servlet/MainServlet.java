@@ -94,12 +94,15 @@ public class MainServlet extends HttpServlet {
 		if (isLogin) {
 			session.setAttribute("isLogin", true);
 			session.setAttribute("login", login);
+			
 
 			// accountDAOを使用してAccountインスタンスを取得
 			Account account = accountDAO.findByLogin(login);
 
 			// Accountオブジェクトをリクエスト属性として設定
 			request.setAttribute("account", account);
+			session.setAttribute("loggedInAccount", account);
+			
 
 			// ランダムな名言と作者を取得
 			String randomQuoteAndAuthor = quoteDAO.getRandomQuoteAndAuthor();
