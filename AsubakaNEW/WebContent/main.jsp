@@ -56,13 +56,30 @@
 		<div>
 			<h2>達成度</h2>
 			<progress value="<c:out value="${account.count}" />" max="66"></progress>
-			<c:out value="${account.count}" />
-			/日 / 66日
+			<c:out value="${account.count}" />日 / 66日
 		</div>
+				
 
-	</div>
 		
-</div>
+		<script>
+  		  // 現在の日数を取得
+   		 let currentDays = parseInt('<c:out value="${account.count}" />');
+   		let isCompleted = '<%= request.getAttribute("isCompleted") %>';
+   		if (isCompleted === 'true') {
+   		    window.location.href = "/reward.jsp";
+   		}
+
+   		 // 66日目にボタンをクリックした場合のリダイレクトロジック
+  			   document.getElementById("achievedButton").addEventListener("click", function(event) {
+        if (currentDays >= 66) {
+            event.preventDefault();  // Submitをキャンセル
+            window.location.href = "reward.jsp";
+          }
+        });
+		</script>
+		
+
+
 
 	<script src="script.js"></script>
 

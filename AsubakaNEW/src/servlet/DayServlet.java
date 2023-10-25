@@ -13,6 +13,10 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import model.Account;
+import utils.DBUtility;
+
 
 public class DayServlet extends HttpServlet {
     // クライアントが同じ日に複数回実行できないように、日付をトラッキングするための変数を追加
@@ -27,14 +31,20 @@ public class DayServlet extends HttpServlet {
         // クライアントが同じ日に複数回実行できないように日付をチェック
         if (lastProcessedDate == null || !lastProcessedDate.equals(currentDateString)) {
             // データベース接続情報
-            String jdbcUrl = "jdbc:mysql://172.16.0.178:3306/Asubaka";
-            String dbUser = "sa";
-            String dbPassword = "";
+        	String url = DBUtility.JDBC_URL;
+        	String user = DBUtility.DB_USER;
+        	String password = DBUtility.DB_PASSWORD;
+
+
+//            String jdbcUrl = "jdbc:mysql://172.16.0.178:3306/Asubaka";
+//            String dbUser = "sa";
+//            String dbPassword = "";
 
             Connection conn = null;
             try {
                 // データベースに接続
-                conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
+            	conn = DriverManager.getConnection(url, user, password);
+//                conn = DriverManager.getConnection(jdbcUrl, dbUser, dbPassword);
 
                 // main.jsp から送信された name 属性の値を取得
                 String nameFromMainJSP = request.getParameter("name");
@@ -104,4 +114,29 @@ public class DayServlet extends HttpServlet {
             return -1;
         }
     }
-}
+    
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	    HttpSession session = request.getSession();
+	    Account account = (Account) session.getAttribute("loggedInAccount");
+	    String name = account.getName(); 
+	    request.setAttribute("account", account);
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        Connection connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD);
+        String sql = "SELECT reward FROM Account WHERE name = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1, name);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            String reward = resultSet.getString("reward");
+            request.setAttribute("reward", reward);
+        }
+        resultSet.close();
+        preparedStatement.close();
+        connection.close();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    }
+    }
