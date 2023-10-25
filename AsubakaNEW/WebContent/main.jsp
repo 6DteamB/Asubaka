@@ -44,9 +44,9 @@
 		<!-- その日の目標達成を確認するボタン -->
 		<div>
 			<h2>今日の習慣</h2>	
-<%-- 			<form method="post" action="DayServlet.java">
+	 			<form method="post" action="DayServlet.java">
 			    <input type="hidden" name="name" value="${account.name}">
-	    		<input type="hidden" name="pass" value="${account.pass}"> --%>
+	    		<input type="hidden" name="pass" value="${account.pass}"> 
 				<button id="achievedButton" class="button">やった！</button>
 			</form>
 		</div>
