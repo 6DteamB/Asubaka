@@ -39,12 +39,6 @@
 		<button id="prevMonth" class="month">前の月</button>
 		<button id="nextMonth" class="month">次の月</button>
 		
-		<!-- 代わりに使用するイラストを表示する要素 -->
-		<td>
-		    <span class="date">${day}</span>
-		    <div class="custom-checkbox" data-date="${date}">
-		    </div>
-		</td>
 		
 		
 		<!-- その日の目標達成を確認するボタン -->
@@ -245,7 +239,7 @@
 		    display: inline-block;
 		    width: 20px; /* 適切な幅と高さを設定してください */
 		    height: 20px;
-		    background: url('images/mark.png') no-repeat;;
+		    background: url('images/mark.png') ;
 		    background-size: contain;
 		    cursor: pointer;
 		} 
@@ -255,9 +249,11 @@
 		    background-image: url('mark_checked.png'); /* チェックされたときの画像 */
 		}
 		
- 		element.style {
-    	display: none;
+		/* Checkboxを非表示にするスタイル */
+		input[type="checkbox"] {
+		    display: none;
 		}
+
 		
 		
 		@keyframes anime-button {
