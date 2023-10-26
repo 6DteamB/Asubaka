@@ -116,6 +116,7 @@
 			margin-left : auto;
 			margin-right : auto;
 			text-align : center;
+			overflow: hidden; /* スクロール */
 		}
 		
 		body {
@@ -382,6 +383,10 @@
 		    .achieve{
 		    	margin-bottom: 4%;
 		    }
+		    
+		    body{
+			overflow: auto;/* スクロール */
+			}
 		}
 		
 		@media (max-width: 600px) {
