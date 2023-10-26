@@ -74,7 +74,8 @@
 				/日 / 66日
 			</div>
 		</div>
-				
+	</div>
+</div>			
 
 		
 		<script>
@@ -359,9 +360,12 @@
 		    }
 		    
 		    #calendar{
-				padding: 4% 26%;
-				margin: 0 auto;
-				margin-right: 20px;
+		    	display: flex;
+				justify-content: center;
+			}
+			
+			#calendar td {
+		    	padding: 20px;   
 			}
 		
 		    .image-container img {
@@ -381,8 +385,8 @@
 		}
 		
 		@media (max-width: 600px) {
-			#calendar{
-				padding: 4% 15%;
+			#calendar td {
+		    	padding: 15px;   
 			}
 		}
 		
