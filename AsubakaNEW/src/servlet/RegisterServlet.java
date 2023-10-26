@@ -17,7 +17,7 @@ public class RegisterServlet extends HttpServlet {
     private static final String JDBC_PASSWORD = "";
 
     static {
-        // JDBCドライバをロード
+        // JDBCドライバをロードmamamama
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
