@@ -31,7 +31,7 @@ public class AccountDAO {
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 
             // SELECT文を準備
-            String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
+            String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT, DATE FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, login.getName());
             pStmt.setString(2, login.getPass());
@@ -50,7 +50,8 @@ public class AccountDAO {
                 String reward = rs.getString("REWARD");
                 int day = rs.getInt("DAY");
                 int count =rs.getInt("COUNT");
-                account = new Account(name, pass, mail, objective, reward, day, count);
+                Object date = rs.getDate("DATE"); // 日付情報を取得
+                account = new Account(name, pass, mail, objective, reward, day, count, date);
                 return account;
             }
         } catch (SQLException e) {
@@ -61,34 +62,26 @@ public class AccountDAO {
         return null;
     } 
 
-    public void update(Account account) {
-        // MySQLのJDBCドライバをロード
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
+	public void update(Account account) {
+	    try {
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	    } catch (ClassNotFoundException e) {
+	        e.printStackTrace();
+	        return;
+	    }
 
-        // データベースへの接続
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-            // UPDATE文を準備
-            String sql = "UPDATE ACCOUNT SET DAY = ? WHERE NAME = ?";
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            pStmt.setInt(1, account.getDay());
-            pStmt.setString(2, account.getName());
+	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+	        String sql = "UPDATE ACCOUNT SET DAY = ?, DATE = ? WHERE NAME = ?";
+	        PreparedStatement pStmt = conn.prepareStatement(sql);
+	        pStmt.setInt(1, account.getDay());
+	        pStmt.setObject(2, account.getDate()); // java.sql.Dateを使用して日付を設定
+	        pStmt.setString(3, account.getName());
 
-            // UPDATEを実行
-            pStmt.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-            // 例外処理を行うか、エラーハンドリングを適切に行ってください
-        }
-    }
-
-	public Account getAccountByName(String name) {
-		// TODO 自動生成されたメソッド・スタブ
-		return null;
+	        pStmt.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
 	}
+
 	
 }

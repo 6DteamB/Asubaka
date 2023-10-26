@@ -11,15 +11,15 @@ public class AccountDAOTest {
     }
 
   public static void testFindByLogin1() {
-	    Login login = new Login("おの", "Admin123");
+	    Login login = new Login("せり", "Admin123");
 	    AccountDAO dao = new AccountDAO();
 	    Account result = dao.findByLogin(login);
 	    if (result != null &&
-	            result.getName().equals("おの") &&
+	            result.getName().equals("せり") &&
 	            result.getPass().equals("Admin123") &&
-	            result.getMail().equals("asubaka123@gmail.com") &&
-	            result.getObjective().equals("100円貯金") &&
-	            result.getReward().equals("パンを食べる")) {
+	            result.getMail().equals("seri@au.com") &&
+	            result.getObjective().equals("走る") &&
+	            result.getReward().equals("バナナ")) {
 	      System.out.println("findByLogin1:成功しました");
 	    } else {
 	      System.out.println("findByLogin1:失敗しました");
@@ -27,7 +27,7 @@ public class AccountDAOTest {
 	  }
 
   public static void testFindByLogin2() {
-    Login login = new Login("おの", "Admin1234");
+    Login login = new Login("おの", "Asubaka1z23");
     AccountDAO dao = new AccountDAO();
     Account result = dao.findByLogin(login);
     if (result == null) {
