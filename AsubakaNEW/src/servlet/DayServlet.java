@@ -39,6 +39,14 @@ public class DayServlet extends HttpServlet {
 
                 String nameFromMainJSP = request.getParameter("name");
 
+             // "DATE"列に現在の日付を追加するクエリ
+                String addCurrentDateQuery = "UPDATE account SET DATE = CONCAT(DATE, ', ?') WHERE name = ?";
+                PreparedStatement datePreparedStatement = conn.prepareStatement(addCurrentDateQuery);
+                datePreparedStatement.setString(1, currentDateString);
+                datePreparedStatement.setString(2, nameFromMainJSP);
+                datePreparedStatement.executeUpdate();
+
+
                 String updateDayQuery = "UPDATE account SET day = day - 1 WHERE name = ?";
                 PreparedStatement dayPreparedStatement = conn.prepareStatement(updateDayQuery);
                 dayPreparedStatement.setString(1, nameFromMainJSP);
@@ -68,7 +76,7 @@ public class DayServlet extends HttpServlet {
                 request.setAttribute("errorMessage", "データベースエラーが発生しました。");
                 request.getRequestDispatcher("Error.jsp").forward(request, response);
             } finally {
-                if (conn != null) {
+                {
                     try {
                         conn.close();
                     } catch (SQLException e) {

@@ -1,5 +1,4 @@
 package servlet;
-
 import java.io.IOException;
 
 import dao.AccountDAO;
@@ -59,7 +58,10 @@ public class MainServlet extends HttpServlet {
 		}
 
 		try {
+			
+	
 
+		    
 			// ランダムな名言の取得
 			String randomQuoteAndAuthor = quoteDAO.getRandomQuoteAndAuthor();
 			req.setAttribute("randomQuoteAndAuthor", randomQuoteAndAuthor);
@@ -87,10 +89,12 @@ public class MainServlet extends HttpServlet {
 		LoginLogic loginLogic = new LoginLogic();
 		boolean isLogin = loginLogic.execute(login);
 		HttpSession session = request.getSession();
+	
 
 		if (isLogin) {
 			session.setAttribute("isLogin", true);
 			session.setAttribute("login", login);
+			
 
 			// accountDAOを使用してAccountインスタンスを取得
 			Account account = accountDAO.findByLogin(login);
@@ -98,6 +102,7 @@ public class MainServlet extends HttpServlet {
 			// Accountオブジェクトをリクエスト属性として設定
 			request.setAttribute("account", account);
 			session.setAttribute("loggedInAccount", account);
+			
 
 			// ランダムな名言と作者を取得
 			String randomQuoteAndAuthor = quoteDAO.getRandomQuoteAndAuthor();
