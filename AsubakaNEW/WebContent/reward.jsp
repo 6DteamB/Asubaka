@@ -13,58 +13,112 @@
         <input type="hidden" name="name" value="${loggedInAccount.name}">
         <input type="hidden" name="pass" value="${loggedInAccount.pass}">
     </form>
+
+    <section>
+	    <div class="leftside">
+	    	<figure>
+	    		<img alt="猫の画像" src='images/14.jpg'>
+	    	</figure>
+	    </div>
+	    
+	    <div class="rightside">
+			<h1>Congratulations!</h1>
+		
+		    <div class="flexbox">
+		    	<div class="flex">
+				    <c:out value="${loggedInAccount.name}さん" />
+				</div>
+				<div class="flexitem">
+				    <c:out value="達成した目標: ${loggedInAccount.objective}" />
+				</div>
+				<div class="flexitem">
+				    <c:out value="ご褒美: ${loggedInAccount.reward}" />
+				</div>
+		   </div>
+		</div>
+    </section>
     
-    <div class="cat">
-    
-		<h1>Congratulations!</h1>
-	
-	    <div class="flexbox">
-	    	<div class="flexitem">
-			    <c:out value="${loggedInAccount.name}さん" />
-			</div>
-			<div class="flexitem">
-			    <c:out value="達成した目標: ${loggedInAccount.objective}" />
-			</div>
-			<div class="flexitem">
-			    <c:out value="ご褒美: ${loggedInAccount.reward}" />
-			</div>
-	   </div>
-   </div>
-   
-	<form method="post" action="DeleteServlet">
+    <form method="post" action="DeleteServlet">
 	    <input type="hidden" name="username" value="${loggedInAccount.name}">
 	    <input type="submit" value="アカウントを削除">
-	</form>
-
-   
+	  </form>
 
     <style>
     	@charset "UTF-8";
 		@import url('https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+Antique:wght@300;400;500&display=swap');
 		
-		* {
+		*{
 			margin:0;
 			padding:0;
 			font-family: 'Zen Kaku Gothic Antique', sans-serif;
 			box-sizing: border-box;
 		}
-
-		body {
-			background: #1f3134;
-		 	color: #e7e7eb;
-		    display: flex;
-		    flex-direction: column; 
-		    text-align: center;
-		    justify-content: center;
-		    align-items: center;
-		    margin: 0 auto;
-		    /*overflow-x: hidden;/* 横スクロールのみ禁止 */
+		
+		html{
+			font-size: 10px;
 		}
 		
-		h1{
-			font-size:7em;
+		body{
+			background: #1f3134;
+			color: #e7e7eb;
+			overflow: hidden; /*カーソル*/
+		}
+		
+		section{
+		 max-width: 1200px;
+		 display: flex;
+		 justify-content: center;
+		 align-items: center;
+		}
+		
+		/*左サイド*/
+		.leftside{
+			width: 600px;
+			
+		}
+		
+		/*写真のサイズ*/
+		.leftside figure{
+			width: 500px;
+			height: 500px;
+			border: 2px solid #646464;
+			position:relative;
+			display: flex;
+		    justify-content: space-around;
+		    align-items: center;
+		    margin: 80px;
+		}
+		
+		/*写真を回転*/
+		.leftside figure img{
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			transform: rotate(-7deg);
+			transform-origin: 0% 100%;
+		}
+		
+		/*黄色の影*/
+		.leftside figure::after{
+			content: "";
+			width: 100%;
+			height: 100%;
+			background-color: #f2ba52;
+			position: absolute;
+			top: 20px;
+			left: 20px;
+			z-index: -1;
+		}
+		
+		/*右サイド*/
+		.rightside{
+			width: 600px;
+			margin-left: 20px;
+		}
+		
+		.rightside h1{
+			font-size: 6rem;
 			text-align:center;
-			/*line-height: 0.95em;*/
 			font-weight:bold;
 			color: transparent;
 			background: repeating-linear-gradient(45deg,
@@ -78,45 +132,70 @@
 			-webkit-background-clip: text;
 			letter-spacing: .1em;
 		}
-
+		
 		.flexbox{
-			margin-top: 20px;
-			letter-spacing: .5em;
+			text-align: center;
+		    justify-content: center;
+		    align-items: center;
+		    font-size: 3rem;
 		}
 		
-		.flexitem{
-			font-size: 45px;
-			font-weight: bold;
-		}
-		
-		/*猫の画像*/
-		.cat {
-			/*display: inline-block;*/
-			background-image: url('images/14.jpg');
-			background-size: cover;
-		  	/*height: 500px;
-		  	width: 500px;*/
-		  	width: 100%;
-		  	height: 100vh;
-			background-position: center center;
-			background-repeat: no-repeat;
-			background-attachment: fixed;
-			background-color: #1f3134;
-		}
-		
+		/*レスポンシブ*/
 		@media (max-width: 900px) {
-			h1{
-				font-size: 10vw;
+		
+			body{
+				overflow: auto;/* スクロール */
+				overflow-x: hidden;
+			}
+			
+			section{
+				flex-direction: column;
+			}
+			.leftside figure {
+		        width: 80vw;
+		        height: auto; /* 画像のアスペクト比を保つ */
+		        margin: 0 auto; /* 中央寄せ */
+		        margin-top: 4em;
+		    }
+		    
+		    /* 画像を回転しないよう設定 */
+		    .leftside figure img {
+		        transform: rotate(0);
+		        transform-origin: center center;
+		    }
+			
+			.rightside{
+				margin-top: 4em;
+			}
+			
+			.rightside h1{
+				font-size: 6rem;
+			}
+		
+			.flexbox{
+				font-size: 2rem;
 			}
 		}
 		
-    </style>
+		@media (max-width: 600px) {
+			.leftside figure {
+				margin-top: 4em;
+			}
+			.rightside h1{
+				font-size: 4rem;
+			}
+		
+			.flexbox{
+				font-size: 2rem;
+			}
+		
+		}
+    </style>    
     
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
 	<script>
 		var end = Date.now() + (15 * 1000);
 	
-		// go Buckeyes!
 		var colors = ['#fcc800', '#706caa', '#e95464'];
 	
 		(function frame() {
@@ -139,6 +218,8 @@
 		    requestAnimationFrame(frame);
 		  }
 		}());
+
 	</script>
+
 </body>
 </html>
