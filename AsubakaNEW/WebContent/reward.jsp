@@ -30,6 +30,13 @@
 			</div>
 	   </div>
    </div>
+   
+	<form method="post" action="DeleteServlet">
+	    <input type="hidden" name="username" value="${loggedInAccount.name}">
+	    <input type="submit" value="アカウントを削除">
+	</form>
+
+   
 
     <style>
     	@charset "UTF-8";
