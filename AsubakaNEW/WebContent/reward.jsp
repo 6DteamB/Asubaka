@@ -147,7 +147,7 @@
 				flex-direction: column;
 			}
 			.leftside figure {
-		        width: 80%;
+		        width: 80vw;
 		        height: auto; /* 画像のアスペクト比を保つ */
 		        margin: 0 auto; /* 中央寄せ */
 		        margin-top: 4em;
@@ -160,9 +160,22 @@
 		    }
 			
 			.rightside{
-				margin-top: 20px;
+				margin-top: 4em;
 			}
 			
+			.rightside h1{
+				font-size: 6rem;
+			}
+		
+			.flexbox{
+				font-size: 2rem;
+			}
+		}
+		
+		@media (max-width: 600px) {
+			.leftside figure {
+				margin-top: 4em;
+			}
 			.rightside h1{
 				font-size: 4rem;
 			}
@@ -170,9 +183,9 @@
 			.flexbox{
 				font-size: 2rem;
 			}
+		
 		}
-    </style>
-    
+    </style>    
     
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.3.2/dist/confetti.browser.min.js"></script>
 	<script>
