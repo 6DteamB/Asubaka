@@ -1,5 +1,6 @@
 package model;
 
+
 public class Account {
 	private String name;
 	private String pass;
@@ -8,10 +9,10 @@ public class Account {
 	private String reward;
 	private int day;
 	private int count;
-	private Object date;
+	private String date;
 
 	public Account(String name, String pass, String mail,
-			String objective, String reward, int day, int count,Object date) {
+			String objective, String reward, int day, int count, String date) {
 		this.name = name;
 		this.pass = pass;
 		this.mail = mail;
@@ -62,11 +63,11 @@ public class Account {
 		this.count = count;
 	}
 
-	public Object getDate() {
+	public String getDate() {
 		return date;
 	}
 
-	public void setDat(Object date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 }
