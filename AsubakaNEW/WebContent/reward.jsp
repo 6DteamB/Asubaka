@@ -13,7 +13,7 @@
         <input type="hidden" name="name" value="${loggedInAccount.name}">
         <input type="hidden" name="pass" value="${loggedInAccount.pass}">
     </form>
-    
+
     <section>
 	    <div class="leftside">
 	    	<figure>
@@ -37,6 +37,11 @@
 		   </div>
 		</div>
     </section>
+    
+    <form method="post" action="DeleteServlet">
+	    <input type="hidden" name="username" value="${loggedInAccount.name}">
+	    <input type="submit" value="アカウントを削除">
+	  </form>
 
     <style>
     	@charset "UTF-8";
