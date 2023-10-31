@@ -35,13 +35,16 @@
 				    <c:out value="ご褒美: ${loggedInAccount.reward}" />
 				</div>
 		   </div>
+			<!-- アカウント削除ボタン -->
+			<form method="post" action="DeleteServlet">
+				<input type="hidden" name="username" value="${loggedInAccount.name}">
+				<input type="submit" value="アカウントを削除">
+			</form>
 		</div>
+		
     </section>
     
-    <form method="post" action="DeleteServlet">
-	    <input type="hidden" name="username" value="${loggedInAccount.name}">
-	    <input type="submit" value="アカウントを削除">
-	  </form>
+    
 
     <style>
     	@charset "UTF-8";
@@ -114,6 +117,7 @@
 		.rightside{
 			width: 600px;
 			margin-left: 20px;
+			text-align: center;
 		}
 		
 		.rightside h1{
@@ -140,6 +144,23 @@
 		    font-size: 3rem;
 		}
 		
+		form input[type="submit"] {
+		    background-color: #f2ba52;
+		    padding: 10px 15px;
+		    border: none;
+		    border-radius: 4px;
+		    cursor: pointer;
+		    transition: .3s cubic-bezier(0.5, 1, 0.89, 1);
+		    color: #8b0000;
+		    margin-top: 20px;
+		}
+		
+		form input[type="submit"]:hover {
+		    background: #8b0000;
+		  	color: #f2ba52;
+		  	transform: scale(1.1);
+		}
+
 		/*レスポンシブ*/
 		@media (max-width: 900px) {
 		

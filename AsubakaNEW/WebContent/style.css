@@ -56,14 +56,14 @@ form input[type="submit"] {
     border-radius: 4px;
     cursor: pointer;
     transition: .3s cubic-bezier(0.5, 1, 0.89, 1);
-    color: #f2f2f2;
+    color: #ff8c00;
     text-align: center;
     margin: auto;
     
 }
 
 form input[type="submit"]:hover {
-    background: #f2f2f2;
+    background: #ff8c00;
   	color: #43676b;
   	transform: scale(1.1);
 }

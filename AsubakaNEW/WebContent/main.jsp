@@ -222,8 +222,8 @@
 		    position: relative;
 		    padding: .5rem .5rem 1rem .5rem ;
 		    margin: 30px 20px 10px 170px;
-		    width: 450px;
-		    height: 40px;
+		    width: 500px;
+		    /*height: 40px;*/
 		    border: 2px solid #2E5C6E;
 		    border-radius: 5px;
 		    background-color: #FBE251;
@@ -254,6 +254,7 @@
 		.card p {
 		    color: #0B1013;
 		    line-height: 1.5;
+		    text-wrap: balance;/*ちょうどいいところで折り返す*/
 		}
 		
 		/*やったボタン*/
