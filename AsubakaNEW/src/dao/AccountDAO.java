@@ -1,10 +1,11 @@
 package dao;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import model.Account;
 import model.Login;
@@ -50,7 +51,7 @@ public class AccountDAO {
                 String reward = rs.getString("REWARD");
                 int day = rs.getInt("DAY");
                 int count =rs.getInt("COUNT");
-                Object date = rs.getDate("DATE"); // 日付情報を取得
+                String date = rs.getString("DATE"); // 日付情報を取得
                 account = new Account(name, pass, mail, objective, reward, day, count, date);
                 return account;
             }
@@ -84,4 +85,46 @@ public class AccountDAO {
 	}
 
 	
+
+
+public List<String> getDataForDates(String userName) {
+    List<String> datesData = new ArrayList<>();
+
+    try {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+        return datesData;
+    }
+
+    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+        String sql = "SELECT DATE1, DATE2, DATE3, DATE4, DATE5, DATE6, DATE7, DATE8, DATE9, DATE10, " +
+                     "DATE11, DATE12, DATE13, DATE14, DATE15, DATE16, DATE17, DATE18, DATE19, DATE20, " +
+                     "DATE21, DATE22, DATE23, DATE24, DATE25, DATE26, DATE27, DATE28, DATE29, DATE30, " +
+                     "DATE31, DATE32, DATE33, DATE34, DATE35, DATE36, DATE37, DATE38, DATE39, DATE40, " +
+                     "DATE41, DATE42, DATE43, DATE44, DATE45, DATE46, DATE47, DATE48, DATE49, DATE50, " +
+                     "DATE51, DATE52, DATE53, DATE54, DATE55, DATE56, DATE57, DATE58, DATE59, DATE60, " +
+                     "DATE61, DATE62, DATE63, DATE64, DATE65, DATE66 FROM ACCOUNT WHERE NAME = ?";
+        PreparedStatement pStmt = conn.prepareStatement(sql);
+        pStmt.setString(1, userName);
+
+        ResultSet rs = pStmt.executeQuery();
+
+        if (rs.next()) {
+            // データベースからDATE1からDATE66までの値を取得してリストに追加
+            for (int i = 1; i <= 66; i++) {
+                String date = rs.getString("DATE" + i); // java.sql.Dateに変更
+                datesData.add(date);
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+
+    return datesData;
 }
+}
+
+
+
+

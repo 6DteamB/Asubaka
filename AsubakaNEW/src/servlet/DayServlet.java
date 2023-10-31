@@ -38,18 +38,26 @@ public class DayServlet extends HttpServlet {
                 conn = DriverManager.getConnection(url, user, password);
 
                 String nameFromMainJSP = request.getParameter("name");
+                String passFromMainJSP = request.getParameter("pass");
 
-             // "DATE"列に現在の日付を追加するクエリ
-                String addCurrentDateQuery = "UPDATE account SET DATE = CONCAT(DATE, ', ?') WHERE name = ?";
-                PreparedStatement datePreparedStatement = conn.prepareStatement(addCurrentDateQuery);
-                datePreparedStatement.setString(1, currentDateString);
-                datePreparedStatement.setString(2, nameFromMainJSP);
-                datePreparedStatement.executeUpdate();
+                // "DATE"列に現在の日付を追加するクエリ
+                String updateDayQuery = "UPDATE account SET day = day - 1, ";
 
+                // 既存のDATEカラムが値を持っているかを確認し、次の空いているDATEnカラムに値を挿入
+                for (int i = 66; i >= 2; i--) {
+                    String currentColumn = "DATE" + i;
+                    String previousColumn = "DATE" + (i - 1);
+                    updateDayQuery += currentColumn + " = IF(" + previousColumn + " IS NOT NULL, " + previousColumn + ", " + currentColumn + "), ";
+                }
 
-                String updateDayQuery = "UPDATE account SET day = day - 1 WHERE name = ?";
+                // 最後に新しい日付をDATE1のカラムに挿入
+                updateDayQuery += "DATE1 = CURDATE()";
+
+                updateDayQuery += " WHERE name = ? AND pass = ?";
                 PreparedStatement dayPreparedStatement = conn.prepareStatement(updateDayQuery);
                 dayPreparedStatement.setString(1, nameFromMainJSP);
+                dayPreparedStatement.setString(2, passFromMainJSP); // プログラム内で定義されたパスワード
+
                 int dayRowsUpdated = dayPreparedStatement.executeUpdate();
 
                 String updateCountQuery = "UPDATE account SET count = count + 1 WHERE name = ?";
@@ -78,7 +86,9 @@ public class DayServlet extends HttpServlet {
             } finally {
                 {
                     try {
-                        conn.close();
+                        if (conn != null) {
+                            conn.close();
+                        }
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }

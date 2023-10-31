@@ -1,5 +1,6 @@
 package servlet;
 import java.io.IOException;
+import java.util.List;
 
 import dao.AccountDAO;
 import dao.QuoteDAO;
@@ -45,38 +46,36 @@ public class MainServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	    HttpSession session = req.getSession();
+	    Boolean isLogin = (Boolean) session.getAttribute("isLogin");
 
-		// ユーザがログインしているかをチェック
-		HttpSession session = req.getSession();
-		Boolean isLogin = (Boolean) session.getAttribute("isLogin");
+	    if (isLogin == null || !isLogin) {
+	        resp.sendRedirect("index.jsp");
+	        return;
+	    }
 
-		if (isLogin == null || !isLogin) {
-			// ログインしていない場合、ログインフォームを表示
-			RequestDispatcher dispatcher = req.getRequestDispatcher("index.jsp");
-			dispatcher.forward(req, resp);
-			return;
-		}
+	    String loggedInUsername = (String) session.getAttribute("username");
 
-		try {
-			
-	
+	    if (loggedInUsername != null) {
+	        try {
+	            String randomQuoteAndAuthor = quoteDAO.getRandomQuoteAndAuthor();
+	            req.setAttribute("randomQuoteAndAuthor", randomQuoteAndAuthor);
 
-		    
-			// ランダムな名言の取得
-			String randomQuoteAndAuthor = quoteDAO.getRandomQuoteAndAuthor();
-			req.setAttribute("randomQuoteAndAuthor", randomQuoteAndAuthor);
+	            CatApi catApi = new CatApi();
+	            String catImageUrl = catApi.getRandomCatImage();
+	            req.setAttribute("animalImagePath", catImageUrl);
 
-			// cat APIのURLの取得
-			CatApi catApi = new CatApi();
-			String catImageUrl = catApi.getRandomCatImage();
-			req.setAttribute("animalImagePath", catImageUrl);
+	            List<String> datesData = accountDAO.getDataForDates(loggedInUsername);
+	            req.setAttribute("datesData", datesData); // データを"datesData"として送信
 
-			// main.jspにフォワード
-			req.getRequestDispatcher("/main.jsp").forward(req, resp);
-		} catch (Exception e) {
-			e.printStackTrace();
-			resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error occurred while processing the request");
-		}
+	            req.getRequestDispatcher("/main.jsp").forward(req, resp);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            resp.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "リクエストの処理中にエラーが発生しました");
+	        }
+	    } else {
+	        resp.sendRedirect("index.jsp");
+	    }
 	}
 
 	@Override
