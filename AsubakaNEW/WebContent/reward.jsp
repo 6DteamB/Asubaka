@@ -25,7 +25,7 @@
 			<h1>Congratulations!</h1>
 		
 		    <div class="flexbox">
-		    	<div class="flex">
+		    	<div class="flexitem">
 				    <c:out value="${loggedInAccount.name}さん" />
 				</div>
 				<div class="flexitem">
@@ -39,6 +39,11 @@
 			<form method="post" action="DeleteServlet">
 				<input type="hidden" name="username" value="${loggedInAccount.name}">
 				<input type="submit" value="アカウントを削除">
+				<div class="memo">
+					<p>66日間継続して取り組むことができたあなたにはきっと習慣が身に付いているはずです。おめでとう！<br>
+					アカウント削除ボタンを押してください。<br>
+					身に付けたい習慣ができたとき、また会いましょう！</p>
+				</div>
 			</form>
 		</div>
 		
@@ -99,6 +104,9 @@
 			object-fit: cover;
 			transform: rotate(-7deg);
 			transform-origin: 0% 100%;
+			display: flex;
+		    justify-content: space-around;
+		    align-items: center;
 		}
 		
 		/*黄色の影*/
@@ -143,7 +151,7 @@
 		    align-items: center;
 		    font-size: 3rem;
 		}
-		
+		/*削除ボタン*/
 		form input[type="submit"] {
 		    background-color: #f2ba52;
 		    padding: 10px 15px;
@@ -160,6 +168,19 @@
 		  	color: #f2ba52;
 		  	transform: scale(1.1);
 		}
+		
+		
+		.memo{
+			margin: 2em auto;
+			padding:2em;/*内側余白*/
+			border:dotted 3px #e2c2b3;/*線の種類・太さ・色*/
+			border-radius: 30px;
+		}
+		
+		.memo p{
+			font-size: 1.5rem;
+		}
+		
 
 		/*レスポンシブ*/
 		@media (max-width: 900px) {
@@ -172,6 +193,12 @@
 			section{
 				flex-direction: column;
 			}
+			
+			.leftside,
+			.rightside{
+				width: 80%;
+		        margin: 0 auto; /* 左右の余白を自動調整 */
+			}
 			.leftside figure {
 		        width: 80vw;
 		        height: auto; /* 画像のアスペクト比を保つ */
@@ -183,6 +210,7 @@
 		    .leftside figure img {
 		        transform: rotate(0);
 		        transform-origin: center center;
+		        width: 80vw;
 		    }
 			
 			.rightside{
@@ -195,6 +223,10 @@
 		
 			.flexbox{
 				font-size: 2rem;
+			}
+			
+			.memo p{
+				font-size: 1.2rem;
 			}
 		}
 		
