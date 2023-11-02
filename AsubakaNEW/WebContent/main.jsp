@@ -3,6 +3,26 @@
 <%@taglib prefix="c" uri="jakarta.tags.core"%>
 <%@ page import="dao.AccountDAO"%>
 <%@ page import="model.Login"%>
+<%
+    // AccountDAOのインスタンスを生成
+    AccountDAO accountDAO = new AccountDAO();
+
+    // JavaScriptの配列データを取得
+    String userName = "name"; // ユーザー名を設定
+    String datesJavaScriptArray = accountDAO.getDatesAsJavaScriptArray(userName);
+%>
+
+<%
+    String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJavaScriptArray");
+    if (datesJavaScriptArrayFromRequest != null) {
+        out.println("Dates JavaScript Array: " + datesJavaScriptArrayFromRequest);
+    } else {
+        out.println("Dates JavaScript Array is null or empty");
+    }
+%>
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +65,13 @@
 				<button id="achievedButton" class="button">やった！</button>
 			</form>
 		</div>
+		
+		
+		    <h2>Dates:</h2>
+		    
+
+
+
 		
 		<!-- カレンダーの表示 -->
 		<div class="flex">
@@ -222,8 +249,8 @@
 		    position: relative;
 		    padding: .5rem .5rem 1rem .5rem ;
 		    margin: 30px 20px 10px 170px;
-		    width: 500px;
-		    /*height: 40px;*/
+		    width: 450px;
+		    height: 40px;
 		    border: 2px solid #2E5C6E;
 		    border-radius: 5px;
 		    background-color: #FBE251;
@@ -254,7 +281,6 @@
 		.card p {
 		    color: #0B1013;
 		    line-height: 1.5;
-		    text-wrap: balance;/*ちょうどいいところで折り返す*/
 		}
 		
 		/*やったボタン*/
@@ -292,30 +318,30 @@
 		}
 		
 		/* チェックボックスを非表示にするスタイル */
-		input[type="checkbox"] {
+		/*input[type="checkbox"] {
     		display: none;
 		}
 
 		/* 代わりに使用するイラストのスタイル */
-		.custom-checkbox {
+		/* .custom-checkbox {
 		    display: inline-block;
 		    width: 20px; /* 適切な幅と高さを設定してください */
-		    height: 20px;
+		   /*  height: 20px;
 		    background: url('images/mark.png') ;
 		    background-size: contain;
 		    cursor: pointer;
-		} 
+		}  */
 		
 		/* Checkboxがチェックされたときのカスタムスタイル */
-		input[type="checkbox"]:checked + .custom-checkbox-label {
+		/* input[type="checkbox"]:checked + .custom-checkbox-label {
 		    background-image: url('mark_checked.png'); /* チェックされたときの画像 */
-		}
+		} 
 		
-		/* Checkboxを非表示にするスタイル */
+		/* Checkboxを非表示にするスタイル 
 		input[type="checkbox"] {
 		    display: none;
 		}
-		
+		 */
 		/* カレンダー*/
 		.month{
 			cursor: pointer;

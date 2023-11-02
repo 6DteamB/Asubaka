@@ -123,8 +123,25 @@ public List<String> getDataForDates(String userName) {
 
     return datesData;
 }
+
+public String getDatesAsJavaScriptArray(String userName) {
+    List<String> datesData = getDataForDates(userName);
+
+    // JavaScriptの配列形式に変換する
+    StringBuilder jsArray = new StringBuilder();
+    jsArray.append("const datesArray = [");
+
+    for (int i = 0; i < datesData.size(); i++) {
+        if (i != 0) {
+            jsArray.append(",");
+        }
+        jsArray.append("'" + datesData.get(i) + "'");
+    }
+
+    jsArray.append("];");
+
+    return jsArray.toString();
 }
-
-
+}
 
 
