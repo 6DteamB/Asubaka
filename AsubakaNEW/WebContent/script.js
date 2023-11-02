@@ -1,59 +1,69 @@
-const calendarElement = document.getElementById("calendar");
-const prevMonthButton = document.getElementById("prevMonth");
-const nextMonthButton = document.getElementById("nextMonth");
-const titleElement = document.getElementById("calendar-title");
-const achievedButton = document.getElementById("achievedButton");
-let currentYear, currentMonth, selectedDates = new Set();
 document.addEventListener("DOMContentLoaded", function() {
-	initCalendar();
-	function initCalendar() {
-		const currentDate = new Date();
-		currentYear = currentDate.getFullYear();
-		currentMonth = currentDate.getMonth();
-		renderCalendar(currentYear, currentMonth);
-		prevMonthButton.addEventListener("click", showPreviousMonth);
-		nextMonthButton.addEventListener("click", showNextMonth);
-		achievedButton.addEventListener("click", checkToday);
-	}
+    const calendarElement = document.getElementById("calendar");
+    const prevMonthButton = document.getElementById("prevMonth");
+    const nextMonthButton = document.getElementById("nextMonth");
+    const titleElement = document.getElementById("calendar-title");
+    const achievedButton = document.getElementById("achievedButton");
+    let currentYear, currentMonth, selectedDates = new Set();
 
+    const datesJavaScriptArrayFromRequest = "<%= datesJavaScriptArrayFromRequest %>";
 
-	function renderCalendar(year, month) {
-		const daysInMonth = new Date(year, month + 1, 0).getDate();
-		const firstDay = new Date(year, month, 1);
-		const startingDay = (firstDay.getDay() + 6) % 7;
+    if (datesJavaScriptArrayFromRequest !== null && datesJavaScriptArrayFromRequest !== "") {
+        // 文字列から配列へ変換する
+        const datesArray = datesJavaScriptArrayFromRequest.split(',');
+        selectedDates = new Set(datesArray);
+    } 
 
-		let calendarHtml = '<table>';
-		calendarHtml += '<tr><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr>';
-		let day = 1;
+    initCalendar();
 
-		for (let i = 0; i < 6; i++) {
-			calendarHtml += '<tr>';
+    function initCalendar() {
+        const currentDate = new Date();
+        currentYear = currentDate.getFullYear();
+        currentMonth = currentDate.getMonth();
+        renderCalendar(currentYear, currentMonth);
+        prevMonthButton.addEventListener("click", showPreviousMonth);
+        nextMonthButton.addEventListener("click", showNextMonth);
+        achievedButton.addEventListener("click", checkToday);
+    }
 
-			for (let j = 0; j < 7; j++) {
-				if (i === 0 && j < startingDay) {
-					calendarHtml += '<td></td>';
-				} else if (day <= daysInMonth) {
-					const date = `${year}-${month + 1}-${day}`;
-					const isChecked = selectedDates.has(date) ? 'checked' : '';
-					calendarHtml += `<td><span class="date">${day}</span><input type="checkbox" data-date="${date}" ${isChecked}></td>`;
-					day++;
-				} else {
-					calendarHtml += '<td></td>';
-				}
-			}
+    function renderCalendar(year, month) {
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+        const firstDay = new Date(year, month, 1);
+        const startingDay = (firstDay.getDay() + 6) % 7;
 
-			calendarHtml += '</tr>';
-		}
+        let calendarHtml = '<table>';
+        calendarHtml += '<tr><th>月</th><th>火</th><th>水</th><th>木</th><th>金</th><th>土</th><th>日</th></tr>';
+        let day = 1;
 
-		calendarHtml += '</table';
-		calendarElement.innerHTML = calendarHtml;
-		titleElement.textContent = `${year}年${month + 1}月`;
+        for (let i = 0; i < 6; i++) {
+            calendarHtml += '<tr>';
 
-		const checkboxes = calendarElement.querySelectorAll('input[type="checkbox"]');
-		checkboxes.forEach(checkbox => {
-			checkbox.addEventListener("change", toggleDate);
-		});
-	}
+            for (let j = 0; j < 7; j++) {
+                if (i === 0 && j < startingDay) {
+                    calendarHtml += '<td></td>';
+                } else if (day <= daysInMonth) {
+                    const date = `${year}-${month + 1}-${day}`;
+                    const isChecked = selectedDates.has(date) ? 'checked' : '';
+                    calendarHtml += `<td><span class="date">${day}</span><input type="checkbox" data-date="${date}" ${isChecked}></td>`;
+                    day++;
+                } else {
+                    calendarHtml += '<td></td>';
+                }
+            }
+
+            calendarHtml += '</tr>';
+        }
+
+        calendarHtml += '</table>';
+        calendarElement.innerHTML = calendarHtml;
+        titleElement.textContent = `${year}年${month + 1}月`;
+
+        const checkboxes = calendarElement.querySelectorAll('input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener("change", toggleDate);
+        });
+    }
+
 
 	function showPreviousMonth() {
 		if (currentMonth === 0) {
@@ -104,3 +114,4 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 });
+
