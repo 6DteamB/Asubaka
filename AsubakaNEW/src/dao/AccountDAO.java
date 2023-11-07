@@ -118,6 +118,6 @@ public String getDatesAsJavaScriptArray(String userName) {
 
     return jsArray.toString();
 }
-}
+} 
 
 
