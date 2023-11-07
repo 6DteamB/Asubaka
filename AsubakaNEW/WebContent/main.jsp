@@ -126,12 +126,18 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
     		elements.forEach(element => {
         	const date = element.getAttribute('data-date');
         	if (datesFromRequest.includes(date)) {
-            element.checked = true; // 日付が一致する場合、チェックボックスを選択状態に更新
-        				}
-    			});
-			});
-	</script>
+        		element.classList.add('hidden-checkbox'); // チェックボックスを非表示にする
 
+                // 代わりに画像を表示する新しい要素を作成
+                const image = document.createElement('img');
+                image.src = 'images/mark.png';
+                image.alt = 'Marked';
+                image.classList.add('custom-checkbox'); // カスタムチェックボックスのスタイルを適用
+                element.parentNode.appendChild(image); // チェックボックスの後ろに画像を追加
+            }
+        });
+    });
+</script>
 
 	<style>
 @charset "UTF-8";
@@ -334,23 +340,23 @@ transform:translate(2px,-2px);}
 /* 代わりに使用するイラストのスタイル */
 .custom-checkbox {
 	display: inline-block;
-	width: 20px; /* 適切な幅と高さを設定してください */
-	height: 20px;
+	width: 25px; /* 適切な幅と高さを設定してください */
+	height: 25px;
 	background: url('images/mark.png');
 	background-size: contain;
 	cursor: pointer;
 }
 
-/* Checkboxがチェックされたときのカスタムスタイル
+/* Checkboxがチェックされたときのカスタムスタイル*/
 input[type="checkbox"]:checked+.custom-checkbox-label {
 	background-image: url('mark_checked.png'); /* チェックされたときの画像 */
-} */
+} 
 
-/* Checkboxを非表示にするスタイル 
+/* Checkboxを非表示にするスタイル */
 		input[type="checkbox"] {
 		    display: none;
 		}
-		 */
+		
 /* カレンダー*/
 .month {
 	cursor: pointer;
