@@ -32,7 +32,7 @@ public class AccountDAO {
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
 
             // SELECT文を準備
-            String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT, DATE FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
+            String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
             PreparedStatement pStmt = conn.prepareStatement(sql);
             pStmt.setString(1, login.getName());
             pStmt.setString(2, login.getPass());
@@ -51,8 +51,7 @@ public class AccountDAO {
                 String reward = rs.getString("REWARD");
                 int day = rs.getInt("DAY");
                 int count =rs.getInt("COUNT");
-                String date = rs.getString("DATE"); // 日付情報を取得
-                account = new Account(name, pass, mail, objective, reward, day, count, date);
+                account = new Account(name, pass, mail, objective, reward, day, count);
                 return account;
             }
         } catch (SQLException e) {
@@ -62,30 +61,7 @@ public class AccountDAO {
         // 見つかったユーザーまたはnullを返す
         return null;
     } 
-
-	public void update(Account account) {
-	    try {
-	        Class.forName("com.mysql.cj.jdbc.Driver");
-	    } catch (ClassNotFoundException e) {
-	        e.printStackTrace();
-	        return;
-	    }
-
-	    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
-	        String sql = "UPDATE ACCOUNT SET DAY = ?, DATE = ? WHERE NAME = ?";
-	        PreparedStatement pStmt = conn.prepareStatement(sql);
-	        pStmt.setInt(1, account.getDay());
-	        pStmt.setObject(2, account.getDate()); // java.sql.Dateを使用して日付を設定
-	        pStmt.setString(3, account.getName());
-
-	        pStmt.executeUpdate();
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	}
-
 	
-
 
 public List<String> getDataForDates(String userName) {
     List<String> datesData = new ArrayList<>();
