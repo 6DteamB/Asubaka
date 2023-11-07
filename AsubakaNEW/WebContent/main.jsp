@@ -57,11 +57,6 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 				</form>
 			</div>
 
-
-		
-
-
-
 			<!-- カレンダーの表示 -->
 			<div class="flex">
 				<span class="material-symbols-outlined" id="prevMonth" class="month">chevron_left</span>
@@ -69,8 +64,6 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 				<span class="material-symbols-outlined" id="nextMonth" class="month">navigate_next</span>
 			</div>
 			<div id="calendar" class="calendar-wrap"></div>
-
-
 
 			<!-- 残り日数-->
 			<p>
@@ -93,9 +86,6 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 		</div>
 	</div>
 
-
-
-
 	<script>
   		  // 現在の日数を取得
    		 let currentDays = parseInt('<c:out value="${account.count}" />');
@@ -112,9 +102,6 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
           }
         });
 	</script>
-
-
-
 
 	<script src="script.js"></script>
 
@@ -142,9 +129,7 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 	<style>
 @charset "UTF-8";
 
-@import
-	url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;600&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap')
-	;
+@importurl('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;600&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
 
 * {
 	margin: 0;
@@ -189,8 +174,7 @@ h2, p {
 }
 
 .Moon {
-	background-image: radial-gradient(ellipse farthest-corner at 20px 20px, #91AD70, #91AD70
-		50%, #B5CAA0 50%);
+	background-image: radial-gradient(ellipse farthest-corner at 20px 20px, #91AD70, #91AD70 50%, #B5CAA0 50%);
 	background-size: 20px 20px;
 }
 
@@ -268,7 +252,6 @@ h2, p {
 	padding: .5rem .5rem 1rem .5rem;
 	margin: 30px 20px 10px 170px;
 	width: 450px;
-	height: 40px;
 	border: 2px solid #2E5C6E;
 	border-radius: 5px;
 	background-color: #FBE251;
@@ -299,6 +282,7 @@ h2, p {
 .card p {
 	color: #0B1013;
 	line-height: 1.5;
+	text-wrap: balance;/*ちょうどいいところで折り返す*/
 }
 
 /*やったボタン*/
@@ -321,20 +305,19 @@ h2, p {
 	animation: anime-button .3s linear infinite;
 }
  
-@
-keyframes anime-button { 
+@keyframes anime-button { 
 20% {
-transform: translate(-2px, 2px);
-}
-
+	transform: translate(-2px, 2px);
+	}
 40%{
-transform:translate(-2px,-2px);
-}
+	transform:translate(-2px,-2px);
+	}
 60%{
-transform:translate(2px,2px);}
-
+	transform:translate(2px,2px);
+	}
 80%{
-transform:translate(2px,-2px);}
+	transform:translate(2px,-2px);
+	}
 }
 
 /* 代わりに使用するイラストのスタイル */
