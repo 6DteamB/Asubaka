@@ -49,7 +49,7 @@ public class MainServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // ログインのロジック
+        // ログインのロジック   
         String name = request.getParameter("name");
         String pass = request.getParameter("pass");
         Login login = new Login(name, pass);
