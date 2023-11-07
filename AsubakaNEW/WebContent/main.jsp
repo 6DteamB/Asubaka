@@ -58,7 +58,7 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 			</div>
 
 
-			<h2>Dates:</h2>
+		
 
 
 
@@ -96,23 +96,6 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 
 
 
-
-	<script>
-    	document.addEventListener("DOMContentLoaded", function() {
-        console.log("datesJavaScriptArrayFromRequest の値: <%=datesJavaScriptArrayFromRequest%>");
-        const datesFromRequest = "<%=datesJavaScriptArrayFromRequest%>";
-        const elements = document.querySelectorAll('td input[data-date]');
-
-        elements.forEach(element => {
-            // 各要素に対する処理を行う
-            console.log(element.getAttribute('data-date'));
-            // 例：該当する日付の処理を記述
-        	});
-
-    	});
-	</script>
-
-
 	<script>
   		  // 現在の日数を取得
    		 let currentDays = parseInt('<c:out value="${account.count}" />');
@@ -137,7 +120,6 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 
 	<script>
 			document.addEventListener("DOMContentLoaded", function() {
-    		console.log("datesJavaScriptArrayFromRequest の値: <%=datesJavaScriptArrayFromRequest%>");
     		const datesFromRequest = "<%=datesJavaScriptArrayFromRequest%>";
     		const elements = document.querySelectorAll('td input[data-date]');
 
@@ -334,43 +316,19 @@ h2, p {
 }
 
 @
-keyframes anime-button { 20% {
-	transform: translate(-2px, 2px);
+keyframes anime-button { 
+20% {
+transform: translate(-2px, 2px);
 }
 
-40
-%
-{
-transform
-:
-translate(
--2px
-,
--2px
-);
+40%{
+transform:translate(-2px,-2px);
 }
-60
-%
-{
-transform
-:
-translate(
-2px
-,
-2px
-);
-}
-80
-%
-{
-transform
-:
-translate(
-2px
-,
--2px
-);
-}
+60%{
+transform:translate(2px,2px);}
+
+80%{
+transform:translate(2px,-2px);}
 }
 
 /* 代わりに使用するイラストのスタイル */
@@ -383,10 +341,10 @@ translate(
 	cursor: pointer;
 }
 
-/* Checkboxがチェックされたときのカスタムスタイル */
+/* Checkboxがチェックされたときのカスタムスタイル
 input[type="checkbox"]:checked+.custom-checkbox-label {
 	background-image: url('mark_checked.png'); /* チェックされたときの画像 */
-}
+} */
 
 /* Checkboxを非表示にするスタイル 
 		input[type="checkbox"] {
