@@ -62,7 +62,7 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 
 
 
-			<!-- カレンダーの表示 -->
+			<!-- カレンダーの表示  -->
 			<div class="flex">
 				<span class="material-symbols-outlined" id="prevMonth" class="month">chevron_left</span>
 				<h1 id="calendar-title"></h1>
