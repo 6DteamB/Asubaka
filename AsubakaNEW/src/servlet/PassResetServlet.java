@@ -11,6 +11,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.DBUtility;
 
 public class PassResetServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +36,7 @@ public class PassResetServlet extends HttpServlet {
 
         try {
             Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://172.16.0.178:3306/Asubaka", "sa", "");
+            connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD);
 
             String sql = "SELECT pass FROM account WHERE mail = ? AND name = ?";
             PreparedStatement statement = connection.prepareStatement(sql);

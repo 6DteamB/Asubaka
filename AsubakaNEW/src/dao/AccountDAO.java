@@ -9,12 +9,16 @@ import java.util.List;
 
 import model.Account;
 import model.Login;
+import utils.DBUtility;
 
 public class AccountDAO {
     // データベース接続に使用する情報
-    private final String JDBC_URL = "jdbc:mysql://172.16.0.178:3306/Asubaka";
-    private final String DB_USER = "sa";
-    private final String DB_PASS = "";
+//    private final String JDBC_URL = "jdbc:mysql://172.16.0.178:3306/Asubaka";
+//    private final String DB_USER = "sa";
+//    private final String DB_PASS = "";
+//	private final String url = DBUtility.JDBC_URL;
+//	private final String user = DBUtility.DB_USER;
+//	private final String password = DBUtility.DB_PASSWORD;
 
 
 	public Account findByLogin(Login login) {
@@ -29,7 +33,7 @@ public class AccountDAO {
         }
 
         // データベースへ接続
-        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+        try (Connection conn = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD)) {
 
             // SELECT文を準備
             String sql = "SELECT NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT FROM ACCOUNT WHERE NAME = ? AND PASS = ?";
@@ -73,7 +77,7 @@ public List<String> getDataForDates(String userName) {
         return datesData;
     }
 
-    try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS)) {
+    try (Connection conn = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD)) {
         String sql = "SELECT DATE1, DATE2, DATE3, DATE4, DATE5, DATE6, DATE7, DATE8, DATE9, DATE10, " +
                      "DATE11, DATE12, DATE13, DATE14, DATE15, DATE16, DATE17, DATE18, DATE19, DATE20, " +
                      "DATE21, DATE22, DATE23, DATE24, DATE25, DATE26, DATE27, DATE28, DATE29, DATE30, " +
