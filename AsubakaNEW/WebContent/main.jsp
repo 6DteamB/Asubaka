@@ -12,9 +12,10 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 
 
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
 <meta charset="UTF-8">
+<meta name=”viewport” content=”width=device-width,initial-scale=1″>
 <title>あすばか</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
@@ -136,6 +137,7 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 	margin: 0;
 	padding: 0;
 	font-family: 'Zen Kaku Gothic Antique', sans-serif;
+	-webkit-appearance: none
 }
 
 html, body {
