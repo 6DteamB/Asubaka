@@ -10,11 +10,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import utils.DBUtility;
 
 public class RegisterServlet extends HttpServlet {
-    private static final String JDBC_URL = "jdbc:mysql://172.16.0.178:3306/Asubaka";
-    private static final String JDBC_USER = "sa";
-    private static final String JDBC_PASSWORD = "";
+//    private static final String JDBC_URL = "jdbc:mysql://172.16.0.178:3306/Asubaka";
+//    private static final String JDBC_USER = "sa";
+//    private static final String JDBC_PASSWORD = "";
 
     static {
         // JDBCドライバをロード
@@ -43,7 +44,7 @@ public class RegisterServlet extends HttpServlet {
 
         try { 
             // データベースに接続
-            connection = DriverManager.getConnection(JDBC_URL, JDBC_USER, JDBC_PASSWORD);
+            connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD);
 
             // SQLクエリを作成（適切なテーブル名とカラム名に置き換えてください）
             String sql = "INSERT INTO account (NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT) VALUES (?, ?, ?, ?, ?, ?, ?)";

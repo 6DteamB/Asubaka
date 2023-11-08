@@ -40,9 +40,9 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 			<div class="quote">
 				<c:out value="${randomQuoteAndAuthor}" />
 			</div>
-			<!-- ランダムな犬・猫の画像 -->
+			<!-- ランダムな猫の画像 -->
 			<div class="image-container">
-				<img src="${animalImagePath}" alt="動物の画像" />
+				<img src="${animalImagePath}" alt="猫" />
 			</div>
 		</div>
 

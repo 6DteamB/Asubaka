@@ -20,13 +20,13 @@ public class QuoteDAO {
 
     public String getRandomQuoteAndAuthor() {
         try (Connection connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD)) {
-            String query = "SELECT 名言, 偉人 FROM quotes ORDER BY RAND() LIMIT 1";
+            String query = "SELECT quotes, author FROM quotes ORDER BY RAND() LIMIT 1";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             if (resultSet.next()) {
-                String quote = resultSet.getString("名言");
-                String author = resultSet.getString("偉人");
+                String quote = resultSet.getString("quotes");
+                String author = resultSet.getString("author");
                 return quote + " - " + author;
             }
         } catch (SQLException e) {
