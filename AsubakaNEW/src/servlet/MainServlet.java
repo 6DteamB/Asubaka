@@ -31,14 +31,9 @@ public class MainServlet extends HttpServlet {
         ServletContext context = getServletContext();
         ConfigLoader.init(context); // CatApiの初期化
 
-        // データベース接続情報を設定
-        String jdbcUrl = "jdbc:mysql://172.16.0.178:3306/Asubaka";
-        String jdbcUsername = "sa";
-        String jdbcPassword = "";
-
         try {
-            quoteDAO = new QuoteDAO(jdbcUrl, jdbcUsername, jdbcPassword);
             accountDAO = new AccountDAO();
+            quoteDAO = new QuoteDAO(); // QuoteDAOを初期化
         } catch (Exception e) {
             e.printStackTrace();
             throw new ServletException("データベース接続エラーが発生しました", e);
