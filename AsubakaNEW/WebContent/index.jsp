@@ -4,14 +4,14 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <meta name=”viewport” content=”width=device-width,initial-scale=1″>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>あすばかログイン</title>
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
     <h4>ねこちゃんとがんばる習慣づけ管理アプリ</h4>
     <h1>明日やろうは馬鹿野郎</h1>
- 
+
     <!-- ログインフォーム -->
     <form action="MainServlet.java" method="post">
         <span class="form-label">ユーザー名</span><input type="text" name="name"><br>
