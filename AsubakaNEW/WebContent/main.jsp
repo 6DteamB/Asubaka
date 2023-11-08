@@ -15,7 +15,7 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<meta name=”viewport” content=”width=device-width,initial-scale=1″>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>あすばか</title>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
