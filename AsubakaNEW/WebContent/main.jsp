@@ -63,8 +63,9 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 				<h1 id="calendar-title"></h1>
 				<span class="material-symbols-outlined" id="nextMonth" class="month">navigate_next</span>
 			</div>
-			<div id="calendar" class="calendar-wrap"></div>
-
+			<div class="calendar-container">
+				<div id="calendar" class="calendar-wrap"></div>
+			</div>
 			<!-- 残り日数-->
 			<p>
 				残り日数:
@@ -74,10 +75,10 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 
 			<!-- 66日間の継続達成度の表示 プログレスバー-->
 			<div class="achieve">
-				<div class="side1">
+				<div class="side">
 					<h2>達成度</h2>
 				</div>
-				<div class="side1">
+				<div class="side">
 					<progress value="<c:out value="${account.count}" />" max="66"></progress>
 					<c:out value="${account.count}" />
 					/日 / 66日
@@ -126,7 +127,7 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
     });
 </script>
 
-	<style>
+<style>
 @charset "UTF-8";
 
 @importurl('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;600&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
@@ -323,11 +324,12 @@ h2, p {
 /* 代わりに使用するイラストのスタイル */
 .custom-checkbox {
 	display: inline-block;
-	width: 25px; /* 適切な幅と高さを設定してください */
+	width: 25px; /* 適切な幅と高さを設定 */
 	height: 25px;
 	background: url('images/mark.png');
 	background-size: contain;
 	cursor: pointer;
+	position: absolute;
 }
 
 /* Checkboxがチェックされたときのカスタムスタイル*/
@@ -366,13 +368,21 @@ input[type="checkbox"]:checked+.custom-checkbox-label {
 	cursor: pointer;
 }
 
+.calendar-container {
+  position: relative;
+  display: flex;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+} 
+
 .side {
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
 }
 
-.side1 {
+.side {
 	display: inline-block;
 }
 
