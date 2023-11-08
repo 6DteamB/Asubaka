@@ -79,7 +79,7 @@ public class MainServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");
             dispatcher.forward(request, response);
         } else {
-            // ログインに失敗した場合、エラーメッセージを設定し、ログインページにリダイレクトします
+            // ログインに失敗した場合、エラーメッセージを設定し、ログインページにリダイレクト
             request.setAttribute("errorMessage", "ユーザー名またはパスワードが正しくありません。もう一度試してください.");
             RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
             dispatcher.forward(request, response);
