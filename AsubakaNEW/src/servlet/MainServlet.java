@@ -20,69 +20,92 @@ import model.LoginLogic;
 
 @WebServlet("/MainServlet")
 public class MainServlet extends HttpServlet {
-    private QuoteDAO quoteDAO;
-    private AccountDAO accountDAO;
+	private QuoteDAO quoteDAO;
+	private AccountDAO accountDAO;
 
-    // サーブレットの初期化処理
-    @Override
-    public void init() throws ServletException {
-        super.init();
+	@Override
+	public void init() throws ServletException {
+		super.init();
 
-        ServletContext context = getServletContext();
-        ConfigLoader.init(context); // CatApiの初期化
+		ServletContext context = getServletContext();
+		ConfigLoader.init(context);
 
-        try {
-            accountDAO = new AccountDAO();
-            quoteDAO = new QuoteDAO(); // QuoteDAOを初期化
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new ServletException("データベース接続エラーが発生しました", e);
-        }
-    }
+		try {
+			accountDAO = new AccountDAO();
+			quoteDAO = new QuoteDAO();
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new ServletException("データベース接続エラーが発生しました", e);
+		}
+	}
 
-    // POSTリクエストの処理
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // ログインのロジック   
-        String name = request.getParameter("name");
-        String pass = request.getParameter("pass");
-        Login login = new Login(name, pass);
-        LoginLogic loginLogic = new LoginLogic();
-        boolean isLogin = loginLogic.execute(login);
-        HttpSession session = request.getSession();
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		boolean isLogin = session.getAttribute("isLogin") != null && (boolean) session.getAttribute("isLogin");
 
-        if (isLogin) {
-            session.setAttribute("isLogin", true);
-            session.setAttribute("login", login);
-            // AccountDAOを使用してAccountインスタンスを取得
-            Account account = accountDAO.findByLogin(login);
+		if (isLogin) {
+			// ユーザーがログインしている場合、アカウントデータを更新します。
+			Login login = (Login) session.getAttribute("login");
+			Account account = accountDAO.findByLogin(login);
+			request.setAttribute("account", account);
+			session.setAttribute("loggedInAccount", account);
 
-            // Accountオブジェクトをリクエスト属性として設定
-            request.setAttribute("account", account);
-            session.setAttribute("loggedInAccount", account);
+			// 他に必要なデータをここで更新することもできます。
 
-            // ランダムな名言と作者を取得
-            String randomQuoteAndAuthor = quoteDAO.getRandomQuoteAndAuthor();
-            request.setAttribute("randomQuoteAndAuthor", randomQuoteAndAuthor);
-            // ランダムな猫の画像のURLを取得
-            CatApi catApi = new CatApi();
-            String catImageUrl = catApi.getRandomCatImage();
-            request.setAttribute("animalImagePath", catImageUrl);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			// ユーザーがログインしていない場合やセッションが存在しない場合を処理します。
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 
-            // AccountDAOからJavaScript配列形式の日付データを取得
-            String userName = account.getName();
-            String datesJavaScriptArrayFromRequest = accountDAO.getDatesAsJavaScriptArray(userName);
-            request.setAttribute("datesJavaScriptArray", datesJavaScriptArrayFromRequest);
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// 既存のPOSTリクエストの処理コードは、元のコードと同じままです。
+		// ログインやその他のアクションをここで処理します。
+		String name = request.getParameter("name");
+		String pass = request.getParameter("pass");
+		Login login = new Login(name, pass);
+		LoginLogic loginLogic = new LoginLogic();
+		boolean isLogin = loginLogic.execute(login);
+		HttpSession session = request.getSession();
 
-            // main.jspにフォワード
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");
-            dispatcher.forward(request, response);
-        } else {
-            // ログインに失敗した場合、エラーメッセージを設定し、ログインページにリダイレクト
-            request.setAttribute("errorMessage", "ユーザー名またはパスワードが正しくありません。もう一度試してください.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
-            dispatcher.forward(request, response);
-        }
-    }
+		if (isLogin) {
+			session.setAttribute("isLogin", true);
+			session.setAttribute("login", login);
+			// AccountDAOを使用してAccountインスタンスを取得
+			Account account = accountDAO.findByLogin(login);
+
+			// Accountオブジェクトをリクエスト属性として設定
+			request.setAttribute("account", account);
+			session.setAttribute("loggedInAccount", account);
+
+			// ランダムな名言と作者を取得
+			String randomQuoteAndAuthor = quoteDAO.getRandomQuoteAndAuthor();
+			request.setAttribute("randomQuoteAndAuthor", randomQuoteAndAuthor);
+			// ランダムな猫の画像のURLを取得
+			CatApi catApi = new CatApi();
+			String catImageUrl = catApi.getRandomCatImage();
+			request.setAttribute("animalImagePath", catImageUrl);
+
+			// AccountDAOからJavaScript配列形式の日付データを取得
+			String userName = account.getName();
+			String datesJavaScriptArrayFromRequest = accountDAO.getDatesAsJavaScriptArray(userName);
+			request.setAttribute("datesJavaScriptArray", datesJavaScriptArrayFromRequest);
+
+			// main.jspにフォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/main.jsp");
+			dispatcher.forward(request, response);
+		} else {
+			// ログインに失敗した場合、エラーメッセージを設定し、ログインページにリダイレクト
+			request.setAttribute("errorMessage", "ユーザー名またはパスワードが正しくありません。もう一度試してください.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+			dispatcher.forward(request, response);
+		}
+	}
 }
