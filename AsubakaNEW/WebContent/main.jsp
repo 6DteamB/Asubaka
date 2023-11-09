@@ -82,7 +82,7 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 				<div class="side">
 					<progress value="<c:out value="${account.count}" />" max="66"></progress>
 					<c:out value="${account.count}" />
-					/日 / 66日
+					日 / 66日
 				</div>
 			</div>
 		</div>
@@ -107,37 +107,45 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 
 	<script src="script.js"></script>
 
-	<script>
-	document.addEventListener("DOMContentLoaded", function() {
-	    // ウェブページのコンテンツが読み込まれたときに実行する処理
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // ウェブページのコンテンツが読み込まれたときに実行する処理
 
-	    // サーバーサイドから受け取った日付の情報を格納
-	    const datesFromRequest = "<%=datesJavaScriptArrayFromRequest%>";
+    // サーバーサイドから受け取った日付の情報を格納
+    const datesFromRequest = "<%=datesJavaScriptArrayFromRequest%>";
 
-	    // HTML内の<td>要素の中にあってdata-date属性を持つ<input>要素をすべて選択
-	    const elements = document.querySelectorAll('td input[data-date]');
+    function processElements() {
+        const elements = document.querySelectorAll('td input[data-date]');
 
-	    // 選択された各要素に対してループ処理
-	    elements.forEach(element => {
-	        // 各要素のdata-date属性の値を取得
-	        const date = element.getAttribute('data-date');
+        elements.forEach(element => {
+            const date = element.getAttribute('data-date');
 
-	        // もしサーバーサイドからのデータにその日付が含まれている場合
-	        if (datesFromRequest.includes(date)) {
-	            // チェックボックスを非表示にするためのクラスを追加
-	            element.classList.add('hidden-checkbox');
+            if (datesFromRequest.includes(date)) {
+                element.classList.add('hidden-checkbox');
 
-	            // 代わりに画像を表示する新しい要素を作成
-	            const image = document.createElement('img');
-	            image.src = 'images/mark.png';
-	            image.alt = 'Marked';
-	            image.classList.add('custom-checkbox'); // カスタムチェックボックスのスタイルを適用
-	            element.parentNode.appendChild(image); // チェックボックスの後ろに画像を追加
-	        }
-	    });
-	});
+                const image = document.createElement('img');
+                image.src = 'images/mark.png';
+                image.alt = 'Marked';
+                image.classList.add('custom-checkbox');
+                element.parentNode.appendChild(image);
+            }
+        });
+    }
 
-	</script>
+    // ページ読み込み時に実行
+    processElements();
+
+    const prevMonthElement = document.getElementById("prevMonth");
+    const nextMonthElement = document.getElementById("nextMonth");
+
+    if (prevMonthElement && nextMonthElement) {
+        prevMonthElement.addEventListener("click", processElements);
+        nextMonthElement.addEventListener("click", processElements);
+    }
+});
+</script>
+
+
 
 	<style>
 @charset "UTF-8";
