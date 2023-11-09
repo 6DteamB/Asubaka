@@ -24,6 +24,10 @@
 </script>
 </head>
 <body>
+
+<!-- 背景 -->	
+<div class="bg_pattern Crown"></div>
+	
 <h1>新規登録</h1>
 
 <!-- 新規登録フォーム -->
