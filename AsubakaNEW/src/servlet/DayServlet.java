@@ -31,9 +31,9 @@ public class DayServlet extends HttpServlet {
 
 		// 前回の処理日付と比較して、処理を続行するかどうかを判断
 		if (lastProcessedDate == null || !lastProcessedDate.equals(currentDateString)) {
-//			String url = DBUtility.JDBC_URL;
-//			String user = DBUtility.DB_USER;
-//			String password = DBUtility.DB_PASSWORD;
+			//			String url = DBUtility.JDBC_URL;
+			//			String user = DBUtility.DB_USER;
+			//			String password = DBUtility.DB_PASSWORD;
 
 			Connection conn = null;
 			try {

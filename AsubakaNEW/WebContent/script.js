@@ -49,15 +49,16 @@ document.addEventListener("DOMContentLoaded", function() {
 				} else if (day <= daysInMonth) {
 					// 日付セル
 					const date = `${year}-${month + 1}-${day}`;
-					const isChecked = selectedDates.has(date) ? 'checked' : '';
-					calendarHtml += `<td><span class="date">${day}</span><input type="checkbox" data-date="${date}" ${isChecked}></td>`;
+					const formattedDay = day < 10 ? `0${day}` : day; // 日付を01から09にフォーマット
+					const formattedDate = `${year}-${month + 1}-${formattedDay}`;
+					const isChecked = selectedDates.has(formattedDate) ? 'checked' : '';
+					calendarHtml += `<td><span class="date">${formattedDay}</span><input type="checkbox" data-date="${formattedDate}" ${isChecked}></td>`;
 					day++;
 				} else {
 					// 月の終わりのセル
 					calendarHtml += '<td></td>';
 				}
 			}
-
 			calendarHtml += '</tr>';
 		}
 

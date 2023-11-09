@@ -108,27 +108,38 @@ String datesJavaScriptArrayFromRequest = (String) request.getAttribute("datesJav
 	<script src="script.js"></script>
 
 	<script>
-			document.addEventListener("DOMContentLoaded", function() {
-    		const datesFromRequest = "<%=datesJavaScriptArrayFromRequest%>";
-    		const elements = document.querySelectorAll('td input[data-date]');
+	document.addEventListener("DOMContentLoaded", function() {
+	    // ウェブページのコンテンツが読み込まれたときに実行する処理
 
-    		elements.forEach(element => {
-        	const date = element.getAttribute('data-date');
-        	if (datesFromRequest.includes(date)) {
-        		element.classList.add('hidden-checkbox'); // チェックボックスを非表示にする
+	    // サーバーサイドから受け取った日付の情報を格納
+	    const datesFromRequest = "<%=datesJavaScriptArrayFromRequest%>";
 
-                // 代わりに画像を表示する新しい要素を作成
-                const image = document.createElement('img');
-                image.src = 'images/mark.png';
-                image.alt = 'Marked';
-                image.classList.add('custom-checkbox'); // カスタムチェックボックスのスタイルを適用
-                element.parentNode.appendChild(image); // チェックボックスの後ろに画像を追加
-            }
-        });
-    });
-</script>
+	    // HTML内の<td>要素の中にあってdata-date属性を持つ<input>要素をすべて選択
+	    const elements = document.querySelectorAll('td input[data-date]');
 
-<style>
+	    // 選択された各要素に対してループ処理
+	    elements.forEach(element => {
+	        // 各要素のdata-date属性の値を取得
+	        const date = element.getAttribute('data-date');
+
+	        // もしサーバーサイドからのデータにその日付が含まれている場合
+	        if (datesFromRequest.includes(date)) {
+	            // チェックボックスを非表示にするためのクラスを追加
+	            element.classList.add('hidden-checkbox');
+
+	            // 代わりに画像を表示する新しい要素を作成
+	            const image = document.createElement('img');
+	            image.src = 'images/mark.png';
+	            image.alt = 'Marked';
+	            image.classList.add('custom-checkbox'); // カスタムチェックボックスのスタイルを適用
+	            element.parentNode.appendChild(image); // チェックボックスの後ろに画像を追加
+	        }
+	    });
+	});
+
+	</script>
+
+	<style>
 @charset "UTF-8";
 
 @importurl('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;600&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap');
