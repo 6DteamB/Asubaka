@@ -9,7 +9,25 @@
 
 body {
 	color: #0B1013;
-    background-color: #E0E0E0;
+    /* background-color: #E0E0E0;*/
+}
+
+/* 背景 */
+.bg_pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #b5caa0;
+  opacity: 0.4;
+  z-index: -1;
+}
+.Crown {
+  background-image: linear-gradient(45deg, #91AD70 25%, transparent 25%), linear-gradient(315deg, #91AD70 25%, #B5CAA0 25%);
+  background-position: 10px 0, 20px 0, 0 0, 0 0;
+  background-size: 20px 20px;
+  background-repeat: repeat;
 }
 
 h1 {
@@ -91,11 +109,13 @@ hr {
 
 @media (max-width:900px) {
 	h1{
-		font-size: 5vw;
+		font-size: 7vw;
 	}
 	h4{
 		font-size: 2.5vw;
 	}
 	
-	
+	form{
+		width: 225px;
+	}
 }

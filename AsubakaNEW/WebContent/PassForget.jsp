@@ -10,6 +10,9 @@
     <title>パスワードを忘れた場合</title>
 </head>
 <body>
+	<!-- 背景 -->	
+	<div class="bg_pattern Crown"></div>
+	
     <h1>パスワードを忘れた場合</h1>
 
 

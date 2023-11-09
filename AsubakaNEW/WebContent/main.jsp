@@ -389,7 +389,7 @@ input[type="checkbox"]:checked+.custom-checkbox-label {
 }
 
 /* レスポンシブ */
-@media ( max-width : 900px) {
+@media ( max-width : 1100px) {
 	.main {
 		flex-direction: column;
 	}

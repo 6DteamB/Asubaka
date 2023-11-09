@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+	<!-- 背景 -->	
+	<div class="bg_pattern Crown"></div>
     <h4>ねこちゃんとがんばる習慣づけ管理アプリ</h4>
     <h1>明日やろうは馬鹿野郎</h1>
 
