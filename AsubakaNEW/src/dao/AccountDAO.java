@@ -96,7 +96,7 @@ public class AccountDAO {
 	                String date = rs.getString("DATE" + i);
 	                if (date == null) {
 	                    // NULL値を処理する（例: 空の文字列に置き換える）
-	                    date = "";
+	                    date = "NULL";
 	                }
 	                datesData.add(date);
 	            }
