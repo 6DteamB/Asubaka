@@ -20,9 +20,10 @@ import utils.DBUtility;
 
 @WebServlet("/DayServlet")
 public class DayServlet extends HttpServlet {
-//	private static String lastProcessedDate = null;
 
-	// HTTP POSTリクエストを処理
+
+	
+// HTTP POSTリクエストを処理
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 	        throws ServletException, IOException {
 	    HttpSession session = request.getSession();
