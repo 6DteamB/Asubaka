@@ -31,76 +31,79 @@ public class DayServlet extends HttpServlet {
 	    Date currentDate = new Date();
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 	    String currentDateString = dateFormat.format(currentDate);
-	    
-	    
-		// 前回の処理日付と比較して、処理を続行するかどうかを判断
+
 	    if (lastProcessedDate == null || !lastProcessedDate.equals(currentDateString)) {
-			
-//			Connection conn = null;
-			 // データベース接続と処理
+	        String nameFromMainJSP = request.getParameter("name");
+	        String passFromMainJSP = request.getParameter("pass");
+
 	        try (Connection conn = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD)) {
-
-				// ユーザーからの入力を取得
-				String nameFromMainJSP = request.getParameter("name");
-				String passFromMainJSP = request.getParameter("pass");
-
-				// ユーザーアカウントの日数を更新するSQLクエリ
-				String updateDayQuery = "UPDATE account SET day = day - 1, ";
-
-				// 既存のDATEカラムが値を持っているかを確認し、次の空いているDATEnカラムに値を挿入
-				for (int i = 66; i >= 2; i--) {
-					String currentColumn = "DATE" + i;
-					String previousColumn = "DATE" + (i - 1);
-					updateDayQuery += currentColumn + " = IF(" + previousColumn + " IS NOT NULL, " + previousColumn
-							+ ", " + currentColumn + "), ";
-				}
-
-				// 最後に新しい日付をDATE1のカラムに挿入
-				updateDayQuery += "DATE1 = CURDATE()";
-
-				updateDayQuery += " WHERE name = ? AND pass = ?";
-				PreparedStatement dayPreparedStatement = conn.prepareStatement(updateDayQuery);
-				dayPreparedStatement.setString(1, nameFromMainJSP);
-				dayPreparedStatement.setString(2, passFromMainJSP); // プログラム内で定義されたパスワード
-
-				int dayRowsUpdated = dayPreparedStatement.executeUpdate();
-
-				// ユーザーアカウントのカウントを更新するSQLクエリ
-				String updateCountQuery = "UPDATE account SET count = count + 1 WHERE name = ?";
-				PreparedStatement countPreparedStatement = conn.prepareStatement(updateCountQuery);
-				countPreparedStatement.setString(1, nameFromMainJSP);
-				int countRowsUpdated = countPreparedStatement.executeUpdate();
-				
-				
-
-				// 残りの日数を取得
-				int remainingDays = getRemainingDays(nameFromMainJSP, conn);
-
-				  if (dayRowsUpdated > 0 && countRowsUpdated > 0) {
-	                    // 処理日をセッションに保存
-	                    session.setAttribute("lastProcessedDate", currentDateString);
-
-	                    if (remainingDays == 0) {
-	                        // 報酬ページにリダイレクト
-	                        request.getRequestDispatcher("/reward.jsp").forward(request, response);
-	                    } else {
-	                        // メインページにリダイレクト
-	                        request.getRequestDispatcher("MainServlet.java").forward(request, response);
-	                    }
-	                } else {
-	                    request.setAttribute("errorMessage", "更新に失敗しました。");
-	                    request.getRequestDispatcher("Error.jsp").forward(request, response);
+	            // 今日の日付が既に存在するかどうかをチェックするSQLクエリ
+	            String checkDateQuery = "SELECT * FROM account WHERE name = ? AND (";
+	            for (int i = 1; i <= 66; i++) {
+	                checkDateQuery += "DATE" + i + " = CURDATE()";
+	                if (i < 66) {
+	                    checkDateQuery += " OR ";
 	                }
-	            } catch (SQLException e) {
-	                e.printStackTrace();
-	                request.setAttribute("errorMessage", "データベースエラーが発生しました。");
-	                request.getRequestDispatcher("Error.jsp").forward(request, response);
 	            }
-	        } else {
-	            request.setAttribute("errorMessage", "本日は既に処理済みです。");
-	            request.getRequestDispatcher("MainServlet.java").forward(request, response);
+	            checkDateQuery += ")";
+
+	            try (PreparedStatement checkDateStmt = conn.prepareStatement(checkDateQuery)) {
+	                checkDateStmt.setString(1, nameFromMainJSP);
+	                ResultSet rs = checkDateStmt.executeQuery();
+
+	                if (rs.next()) {
+	                    request.setAttribute("errorMessage", "本日の日付は既に登録されています。");
+	                    request.getRequestDispatcher("Error.jsp").forward(request, response);
+	                    return;
+	                }
+	            }
+
+	            // 日付の存在チェック後の処理...
+	            String updateDayQuery = "UPDATE account SET day = day - 1, ";
+	            for (int i = 66; i >= 2; i--) {
+	                String currentColumn = "DATE" + i;
+	                String previousColumn = "DATE" + (i - 1);
+	                updateDayQuery += currentColumn + " = IF(" + previousColumn + " IS NOT NULL, " + previousColumn + ", " + currentColumn + "), ";
+	            }
+	            updateDayQuery += "DATE1 = CURDATE() WHERE name = ? AND pass = ?";
+	            try (PreparedStatement dayPreparedStatement = conn.prepareStatement(updateDayQuery)) {
+	                dayPreparedStatement.setString(1, nameFromMainJSP);
+	                dayPreparedStatement.setString(2, passFromMainJSP);
+	                int dayRowsUpdated = dayPreparedStatement.executeUpdate();
+
+	                // ユーザーアカウントのカウントを更新するSQLクエリ
+	                String updateCountQuery = "UPDATE account SET count = count + 1 WHERE name = ?";
+	                try (PreparedStatement countPreparedStatement = conn.prepareStatement(updateCountQuery)) {
+	                    countPreparedStatement.setString(1, nameFromMainJSP);
+	                    int countRowsUpdated = countPreparedStatement.executeUpdate();
+
+	                    int remainingDays = getRemainingDays(nameFromMainJSP, conn);
+
+	                    if (dayRowsUpdated > 0 && countRowsUpdated > 0) {
+	                        session.setAttribute("lastProcessedDate", currentDateString);
+
+	                        if (remainingDays == 0) {
+	                            request.getRequestDispatcher("/reward.jsp").forward(request, response);
+	                        } else {
+	                            request.getRequestDispatcher("MainServlet.java").forward(request, response);
+	                        }
+	                    } else {
+	                        request.setAttribute("errorMessage", "更新に失敗しました。");
+	                        request.getRequestDispatcher("Error.jsp").forward(request, response);
+	                    }
+	                }
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	            request.setAttribute("errorMessage", "データベースエラーが発生しました。");
+	            request.getRequestDispatcher("Error.jsp").forward(request, response);
 	        }
+	    } else {
+	        request.setAttribute("errorMessage", "本日は既に処理済みです。");
+	        request.getRequestDispatcher("MainServlet.java").forward(request, response);
 	    }
+	}
+
 
 	    // 指定したユーザーの残りの日数を取得する
 	    private int getRemainingDays(String name, Connection connection) throws SQLException {
