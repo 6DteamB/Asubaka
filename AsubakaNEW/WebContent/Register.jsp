@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <link rel="stylesheet" type="text/css" href="Register.css">
@@ -12,7 +11,7 @@
 <script>
   function validatePassword() {
     var password = document.getElementById("pass").value;
-    
+
     // パスワードが6文字以上で、大文字と数字を含むかを検証
     if (password.length < 6 || !/[A-Z]/.test(password) || !/[0-9]/.test(password)) {
       alert("パスワードは大文字と数字を含めた6文字以上にしてください。");
@@ -28,8 +27,12 @@
       alert("メールアドレス、目標、報酬を入力してください。");
       return false;
     }
-    
+
     return true;
+  }
+  
+  function showDuplicateError() {
+    alert("同じユーザーが既に存在しています。");
   }
 </script>
 
@@ -38,7 +41,7 @@
 
 <!-- 背景 -->	
 <div class="bg_pattern Crown"></div>
-	
+
 <h1>新規登録</h1>
 
 <!-- 新規登録フォーム -->
@@ -50,12 +53,11 @@
 達成報酬：<input type="text" name="reward"><br>
 継続日数:<br>
 <select name="day">
-	<option value="66">66日</option>
-</select>
- </select><br>
-    <input type="hidden" name="count" value="0" style="display: none;"> <!-- 非表示の count フィールド -->
+  <option value="66">66日</option>
+</select><br>
+<input type="hidden" name="count" value="0" style="display: none;"> <!-- 非表示の count フィールド -->
 <br>
-<input type="submit" value="新規登録">
+<input type="submit" value="新規登録" onclick="showDuplicateError(); return false;">
 </form>
 
 <hr> <!-- 水平線を追加 -->
