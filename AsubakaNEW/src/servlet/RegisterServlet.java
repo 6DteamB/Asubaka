@@ -52,6 +52,20 @@ public class RegisterServlet extends HttpServlet {
             // データベースに接続
             connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD);
 
+            // データベースに同じ name または pass が存在するかを確認
+            String duplicateCheckQuery = "SELECT COUNT(*) FROM account WHERE NAME = ? OR PASS = ?";
+            try (PreparedStatement duplicateCheckStatement = connection.prepareStatement(duplicateCheckQuery)) {
+                duplicateCheckStatement.setString(1, name);
+                duplicateCheckStatement.setString(2, pass);
+                try (var resultSet = duplicateCheckStatement.executeQuery()) {
+                    if (resultSet.next() && resultSet.getInt(1) > 0) {
+                        // 同じ name または pass が既に存在する場合
+                        response.sendError(HttpServletResponse.SC_CONFLICT, "同じユーザーが既に存在しています。");
+                        return;
+                    }
+                }
+            }
+
             // SQLクエリを作成（適切なテーブル名とカラム名に置き換えてください）
             String sql = "INSERT INTO account (NAME, PASS, MAIL, OBJECTIVE, REWARD, DAY, COUNT) VALUES (?, ?, ?, ?, ?, ?, ?)";
             preparedStatement = connection.prepareStatement(sql);
@@ -68,7 +82,7 @@ public class RegisterServlet extends HttpServlet {
 
             if (rowsAffected > 0) {
                 // 登録成功した場合、index.jsp にリダイレクト
-                response.sendRedirect("/AsubakaNEW/RegisterSuccses.jsp");
+                response.sendRedirect("/AsubakaNEW/RegisterSuccess.jsp");
             } else {
                 // 登録に失敗した場合の処理を追加
                 // ユーザーフレンドリーなエラーメッセージを提供
