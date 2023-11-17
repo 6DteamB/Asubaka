@@ -18,10 +18,21 @@
       alert("パスワードは大文字と数字を含めた6文字以上にしてください。");
       return false;
     }
+
+    var mail = document.getElementsByName("mail")[0].value;
+    var objective = document.getElementsByName("objective")[0].value;
+    var reward = document.getElementsByName("reward")[0].value;
+
+    // バリデーション: mail、objective、reward が空の場合はアラートを表示してフォームを送信しない
+    if (mail === "" || objective === "" || reward === "") {
+      alert("メールアドレス、目標、報酬を入力してください。");
+      return false;
+    }
     
     return true;
   }
 </script>
+
 </head>
 <body>
 

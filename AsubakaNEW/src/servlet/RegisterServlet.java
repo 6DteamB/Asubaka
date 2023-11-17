@@ -42,7 +42,13 @@ public class RegisterServlet extends HttpServlet {
         Connection connection = null;
         PreparedStatement preparedStatement = null;
 
-        try { 
+        try {
+            // バリデーション: mail、objective、reward が null の場合は登録を拒否
+            if (mail == "" || objective == "" || reward == "") {
+                response.sendError(HttpServletResponse.SC_BAD_REQUEST, "必須フィールドが未入力です。");
+                return;
+            }
+
             // データベースに接続
             connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD);
 
