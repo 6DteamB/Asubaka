@@ -13,9 +13,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import utils.DBUtility;
 
 public class RegisterServlet extends HttpServlet {
-	//    private static final String JDBC_URL = "jdbc:mysql://172.16.0.178:3306/Asubaka";
-	//    private static final String JDBC_USER = "sa";
-	//    private static final String JDBC_PASSWORD = "";
 
 	static {
 		// JDBCドライバをロード
@@ -31,6 +28,8 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// フォームから新規登録情報を取得
 		String name = request.getParameter("name");
+		System.out.println("Username: " + name); // デバッグ用ログ
+
 		String pass = request.getParameter("pass");
 		String mail = request.getParameter("mail");
 		String objective = request.getParameter("objective");
@@ -41,29 +40,36 @@ public class RegisterServlet extends HttpServlet {
 		// データベースに新規登録情報を保存
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
+		
 
 		try {
 			// バリデーション: mail、objective、reward が null の場合は登録を拒否
 			if (mail == "" || objective == "" || reward == "") {
-				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "必須フィールドが未入力です。");
+				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "必須項目が未入力です。");
 				return;
 			}
 			// データベースに接続
 			connection = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD);
 
 			// データベースに同じ name または pass が存在するかを確認
-			String duplicateCheckQuery = "SELECT COUNT(*) FROM account WHERE NAME = ? OR PASS = ?";
+			String duplicateCheckQuery = "SELECT COUNT(*) FROM account WHERE NAME = ? AND PASS = ?";
+
 			try (PreparedStatement duplicateCheckStatement = connection.prepareStatement(duplicateCheckQuery)) {
 			    duplicateCheckStatement.setString(1, name);
 			    duplicateCheckStatement.setString(2, pass);
 			    try (var resultSet = duplicateCheckStatement.executeQuery()) {
 			        if (resultSet.next() && resultSet.getInt(1) > 0) {
-			            // 重複が見つかった場合
-			            response.sendError(HttpServletResponse.SC_CONFLICT, "同じユーザー名かパスワードが既に存在しています。");
+			            // 重複が見つかった場合の処理
+			            response.setContentType("text/plain");
+			            response.setCharacterEncoding("UTF-8");
+			            response.setStatus(HttpServletResponse.SC_CONFLICT);
+			            response.getWriter().write("ユーザー名かパスワードを変更してください。");
 			            return;
 			        }
 			    }
 			}
+
 
 
 			// SQLクエリを作成（適切なテーブル名とカラム名に置き換えてください）
