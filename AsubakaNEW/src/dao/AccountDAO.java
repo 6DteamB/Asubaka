@@ -119,41 +119,4 @@ public class AccountDAO {
 
 		return jsArray.toString();
 	}
-	
-	 // データベースから全アカウント情報を取得するメソッド
-    public List<Account> getAllAccounts() {
-        List<Account> accounts = new ArrayList<>();
-        
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-        try (Connection conn = DriverManager.getConnection(DBUtility.JDBC_URL, DBUtility.DB_USER, DBUtility.DB_PASSWORD)) {
-            String sql = "SELECT * FROM account"; // 適宜、必要なカラムを指定
-            PreparedStatement pStmt = conn.prepareStatement(sql);
-            ResultSet rs = pStmt.executeQuery();
-
-            while (rs.next()) {
-                // 結果セットからAccountオブジェクトを生成してリストに追加
-                String name = rs.getString("name");
-                String pass = rs.getString("pass");
-                String mail = rs.getString("mail");
-                String objective = rs.getString("objective");
-                String reward = rs.getString("reward");
-                int day = rs.getInt("day");
-                int count = rs.getInt("count");
-
-                Account account = new Account(name, pass, mail, objective, reward, day, count);
-                accounts.add(account);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return accounts;
-    }
-
 }
