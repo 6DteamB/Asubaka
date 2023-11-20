@@ -7,12 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.DBUtility;
 
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
+
 
 	static {
 		// JDBCドライバをロード
