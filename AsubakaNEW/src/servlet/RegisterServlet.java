@@ -7,15 +7,15 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import utils.DBUtility;
 
+@WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
-//    private static final String JDBC_URL = "jdbc:mysql://172.16.0.178:3306/Asubaka";
-//    private static final String JDBC_USER = "sa";
-//    private static final String JDBC_PASSWORD = "";
+
 
     static {
         // JDBCドライバをロード
