@@ -72,7 +72,7 @@
 
     <h1>新規登録</h1>
 
-	<!-- 新規登録フォーム -->
+	<!-- 新規登録フォームzz -->
 	<form action="RegisterServlet.java" method="post"
 		onsubmit="return validatePassword() && showDuplicateError();">
 		ユーザー名：<input type="text" name="name"><br> パスワード：<input
