@@ -20,7 +20,7 @@ public class RegisterServlet extends HttpServlet {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			// クラスが見つからなかった場合のエラーハンドリング
+			// クラスが見つからなかった場合のエラーハンドリングzzz
 		}
 	}
 
