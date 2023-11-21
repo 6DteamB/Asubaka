@@ -31,7 +31,7 @@ public class RegisterServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// フォームから新規登録情報を取得
 		String name = request.getParameter("name");
-		System.out.println("Username: " + name); // デバッグ用ログ
+		//System.out.println("Username: " + name); // デバッグ用ログ
 
 		String pass = request.getParameter("pass");
 		String mail = request.getParameter("mail");
